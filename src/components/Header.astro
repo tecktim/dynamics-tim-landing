@@ -1,0 +1,43 @@
+---
+const base = import.meta.env.BASE_URL ?? '/';
+const to = (path: string) => `${base}${path.replace(/^\//, '')}`;
+
+const navItems = [
+  { label: 'Start', href: base },
+  { label: 'Leistungen', href: to('services') },
+  { label: 'Profil', href: to('profile') },
+  { label: 'Kontakt', href: to('contact') }
+];
+---
+
+<header class="sticky top-0 z-50 bg-white/90 shadow-sm backdrop-blur">
+  <div class="mx-auto flex max-w-6xl items-center justify-between px-6 py-4">
+    <a href={base} class="flex items-center gap-3 text-lg font-semibold text-slate-900">
+      <span class="flex h-10 w-10 items-center justify-center rounded-xl bg-brand-600 text-white">TF</span>
+      <span class="hidden sm:inline-block">Tim Friedrich · Dynamics 365</span>
+    </a>
+    <nav class="hidden items-center gap-8 text-sm font-medium text-slate-700 md:flex">
+      {navItems.map((item) => (
+        <a
+          href={item.href}
+          class="transition hover:text-brand-600"
+        >
+          {item.label}
+        </a>
+      ))}
+      <a
+        href={to('contact')}
+        class="rounded-xl bg-brand-600 px-4 py-2 text-sm font-semibold text-white shadow-soft transition hover:bg-brand-500"
+      >
+        Kostenloses Erstgespräch
+      </a>
+    </nav>
+    <a
+      href={to('contact')}
+      class="md:hidden rounded-xl bg-brand-600 px-3 py-2 text-sm font-semibold text-white shadow-soft"
+      aria-label="Kontakt aufnehmen"
+    >
+      Kontakt
+    </a>
+  </div>
+</header>

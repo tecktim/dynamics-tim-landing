@@ -1,0 +1,88 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Hero from '../components/Hero.astro';
+import ServicesGrid from '../components/ServicesGrid.astro';
+import ProjectCards from '../components/ProjectCards.astro';
+import { getCollection } from 'astro:content';
+
+const base = import.meta.env.BASE_URL ?? '/';
+const to = (path: string) => `${base}${path.replace(/^\//, '')}`;
+
+const projects = (await getCollection('projects')).sort((a, b) => (a.data.featured === b.data.featured ? 0 : a.data.featured ? -1 : 1));
+const heroServices = [
+  {
+    title: 'Solution Architektur',
+    description: 'Zielbild, Governance & Best Practices für modulare Dynamics 365 Landschaften.'
+  },
+  {
+    title: 'Integrationen & Automatisierung',
+    description: 'Azure Functions, Service Bus, Power Automate & Plugins – orchestriert mit DevOps-Pipelines.'
+  },
+  {
+    title: 'Delivery & Enablement',
+    description: 'Team-Coaching, Pairing, Quality Gates und produktionsreife Übergabe.'
+  },
+  {
+    title: 'Modernisierung & Performance',
+    description: 'Refactoring von Plugins, Telemetrie, Monitoring und messbare Optimierungen.'
+  }
+];
+
+const valueBullets = [
+  {
+    title: 'Schnelle Impact-Analyse',
+    description: 'Innerhalb von Tagen statt Wochen Klarheit über Risiken, Scope und nächsten Schritte.'
+  },
+  {
+    title: 'Enterprise-ready Delivery',
+    description: 'CI/CD, Source Control und Observability als Standard – unabhängig von Teamgröße.'
+  },
+  {
+    title: 'Hands-on Umsetzung',
+    description: 'Keine PowerPoint-Schlachten. Ich liefere produktionsreife Ergebnisse mit Code & Tests.'
+  }
+];
+---
+
+<BaseLayout title="Startseite" description="Dynamics 365 (Sales/Service) Entwicklung & Beratung: saubere Architekturen, performante Integrationen, Power Platform, Azure & DevOps.">
+  <Hero />
+
+  <section class="bg-white py-20">
+    <div class="mx-auto max-w-6xl px-6">
+      <h2 class="section-title">Warum Tim?</h2>
+      <div class="mt-10 grid gap-6 md:grid-cols-3">
+        {valueBullets.map((bullet) => (
+          <div class="card" key={bullet.title}>
+            <h3 class="text-xl font-semibold text-slate-900">{bullet.title}</h3>
+            <p class="mt-3 text-base text-slate-600">{bullet.description}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <ServicesGrid
+    heading="Leistungen"
+    subheading="Ob Greenfield oder Sanierung – ich begleite Dynamics 365 Projekte von der Idee bis zum stabilen Betrieb."
+    items={heroServices}
+  />
+
+  <ProjectCards items={projects.slice(0, 2)} />
+
+  <section class="bg-slate-900 py-24 text-white">
+    <div class="mx-auto max-w-5xl px-6 text-center">
+      <h2 class="text-3xl font-bold sm:text-4xl">Bereit für skalierbare Dynamics 365 Lösungen?</h2>
+      <p class="mt-4 text-lg text-slate-200">
+        Lass uns im kostenlosen Erstgespräch klären, wie wir Architektur, Delivery und Integrationen gemeinsam beschleunigen.
+      </p>
+      <div class="mt-8 flex flex-wrap justify-center gap-4">
+        <a href="mailto:hello@tim-freelance.dev" class="rounded-2xl bg-white px-6 py-3 text-base font-semibold text-brand-600 shadow-soft">
+          Kostenloses Erstgespräch
+        </a>
+        <a href={to('services')} class="rounded-2xl border border-white px-6 py-3 text-base font-semibold text-white transition hover:bg-white/10">
+          Leistungen ansehen
+        </a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

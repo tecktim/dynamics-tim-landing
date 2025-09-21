@@ -1,0 +1,33 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    color-scheme: light;
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-slate-950/5 text-slate-900 antialiased;
+    font-family: theme('fontFamily.sans');
+  }
+
+  a {
+    @apply text-brand-600 transition hover:text-brand-500;
+  }
+}
+
+@layer components {
+  .prose {
+    @apply prose-slate max-w-none;
+  }
+
+  .section-title {
+    @apply text-3xl font-semibold tracking-tight text-slate-900 sm:text-4xl md:text-5xl;
+  }
+
+  .card {
+    @apply rounded-2xl border border-slate-100 bg-white/80 p-8 shadow-soft backdrop-blur;
+  }
+}
