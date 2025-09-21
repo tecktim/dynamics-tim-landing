@@ -9,7 +9,7 @@ export default [
     ignores: ['dist', '.astro', '.dist', 'node_modules', 'scripts']
   },
   js.configs.recommended,
-  ...tseslint.configs['flat/recommended'],
+  ...tseslint.configs.recommended,
   ...astroPlugin.configs['flat/recommended'],
   {
     files: ['**/*.{ts,tsx}', '**/*.astro', '**/*.astro/*.ts', '**/*.astro/*.js'],
