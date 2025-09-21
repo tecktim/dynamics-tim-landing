@@ -1,0 +1,88 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import ServicesGrid from '../components/ServicesGrid.astro';
+
+const services = [
+  {
+    title: 'Architektur & Roadmap',
+    description:
+      'Blueprints für modulare Dynamics 365 Lösungen, Capability-Maps, Schnittstellen-Design und Governance-Modelle.'
+  },
+  {
+    title: 'Implementierung & Plugins',
+    description:
+      'Entwicklung von C# Plugins, Power Automate Flows, Canvas Apps und Serverless Integrationen inklusive Tests.'
+  },
+  {
+    title: 'Integrationen & Daten',
+    description:
+      'Azure Functions, DataVerse, Synapse & Service Bus – orchestriert mit Telemetrie, Retry-Logik und Monitoring.'
+  },
+  {
+    title: 'DevOps & Qualität',
+    description:
+      'CI/CD Pipelines, ALM, Infrastructure as Code sowie Code-Reviews und Performance Tuning.'
+  }
+];
+
+const formats = [
+  {
+    title: 'Freelance Delivery',
+    description: 'Hands-on Umsetzung als Teil des Teams oder als Projektlead inklusive Wissensübergabe.'
+  },
+  {
+    title: 'Architecture Sprint',
+    description: '2-wöchiger Fokus-Sprint: Analyse, Zielbild, Priorisierung & Umsetzung der wichtigsten Maßnahmen.'
+  },
+  {
+    title: 'Review & Coaching',
+    description: 'Code-Reviews, Pairing Sessions, Playbooks und Enablement für interne Entwickler:innen.'
+  }
+];
+---
+
+<BaseLayout title="Leistungen" description="Dynamics 365 Leistungen für Architektur, Integrationen, Plugins und DevOps – maßgeschneidert für B2B Sales & Service.">
+  <section class="bg-gradient-to-br from-white via-white to-brand-50 py-20">
+    <div class="mx-auto max-w-5xl px-6 text-center">
+      <h1 class="section-title">Leistungen im Überblick</h1>
+      <p class="mt-6 text-lg text-slate-600">
+        Jede Zusammenarbeit startet mit einem klaren Zielbild und messbaren Ergebnissen. Ich arbeite embedded im Team oder als Deliver Lead – transparent, iterativ und mit Fokus auf Business-Impact.
+      </p>
+    </div>
+  </section>
+
+  <ServicesGrid
+    heading="Kernkompetenzen"
+    subheading="Strategie, Umsetzung und Betrieb – abgestimmt auf Dynamics 365 Sales & Service."
+    items={services}
+  />
+
+  <section class="bg-slate-900 py-20 text-white">
+    <div class="mx-auto max-w-6xl px-6">
+      <h2 class="section-title text-white">Zusammenarbeitsmodelle</h2>
+      <div class="mt-10 grid gap-6 md:grid-cols-3">
+        {formats.map((format) => (
+          <div class="card bg-white/5 text-left" key={format.title}>
+            <h3 class="text-xl font-semibold text-white">{format.title}</h3>
+            <p class="mt-3 text-sm text-slate-200">{format.description}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="bg-white py-20">
+    <div class="mx-auto max-w-5xl px-6 text-center">
+      <h2 class="text-3xl font-semibold text-slate-900 sm:text-4xl">Lass uns sprechen</h2>
+      <p class="mt-4 text-lg text-slate-600">
+        Schicke mir deine Anforderungen oder buche direkt einen Termin. Ich melde mich innerhalb von 24 Stunden mit Vorschlägen.
+      </p>
+      <a
+        href="mailto:hello@tim-freelance.dev"
+        class="mt-8 inline-flex items-center rounded-2xl bg-brand-600 px-6 py-3 text-base font-semibold text-white shadow-soft hover:bg-brand-500"
+      >
+        Kostenloses Erstgespräch vereinbaren
+      </a>
+    </div>
+  </section>
+</BaseLayout>

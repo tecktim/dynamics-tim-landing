@@ -1,0 +1,57 @@
+---
+import type { CollectionEntry } from 'astro:content';
+
+interface Props {
+  items: CollectionEntry<'projects'>[];
+}
+
+const { items } = Astro.props as Props;
+const rendered = await Promise.all(
+  items.map(async (entry) => {
+    const { Content } = await entry.render();
+    return { entry, Content };
+  })
+);
+---
+
+<section class="bg-white py-20">
+  <div class="mx-auto max-w-6xl px-6">
+    <div class="mb-10 max-w-3xl space-y-4">
+      <h2 class="section-title">Projekt-Highlights</h2>
+      <p class="text-lg text-slate-600">
+        Auswahl an Projekten, die Dynamics 365, Azure und Power Platform kombinieren – mit Fokus auf Wiederverwendbarkeit und schnelle Wertschöpfung.
+      </p>
+    </div>
+    <div class="grid gap-6 md:grid-cols-2">
+      {rendered.map(({ entry, Content }) => (
+        <article class="card flex flex-col gap-4" key={entry.id}>
+          <div class="flex items-center justify-between">
+            <h3 class="text-2xl font-semibold text-slate-900">{entry.data.title}</h3>
+            {entry.data.featured && (
+              <span class="rounded-full bg-brand-100 px-3 py-1 text-xs font-semibold uppercase text-brand-700">
+                Fokus
+              </span>
+            )}
+          </div>
+          <p class="text-base text-slate-600">{entry.data.summary}</p>
+          <div class="prose text-slate-600">
+            <Content />
+          </div>
+          {entry.data.tech.length > 0 && (
+            <div class="flex flex-wrap gap-2">
+              {entry.data.tech.map((tech) => (
+                <span class="rounded-full bg-slate-100 px-3 py-1 text-xs font-semibold text-slate-600" key={tech}>
+                  {tech}
+                </span>
+              ))}
+            </div>
+          )}
+          <div class="mt-auto flex flex-wrap gap-4 text-sm font-semibold text-brand-600">
+            {entry.data.link && <a href={entry.data.link} class="hover:text-brand-500">Case ansehen →</a>}
+            {entry.data.repo && <a href={entry.data.repo} class="hover:text-brand-500">Code ansehen →</a>}
+          </div>
+        </article>
+      ))}
+    </div>
+  </div>
+</section>

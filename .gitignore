@@ -1,0 +1,10 @@
+node_modules
+.dist
+.astro
+dist
+.DS_Store
+.env
+.env.*
+*.log
+coverage
+public/og-image.png
