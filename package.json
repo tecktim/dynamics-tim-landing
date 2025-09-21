@@ -23,7 +23,6 @@
   "author": "Tim Friedrich",
   "license": "MIT",
   "dependencies": {
-    "@astrojs/image": "^0.18.0",
     "@astrojs/mdx": "^4.3.5",
     "@astrojs/sitemap": "^3.6.0",
     "@astrojs/tailwind": "^6.0.2",

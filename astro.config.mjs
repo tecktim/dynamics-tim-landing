@@ -2,7 +2,6 @@ import { defineConfig } from 'astro/config';
 import tailwind from '@astrojs/tailwind';
 import mdx from '@astrojs/mdx';
 import sitemap from '@astrojs/sitemap';
-import image from '@astrojs/image';
 import robotsTxt from 'astro-robots-txt';
 import compress from 'astro-compress';
 
@@ -29,7 +28,6 @@ export default defineConfig({
       ],
       sitemap: `${siteUrl}/tim-freelance-landing/sitemap-index.xml`
     }),
-    image(),
     compress({
       HTML: true,
       CSS: true,
