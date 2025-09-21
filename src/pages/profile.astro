@@ -9,30 +9,30 @@ const projects = (await getCollection('projects')).sort((a, b) => (a.data.featur
 const certs = (await getCollection('certs')).sort((a, b) => b.data.issued.localeCompare(a.data.issued));
 ---
 
-<BaseLayout title="Profil" description="Profil von Tim Friedrich: Dynamics 365 Freelancer fÃ¼r Sales/Service, Integrationen, Azure & DevOps.">
+<BaseLayout title="Profil" description="Profil von Tim Friedrich: Dynamics 365 Freelancer für Sales/Service, Integrationen, Azure & DevOps.">
   <section class="bg-surface-100 py-20">
     <div class="mx-auto max-w-5xl px-6">
-      <h1 class="section-title">Ãœber Tim Friedrich</h1>
+      <h1 class="section-title">Über Tim Friedrich</h1>
       <p class="mt-6 text-lg text-slate-600">
-        Ich verbinde tiefes Dynamics 365 Wissen mit Cloud-Architektur und DevOps. Mein Fokus: performante Integrationen, saubere Code-Bases und Teams, die selbstÃ¤ndig liefern kÃ¶nnen.
+        Ich verbinde tiefes Dynamics 365 Wissen mit Cloud-Architektur und DevOps. Mein Fokus: performante Integrationen, saubere Code-Bases und Teams, die selbständig liefern können.
       </p>
       <div class="mt-8 grid gap-6 md:grid-cols-2">
         <div class="card">
           <h2 class="text-xl font-semibold text-slate-900">Schwerpunkte</h2>
           <ul class="mt-4 space-y-2 text-sm text-slate-600">
-            <li>â€¢ Dynamics 365 Sales & Service End-to-End</li>
-            <li>â€¢ Azure Integration Services, Functions & Eventing</li>
-            <li>â€¢ Power Platform, Plugins, Testautomatisierung</li>
-            <li>â€¢ DevOps, Governance, Security & Monitoring</li>
+            <li>• Dynamics 365 Sales & Service End-to-End</li>
+            <li>• Azure Integration Services, Functions & Eventing</li>
+            <li>• Power Platform, Plugins, Testautomatisierung</li>
+            <li>• DevOps, Governance, Security & Monitoring</li>
           </ul>
         </div>
         <div class="card">
           <h2 class="text-xl font-semibold text-slate-900">Arbeitsweise</h2>
           <ul class="mt-4 space-y-2 text-sm text-slate-600">
-            <li>â€¢ Transparente Roadmaps & kurze Feedback-Loops</li>
-            <li>â€¢ Co-Creation mit internen Teams statt Silos</li>
-            <li>â€¢ Fokus auf messbaren Business-Impact</li>
-            <li>â€¢ Enablement & Dokumentation als Ergebnisbestandteil</li>
+            <li>• Transparente Roadmaps & kurze Feedback-Loops</li>
+            <li>• Co-Creation mit internen Teams statt Silos</li>
+            <li>• Fokus auf messbaren Business-Impact</li>
+            <li>• Enablement & Dokumentation als Ergebnisbestandteil</li>
           </ul>
         </div>
       </div>
@@ -60,7 +60,7 @@ const certs = (await getCollection('certs')).sort((a, b) => b.data.issued.locale
             </div>
             {cert.data.credentialUrl && (
               <a href={cert.data.credentialUrl} class="mt-4 inline-flex text-xs font-semibold text-accent-200 hover:text-white">
-                Zertifikat ansehen â†’
+                Zertifikat ansehen →
               </a>
             )}
           </article>
