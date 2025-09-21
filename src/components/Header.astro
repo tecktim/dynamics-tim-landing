@@ -10,31 +10,28 @@ const navItems = [
 ];
 ---
 
-<header class="sticky top-0 z-50 bg-white/90 shadow-sm backdrop-blur">
+<header class="sticky top-0 z-50 border-b border-surface-200/80 bg-white/85 shadow-sm backdrop-blur">
   <div class="mx-auto flex max-w-6xl items-center justify-between px-6 py-4">
-    <a href={base} class="flex items-center gap-3 text-lg font-semibold text-slate-900">
-      <span class="flex h-10 w-10 items-center justify-center rounded-xl bg-brand-600 text-white">TF</span>
+    <a href={base} class="flex items-center gap-3 text-lg font-semibold text-brand-700 hover:text-brand-500">
+      <span class="flex h-10 w-10 items-center justify-center rounded-xl bg-brand-500 text-white shadow-soft">TF</span>
       <span class="hidden sm:inline-block">Tim Friedrich · Dynamics 365</span>
     </a>
-    <nav class="hidden items-center gap-8 text-sm font-medium text-slate-700 md:flex">
+    <nav class="hidden items-center gap-8 text-sm font-medium text-slate-600 md:flex">
       {navItems.map((item) => (
-        <a
-          href={item.href}
-          class="transition hover:text-brand-600"
-        >
+        <a href={item.href} class="transition hover:text-brand-500 focus-visible:outline-none focus-visible:text-brand-500">
           {item.label}
         </a>
       ))}
       <a
         href={to('contact')}
-        class="rounded-xl bg-brand-600 px-4 py-2 text-sm font-semibold text-white shadow-soft transition hover:bg-brand-500"
+        class="rounded-xl bg-brand-500 px-4 py-2 text-sm font-semibold text-white shadow-soft transition hover:bg-brand-400 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-brand-500 focus-visible:ring-offset-white"
       >
         Kostenloses Erstgespräch
       </a>
     </nav>
     <a
       href={to('contact')}
-      class="rounded-xl bg-brand-600 px-3 py-2 text-sm font-semibold text-white shadow-soft md:hidden"
+      class="rounded-xl bg-brand-500 px-3 py-2 text-sm font-semibold text-white shadow-soft transition hover:bg-brand-400 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-400 md:hidden"
       aria-label="Kontakt aufnehmen"
     >
       Kontakt

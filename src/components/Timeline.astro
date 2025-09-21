@@ -14,7 +14,7 @@ const rendered = await Promise.all(
 );
 ---
 
-<section class="bg-slate-50 py-20">
+<section class="bg-surface-100 py-20">
   <div class="mx-auto max-w-6xl px-6">
     <div class="mb-10 max-w-3xl space-y-4">
       <h2 class="section-title">Erfahrung im Überblick</h2>
@@ -22,10 +22,10 @@ const rendered = await Promise.all(
         Von Enterprise-Rollouts bis schnellen Prototypen: Hands-on Erfahrung entlang der gesamten Dynamics 365 Delivery-Kette.
       </p>
     </div>
-    <ol class="relative border-l border-slate-200">
+    <ol class="relative border-l border-surface-200">
       {rendered.map(({ entry, Content }) => (
-        <li class="relative ml-6 border-b border-slate-200 py-8 last:border-b-0" key={entry.id}>
-          <div class="absolute -left-3 top-9 h-6 w-6 rounded-full border-4 border-white bg-brand-500 shadow-soft" aria-hidden="true"></div>
+        <li class="relative ml-6 border-b border-surface-200 py-8 last:border-b-0" key={entry.id}>
+          <div class="absolute -left-3 top-9 h-6 w-6 rounded-full border-4 border-white bg-accent-400 shadow-soft" aria-hidden="true"></div>
           <div class="flex flex-col gap-2 rounded-2xl bg-white/90 p-6 shadow-soft">
             <div class="flex flex-wrap items-center gap-3 text-sm font-semibold uppercase tracking-wide text-brand-600">
               <span>{entry.data.startDate} – {entry.data.endDate ?? 'Heute'}</span>
