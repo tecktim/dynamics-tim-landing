@@ -1,10 +1,10 @@
 {
-  "name": "tim-freelance-landing",
+  "name": "dynamics-tim-landing",
   "version": "1.0.0",
   "private": true,
   "description": "Landingpage für Dynamics 365 Freelancer Tim Friedrich mit Astro & Tailwind.",
   "type": "module",
-  "homepage": "https://tim-freelance.github.io/tim-freelance-landing/",
+  "homepage": "https://dynamics-tim.dev/",
   "scripts": {
     "dev": "astro dev",
     "build": "astro build",

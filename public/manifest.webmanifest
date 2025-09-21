@@ -1,13 +1,13 @@
 {
   "name": "Tim Friedrich · Dynamics 365 Freelancer",
   "short_name": "Tim Dynamics",
-  "start_url": "/tim-freelance-landing/",
+  "start_url": "/",
   "display": "standalone",
   "background_color": "#ffffff",
   "theme_color": "#4282ff",
   "icons": [
     {
-      "src": "/tim-freelance-landing/favicon.svg",
+      "src": "/favicon.svg",
       "sizes": "64x64",
       "type": "image/svg+xml"
     }

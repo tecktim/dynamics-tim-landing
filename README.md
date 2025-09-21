@@ -43,7 +43,7 @@ Das Repository enthält ein Workflow (`.github/workflows/deploy.yml`), der bei j
 3. das Build als Pages-Artefakt hochlädt
 4. via `actions/deploy-pages` auf die `gh-pages` Branch deployed
 
-Die Seite ist unter `https://tim-freelance.github.io/tim-freelance-landing/` erreichbar. Domain & Basis-Pfad sind in `astro.config.mjs` hinterlegt.
+Die Seite ist unter `https://dynamics-tim.dev/` erreichbar. Domain & Basis-Pfad sind in `astro.config.mjs` hinterlegt.
 
 ## 🗂️ Projektstruktur
 

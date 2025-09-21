@@ -5,13 +5,13 @@ import sitemap from '@astrojs/sitemap';
 import robotsTxt from 'astro-robots-txt';
 import compress from 'astro-compress';
 
-const defaultSite = 'https://tim-freelance.github.io';
-const repoBase = '/tim-freelance-landing/';
+const defaultSite = 'https://dynamics-tim.dev';
+const defaultBase = '/';
 const publicBaseUrl = process.env.PUBLIC_BASE_URL;
 const ensureSlash = (value) => (value.endsWith('/') ? value : `${value}/`);
 
-const siteUrl = publicBaseUrl ? ensureSlash(publicBaseUrl) : `${defaultSite}${repoBase}`;
-const baseUrl = publicBaseUrl ? ensureSlash(new URL(publicBaseUrl).pathname) : repoBase;
+const siteUrl = ensureSlash(publicBaseUrl ?? defaultSite);
+const baseUrl = ensureSlash(publicBaseUrl ? new URL(publicBaseUrl).pathname : defaultBase);
 
 export default defineConfig({
   site: siteUrl,
