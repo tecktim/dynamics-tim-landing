@@ -5,11 +5,17 @@ import sitemap from '@astrojs/sitemap';
 import robotsTxt from 'astro-robots-txt';
 import compress from 'astro-compress';
 
-const siteUrl = 'https://tim-freelance.github.io';
+const defaultSite = 'https://tim-freelance.github.io';
+const repoBase = '/tim-freelance-landing/';
+const publicBaseUrl = process.env.PUBLIC_BASE_URL;
+const ensureSlash = (value) => (value.endsWith('/') ? value : `${value}/`);
+
+const siteUrl = publicBaseUrl ? ensureSlash(publicBaseUrl) : `${defaultSite}${repoBase}`;
+const baseUrl = publicBaseUrl ? ensureSlash(new URL(publicBaseUrl).pathname) : repoBase;
 
 export default defineConfig({
   site: siteUrl,
-  base: '/tim-freelance-landing/',
+  base: baseUrl,
   output: 'static',
   integrations: [
     tailwind({
@@ -23,10 +29,10 @@ export default defineConfig({
       policy: [
         {
           userAgent: '*',
-          allow: '/' 
+          allow: '/'
         }
       ],
-      sitemap: `${siteUrl}/tim-freelance-landing/sitemap-index.xml`
+      sitemap: `${siteUrl}sitemap-index.xml`
     }),
     compress({
       HTML: true,
