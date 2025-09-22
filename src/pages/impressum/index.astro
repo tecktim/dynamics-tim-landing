@@ -1,0 +1,99 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import legalData from '../../../env/.env.json';
+
+const {
+  BUSINESS_NAME,
+  ADDRESS,
+  EMAIL,
+  PHONE,
+  VAT_ID,
+  TRADE_REGISTER,
+  SUPERVISORY_AUTH
+} = legalData;
+
+const hasTradeRegister = TRADE_REGISTER && TRADE_REGISTER !== 'optional';
+const tradeRegisterText = hasTradeRegister
+  ? TRADE_REGISTER
+  : 'TODO: Handelsregistereintrag und zuständige Kammer ergänzen, falls vorhanden.';
+const supervisoryAuthorityText = SUPERVISORY_AUTH && SUPERVISORY_AUTH.length > 0
+  ? SUPERVISORY_AUTH
+  : 'TODO: Zuständige Aufsichtsbehörde (Name, Anschrift, URL) ergänzen.';
+const mailHref = `mailto:${EMAIL}`;
+const sanitizedPhone = PHONE.replace(/[^+\d]/g, '');
+const phoneHref = `tel:${sanitizedPhone}`;
+---
+
+<BaseLayout
+  title="Impressum"
+  description="Pflichtangaben nach § 5 DDG für Tim Friedrich - Dynamics 365 Freelancer."
+  url="/impressum/"
+>
+  <section class="bg-surface-100 py-24">
+    <div class="mx-auto max-w-3xl px-6">
+      <div class="prose">
+        <h1>Impressum</h1>
+        <p>Informationspflicht gemäß § 5 Digitale-Dienste-Gesetz (DDG).</p>
+
+        <h2>Verantwortlich für den Inhalt</h2>
+        <p>
+          <strong>{BUSINESS_NAME}</strong><br />
+          {ADDRESS}
+        </p>
+
+        <h3>Kontakt</h3>
+        <ul>
+          <li>E-Mail: <a href={mailHref}>{EMAIL}</a></li>
+          <li>Telefon: <a href={phoneHref}>{PHONE}</a></li>
+        </ul>
+
+        <h3>Umsatzsteuer-ID</h3>
+        <p>Umsatzsteuer-Identifikationsnummer gemäß § 27a UStG: <strong>{VAT_ID}</strong></p>
+
+        <!-- <h3>Registereintrag</h3>
+        <p>{tradeRegisterText}</p>
+
+        <h3>Aufsichtsbehörde</h3>
+        <p>{supervisoryAuthorityText}</p> -->
+
+        <h3>Berufsrechtliche Regelungen</h3>
+        <p>
+          Keine besonderen berufsrechtlichen Regelungen, die über allgemeines Handels- und Vertragsrecht hinausgehen.
+        </p>
+
+        <h3>Haftung für Inhalte</h3>
+        <p>
+          Als Diensteanbieter bin ich gemäß § 7 Abs. 1 DDG für eigene Inhalte auf diesen Seiten nach den allgemeinen
+          Gesetzen verantwortlich. Nach §§ 8 bis 10 DDG bin ich jedoch nicht verpflichtet, übermittelte oder gespeicherte
+          fremde Informationen zu überwachen oder nach Umständen zu forschen, die auf eine rechtswidrige Tätigkeit
+          hinweisen. Verpflichtungen zur Entfernung oder Sperrung der Nutzung von Informationen nach den allgemeinen
+          Gesetzen bleiben hiervon unberührt.
+        </p>
+
+        <h3>Haftung für Links</h3>
+        <p>
+          Diese Website enthält Links zu externen Websites Dritter, auf deren Inhalte ich keinen Einfluss habe. Deshalb kann
+          ich für diese fremden Inhalte auch keine Gewähr übernehmen. Für die Inhalte der verlinkten Seiten ist stets der
+          jeweilige Anbieter oder Betreiber der Seiten verantwortlich. Bei Bekanntwerden von Rechtsverletzungen werden derart
+          Links umgehend entfernt.
+        </p>
+
+        <h3>Urheberrecht</h3>
+        <p>
+          Die durch den Seitenbetreiber erstellten Inhalte und Werke auf diesen Seiten unterliegen dem deutschen
+          Urheberrecht. Beiträge Dritter sind als solche gekennzeichnet. Die Vervielfältigung, Bearbeitung, Verbreitung und
+          jede Art der Verwertung außerhalb der Grenzen des Urheberrechtes bedürfen der schriftlichen Zustimmung des
+          jeweiligen Autors bzw. Erstellers.
+        </p>
+
+        <h3>Streitbeilegung</h3>
+        <p>
+          Die frühere EU-ODR-Plattform wurde durch Regulation (EU) 2024/3228 zum 9. April 2024 abgeschafft. Ich bin weder
+          verpflichtet noch bereit, an alternativen Streitbeilegungsverfahren vor einer Verbraucherschlichtungsstelle im
+          Sinne des VSBG teilzunehmen.
+        </p>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
