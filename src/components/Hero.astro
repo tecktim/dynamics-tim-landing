@@ -4,8 +4,8 @@ const to = (path: string) => `${base}${path.replace(/^\//, '')}`;
 ---
 
 <section class="hero-ambient relative overflow-hidden bg-gradient-to-br from-brand-900 via-brand-800 to-accent-700 py-24 text-white">
-  <div class="ambient-glow absolute inset-0 bg-[radial-gradient(circle_at_top,_rgba(76,162,242,0.35),_transparent_55%)]"></div>
-  <div class="ambient-orb absolute -right-24 top-24 h-96 w-96 rounded-full bg-[conic-gradient(from_90deg,_rgba(0,154,174,0.25),_transparent_60%)] blur-3xl"></div>
+  <div class="ambient-glow pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_top,_rgba(76,162,242,0.35),_transparent_55%)]"></div>
+  <div class="ambient-orb pointer-events-none absolute -right-24 top-24 h-96 w-96 rounded-full bg-[conic-gradient(from_90deg,_rgba(0,154,174,0.25),_transparent_60%)] blur-3xl"></div>
   <div class="relative mx-auto flex max-w-6xl flex-col gap-12 px-6 lg:flex-row lg:items-center">
     <div class="max-w-3xl space-y-6">
       <div class="hero-badge inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/10 px-4 py-2 text-sm font-medium text-accent-100/90 shadow-soft" data-reveal data-reveal-delay="0">
@@ -66,3 +66,4 @@ const to = (path: string) => `${base}${path.replace(/^\//, '')}`;
     </div>
   </div>
 </section>
+
