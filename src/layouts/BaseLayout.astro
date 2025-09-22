@@ -36,7 +36,7 @@ const csp = [
 ---
 
 <!DOCTYPE html>
-<html lang="de">
+<html lang="de" class="has-page-transition is-preload">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -55,6 +55,7 @@ const csp = [
       <slot />
     </main>
     {showFooter && <Footer />}
+    <script src={`${base}assets/js/page-transitions.js`} defer></script>
     <script src={`${base}assets/js/reveal.js`} defer></script>
     <script src={`${base}assets/js/consent.js`} defer></script>
   </body>

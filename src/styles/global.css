@@ -54,6 +54,7 @@
   :root {
     color-scheme: light;
     scroll-behavior: smooth;
+    --page-transition-duration: 320ms;
   }
 
   body {
@@ -64,6 +65,51 @@
   a {
     @apply text-brand-500 transition hover:text-brand-400;
   }
+
+  html.has-page-transition body {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+    will-change: opacity, transform;
+    transition: opacity var(--page-transition-duration) cubic-bezier(0.16, 1, 0.3, 1),
+      transform var(--page-transition-duration) cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  html.has-page-transition body::after {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background: radial-gradient(circle at 18% 18%, rgba(0, 120, 212, 0.2), transparent 60%),
+      radial-gradient(circle at 82% 82%, rgba(0, 154, 174, 0.22), transparent 58%),
+      rgba(0, 24, 56, 0.25);
+    opacity: 0;
+    transform: scale(1.03);
+    transition: opacity var(--page-transition-duration) cubic-bezier(0.22, 1, 0.36, 1),
+      transform var(--page-transition-duration) cubic-bezier(0.22, 1, 0.36, 1);
+    pointer-events: none;
+    mix-blend-mode: screen;
+    z-index: 60;
+  }
+
+  html.has-page-transition.is-preload body {
+    opacity: 0;
+    transform: translate3d(0, 24px, 0);
+  }
+
+  html.has-page-transition.is-transitioning body {
+    opacity: 0;
+    transform: translate3d(0, -16px, 0);
+  }
+
+  html.has-page-transition.is-transitioning body::after {
+    opacity: 0.42;
+    transform: scale(1.01);
+  }
+
+  html.has-page-transition.is-page-ready body::after {
+    opacity: 0;
+    transform: scale(1.03);
+  }
+
 }
 
 @layer components {
@@ -75,8 +121,120 @@
     @apply text-3xl font-semibold tracking-tight text-slate-900 sm:text-4xl md:text-5xl;
   }
 
+  .nav-link {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.25rem;
+    padding-block: 0.25rem;
+    color: theme('colors.slate.600');
+    font-weight: 500;
+    transition: color 220ms ease, text-shadow 220ms ease;
+  }
+
+  .nav-link::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: -0.35rem;
+    height: 2px;
+    border-radius: 9999px;
+    background: linear-gradient(120deg, rgba(0, 120, 212, 0.55), rgba(0, 154, 174, 0.4));
+    opacity: 0;
+    transform: scaleX(0.45);
+    transform-origin: center;
+    transition: opacity 220ms ease, transform 260ms cubic-bezier(0.16, 1, 0.3, 1);
+    pointer-events: none;
+  }
+
+  .nav-link:hover,
+  .nav-link:focus-visible {
+    color: theme('colors.brand.700');
+    text-shadow: 0 0 12px rgba(0, 120, 212, 0.28);
+  }
+
+  .nav-link:hover::after,
+  .nav-link:focus-visible::after {
+    opacity: 1;
+    transform: scaleX(1);
+  }
+
+  .nav-link:focus-visible {
+    outline: none;
+  }
+
   .card {
     @apply rounded-2xl border border-surface-200 bg-white/80 p-8 shadow-soft backdrop-blur;
+    position: relative;
+    isolation: isolate;
+    overflow: hidden;
+    z-index: 0;
+    --card-padding: 2rem;
+    --card-bg: rgba(255, 255, 255, 0.8);
+    --card-bg-hover: rgba(255, 255, 255, 0.96);
+    --card-border-hover: rgba(0, 120, 212, 0.3);
+    --card-shadow-hover: 0 26px 64px rgba(0, 39, 76, 0.18);
+    --card-lift: translate3d(0, -8px, 0) scale(1.01);
+    --card-glow: linear-gradient(135deg, rgba(0, 120, 212, 0.22), rgba(0, 154, 174, 0.18), rgba(255, 255, 255, 0));
+    padding: var(--card-padding);
+    background-color: var(--card-bg);
+    transform: translate3d(0, 0, 0);
+    transition: transform 320ms cubic-bezier(0.16, 1, 0.3, 1), box-shadow 360ms cubic-bezier(0.16, 1, 0.3, 1), border-color 280ms ease, background-color 280ms ease;
+    will-change: transform, box-shadow;
+  }
+
+  .card::before {
+    content: '';
+    position: absolute;
+    inset: -1px;
+    border-radius: inherit;
+    background: var(--card-glow);
+    opacity: 0;
+    transform: scale(0.94);
+    transition: opacity 320ms ease, transform 360ms cubic-bezier(0.16, 1, 0.3, 1);
+    pointer-events: none;
+    z-index: -1;
+  }
+
+  .card:hover,
+  .card:focus-within {
+    transform: var(--card-lift);
+    background-color: var(--card-bg-hover);
+    border-color: var(--card-border-hover);
+    box-shadow: var(--card-shadow-hover);
+  }
+
+  .card:hover::before,
+  .card:focus-within::before {
+    opacity: 1;
+    transform: scale(1);
+  }
+
+  .card--on-dark {
+    --card-padding: 1.75rem;
+    --card-bg: rgba(255, 255, 255, 0.12);
+    --card-bg-hover: rgba(255, 255, 255, 0.2);
+    --card-border-hover: rgba(255, 255, 255, 0.55);
+    --card-shadow-hover: 0 24px 54px rgba(1, 24, 56, 0.45);
+    --card-lift: translate3d(0, -4px, 0) scale(1.005);
+    --card-glow: linear-gradient(135deg, rgba(255, 255, 255, 0.4), rgba(0, 154, 174, 0.32), rgba(255, 255, 255, 0));
+    border-color: rgba(255, 255, 255, 0.22);
+    box-shadow: 0 20px 48px rgba(1, 24, 56, 0.35);
+  }
+
+  .card--resume {
+    --card-padding: 1.5rem;
+    --card-bg: rgba(255, 255, 255, 0.94);
+    --card-bg-hover: rgba(255, 255, 255, 0.99);
+    --card-border-hover: rgba(0, 120, 212, 0.22);
+    --card-shadow-hover: 0 22px 48px rgba(0, 39, 76, 0.14);
+    --card-lift: translate3d(0, -6px, 0) scale(1.006);
+    --card-glow: linear-gradient(135deg, rgba(0, 120, 212, 0.18), rgba(0, 154, 174, 0.16), rgba(255, 255, 255, 0));
+  }
+
+  .card--compact {
+    --card-padding: 1.5rem;
   }
 }
 
@@ -123,6 +281,7 @@
   }
 
   .hero-ambient::before {
+    pointer-events: none;
     content: '';
     position: absolute;
     inset: -20%;
@@ -135,6 +294,7 @@
   }
 
   .hero-ambient::after {
+    pointer-events: none;
     content: '';
     position: absolute;
     inset: -25%;
@@ -239,6 +399,18 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
+  html.has-page-transition body,
+  html.has-page-transition.is-preload body,
+  html.has-page-transition.is-transitioning body {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+  }
+
+  html.has-page-transition body::after {
+    display: none !important;
+  }
+
   .hero-ambient::before,
   .hero-ambient::after,
   .hero-ambient .ambient-glow,
@@ -259,6 +431,22 @@
   .cta-glow:hover::before,
   .cta-glow:focus-visible::before {
     opacity: 0.4;
+  }
+
+  .nav-link::after,
+  .card,
+  .card::before {
+    transition: none !important;
+  }
+
+  .card,
+  .card:hover,
+  .card:focus-within {
+    transform: none !important;
+  }
+
+  .nav-link::after {
+    transform: none !important;
   }
 }
 

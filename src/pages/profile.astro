@@ -17,7 +17,7 @@ const certs = (await getCollection('certs')).sort((a, b) => b.data.issued.locale
         Ich verbinde tiefes Dynamics 365 Wissen mit Cloud-Architektur und DevOps. Mein Fokus: performante Integrationen, saubere Code-Bases und Teams, die selbständig liefern können.
       </p>
       <div class="mt-8 grid gap-6 md:grid-cols-2">
-        <div class="card">
+        <div class="card card--resume">
           <h2 class="text-xl font-semibold text-slate-900">Schwerpunkte</h2>
           <ul class="mt-4 space-y-2 text-sm text-slate-600">
             <li>• Dynamics 365 Sales & Service End-to-End</li>
@@ -26,7 +26,7 @@ const certs = (await getCollection('certs')).sort((a, b) => b.data.issued.locale
             <li>• DevOps, Governance, Security & Monitoring</li>
           </ul>
         </div>
-        <div class="card">
+        <div class="card card--resume">
           <h2 class="text-xl font-semibold text-slate-900">Arbeitsweise</h2>
           <ul class="mt-4 space-y-2 text-sm text-slate-600">
             <li>• Transparente Roadmaps & kurze Feedback-Loops</li>
@@ -48,9 +48,9 @@ const certs = (await getCollection('certs')).sort((a, b) => b.data.issued.locale
       <h2 class="section-title text-white">Zertifizierungen</h2>
       <div class="mt-10 grid gap-6 md:grid-cols-3">
         {certs.map((cert) => (
-          <article class="flex flex-col gap-4 rounded-2xl border border-white/20 bg-white/10 p-6 text-left shadow-soft" key={cert.id}>
+          <article class="card card--on-dark card--compact flex flex-col gap-4 text-left" key={cert.id}>
             <h3 class="text-xl font-semibold text-white">{cert.data.title}</h3>
-            <p class="mt-2 text-sm text-slate-200">{cert.data.issuer} Â· {cert.data.issued}</p>
+            <p class="mt-2 text-sm text-slate-200">{cert.data.issuer} &middot; {cert.data.issued}</p>
             <div class="mt-4 text-sm text-slate-200">
               {cert.data.skills.map((skill) => (
                 <span class="mr-2 inline-flex items-center rounded-full bg-white/10 px-3 py-1 text-xs font-semibold" key={skill}>
@@ -69,5 +69,6 @@ const certs = (await getCollection('certs')).sort((a, b) => b.data.issued.locale
     </div>
   </section>
 </BaseLayout>
+
 
 
