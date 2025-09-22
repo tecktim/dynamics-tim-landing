@@ -1,4 +1,4 @@
-﻿---
+---
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import SeoHead from '../components/SeoHead.astro';
@@ -55,6 +55,7 @@ const csp = [
       <slot />
     </main>
     {showFooter && <Footer />}
+    <script src={`${base}assets/js/reveal.js`} defer></script>
     <script src={`${base}assets/js/consent.js`} defer></script>
   </body>
 </html>

@@ -79,3 +79,228 @@
     @apply rounded-2xl border border-surface-200 bg-white/80 p-8 shadow-soft backdrop-blur;
   }
 }
+
+@layer base {
+  @media (prefers-reduced-motion: reduce) {
+    :root {
+      scroll-behavior: auto;
+    }
+  }
+}
+
+@layer utilities {
+  [data-reveal] {
+    --reveal-delay: 0ms;
+  }
+
+  [data-reveal].reveal-ready {
+    opacity: 0;
+    transform: translate3d(0, 24px, 0);
+    transition: opacity 320ms cubic-bezier(0.16, 1, 0.3, 1), transform 480ms cubic-bezier(0.16, 1, 0.3, 1);
+    transition-delay: var(--reveal-delay);
+    will-change: opacity, transform;
+  }
+
+  [data-reveal].is-revealed {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    [data-reveal] {
+      opacity: 1 !important;
+      transform: none !important;
+      transition: none !important;
+    }
+  }
+}
+
+@layer components {
+  .hero-ambient {
+    position: relative;
+    isolation: isolate;
+    overflow: hidden;
+  }
+
+  .hero-ambient::before {
+    content: '';
+    position: absolute;
+    inset: -20%;
+    background: radial-gradient(circle at 20% 20%, rgba(255, 255, 255, 0.15), transparent 55%);
+    opacity: 0.9;
+    transform: rotate(0deg) scale(1);
+    animation: heroAmbientDrift 18s ease-in-out infinite alternate;
+    will-change: transform, opacity;
+    z-index: 0;
+  }
+
+  .hero-ambient::after {
+    content: '';
+    position: absolute;
+    inset: -25%;
+    background: linear-gradient(120deg, rgba(12, 86, 194, 0.2), rgba(60, 225, 195, 0.15), transparent 70%);
+    mix-blend-mode: screen;
+    opacity: 0.4;
+    animation: heroAmbientShift 22s ease-in-out infinite alternate;
+    will-change: transform, opacity;
+    z-index: 0;
+  }
+
+  .hero-ambient .ambient-glow,
+  .hero-ambient .ambient-orb {
+    animation: heroSoftPulse 16s ease-in-out infinite alternate;
+    will-change: transform, opacity;
+  }
+
+  .hero-ambient .ambient-orb {
+    animation-duration: 20s;
+    animation-delay: 2s;
+  }
+
+  .hero-badge {
+    animation: heroBadgeFloat 6s ease-in-out infinite;
+    will-change: transform;
+  }
+
+  .cta-glow {
+    position: relative;
+    overflow: hidden;
+    transition: transform 280ms cubic-bezier(0.16, 1, 0.3, 1), box-shadow 320ms ease;
+    will-change: transform;
+  }
+
+  .cta-glow::before {
+    content: '';
+    position: absolute;
+    inset: -120% -40%;
+    background: radial-gradient(circle, rgba(255, 255, 255, 0.55), transparent 55%);
+    transform: translate3d(-40%, 0, 0);
+    opacity: 0;
+    transition: transform 520ms cubic-bezier(0.16, 1, 0.3, 1), opacity 320ms ease;
+    will-change: transform, opacity;
+    pointer-events: none;
+  }
+
+  .cta-glow:hover,
+  .cta-glow:focus-visible {
+    transform: translateY(-2px);
+    box-shadow: 0 18px 35px rgba(23, 76, 125, 0.25);
+  }
+
+  .cta-glow:hover::before,
+  .cta-glow:focus-visible::before {
+    opacity: 1;
+    transform: translate3d(45%, 0, 0);
+  }
+
+  .cta-outline {
+    position: relative;
+    overflow: hidden;
+    transition: color 280ms ease, background 280ms ease, border-color 280ms ease;
+  }
+
+  .cta-outline::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(120deg, rgba(255, 255, 255, 0.45), rgba(255, 255, 255, 0));
+    opacity: 0;
+    transition: opacity 320ms ease;
+    pointer-events: none;
+  }
+
+  .cta-outline:hover::before,
+  .cta-outline:focus-visible::before {
+    opacity: 0.25;
+  }
+
+  .footer-ambient {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .footer-ambient::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 50%;
+    width: min(640px, 80%);
+    height: 2px;
+    transform: translateX(-50%);
+    background: linear-gradient(90deg, rgba(255, 255, 255, 0), rgba(255, 255, 255, 0.45), rgba(255, 255, 255, 0));
+    opacity: 0;
+    transition: opacity 420ms ease;
+    pointer-events: none;
+  }
+
+  .footer-ambient.is-revealed::before {
+    opacity: 1;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-ambient::before,
+  .hero-ambient::after,
+  .hero-ambient .ambient-glow,
+  .hero-ambient .ambient-orb,
+  .hero-badge {
+    animation: none !important;
+  }
+
+  .cta-glow {
+    transition-duration: 0ms !important;
+  }
+
+  .cta-glow::before {
+    transition: opacity 0ms !important;
+    transform: none !important;
+  }
+
+  .cta-glow:hover::before,
+  .cta-glow:focus-visible::before {
+    opacity: 0.4;
+  }
+}
+
+@keyframes heroAmbientDrift {
+  0% {
+    transform: rotate(0deg) scale(1);
+    opacity: 0.7;
+  }
+  100% {
+    transform: rotate(8deg) scale(1.1);
+    opacity: 1;
+  }
+}
+
+@keyframes heroAmbientShift {
+  0% {
+    transform: translate3d(-10%, -5%, 0) scale(1);
+    opacity: 0.3;
+  }
+  100% {
+    transform: translate3d(8%, 6%, 0) scale(1.05);
+    opacity: 0.55;
+  }
+}
+
+@keyframes heroSoftPulse {
+  0% {
+    transform: translate3d(0, 0, 0) scale(1);
+    opacity: 0.75;
+  }
+  100% {
+    transform: translate3d(10px, -12px, 0) scale(1.05);
+    opacity: 1;
+  }
+}
+
+@keyframes heroBadgeFloat {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0);
+  }
+  50% {
+    transform: translate3d(0, -6px, 0);
+  }
+}

@@ -49,10 +49,10 @@ const valueBullets = [
 
   <section class="bg-surface-100 py-20">
     <div class="mx-auto max-w-6xl px-6">
-      <h2 class="section-title">Warum Tim?</h2>
-      <div class="mt-10 grid gap-6 md:grid-cols-3">
-        {valueBullets.map((bullet) => (
-          <div class="card" key={bullet.title}>
+      <h2 class="section-title" data-reveal data-reveal-delay="0">Warum Tim?</h2>
+      <div class="mt-10 grid gap-6 md:grid-cols-3" data-reveal data-reveal-delay="80">
+        {valueBullets.map((bullet, index) => (
+          <div class="card" data-reveal data-reveal-delay={`${index * 80 + 160}`} key={bullet.title}>
             <h3 class="text-xl font-semibold text-slate-900">{bullet.title}</h3>
             <p class="mt-3 text-base text-slate-600">{bullet.description}</p>
           </div>
@@ -69,17 +69,17 @@ const valueBullets = [
 
   <ProjectCards items={projects.slice(0, 2)} />
 
-  <section class="bg-gradient-to-br from-brand-900 via-brand-800 to-accent-600 py-24 text-white">
+  <section class="bg-gradient-to-br from-brand-900 via-brand-800 to-accent-600 py-24 text-white" data-reveal data-reveal-delay="0">
     <div class="mx-auto max-w-5xl px-6 text-center">
-      <h2 class="text-3xl font-bold sm:text-4xl">Bereit für skalierbare Dynamics 365 Lösungen?</h2>
-      <p class="mt-4 text-lg text-slate-200">
+      <h2 class="text-3xl font-bold sm:text-4xl" data-reveal data-reveal-delay="0">Bereit für skalierbare Dynamics 365 Lösungen?</h2>
+      <p class="mt-4 text-lg text-slate-200" data-reveal data-reveal-delay="80">
         Lass uns im kostenlosen Erstgespräch klären, wie wir Architektur, Delivery und Integrationen gemeinsam beschleunigen.
       </p>
-      <div class="mt-8 flex flex-wrap justify-center gap-4">
-        <a href="mailto:hello@dynamics-tim.dev" class="rounded-2xl bg-white px-6 py-3 text-base font-semibold text-brand-700 shadow-soft transition hover:bg-surface-200">
+      <div class="mt-8 flex flex-wrap justify-center gap-4" data-reveal data-reveal-delay="160">
+        <a href="mailto:hello@dynamics-tim.dev" class="cta-glow rounded-2xl bg-white px-6 py-3 text-base font-semibold text-brand-700 shadow-soft transition hover:bg-surface-200">
           Kostenloses Erstgespräch
         </a>
-        <a href={to('services')} class="rounded-2xl border border-white/60 px-6 py-3 text-base font-semibold text-white transition hover:bg-white/15">
+        <a href={to('services')} class="cta-outline rounded-2xl border border-white/60 px-6 py-3 text-base font-semibold text-white transition hover:bg-white/15">
           Leistungen ansehen
         </a>
       </div>

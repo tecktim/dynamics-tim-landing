@@ -3,35 +3,35 @@ const base = import.meta.env.BASE_URL ?? '/';
 const to = (path: string) => `${base}${path.replace(/^\//, '')}`;
 ---
 
-<section class="relative overflow-hidden bg-gradient-to-br from-brand-900 via-brand-800 to-accent-700 py-24 text-white">
-  <div class="absolute inset-0 bg-[radial-gradient(circle_at_top,_rgba(76,162,242,0.35),_transparent_55%)]"></div>
-  <div class="absolute -right-24 top-24 h-96 w-96 rounded-full bg-[conic-gradient(from_90deg,_rgba(0,154,174,0.25),_transparent_60%)] blur-3xl"></div>
+<section class="hero-ambient relative overflow-hidden bg-gradient-to-br from-brand-900 via-brand-800 to-accent-700 py-24 text-white">
+  <div class="ambient-glow absolute inset-0 bg-[radial-gradient(circle_at_top,_rgba(76,162,242,0.35),_transparent_55%)]"></div>
+  <div class="ambient-orb absolute -right-24 top-24 h-96 w-96 rounded-full bg-[conic-gradient(from_90deg,_rgba(0,154,174,0.25),_transparent_60%)] blur-3xl"></div>
   <div class="relative mx-auto flex max-w-6xl flex-col gap-12 px-6 lg:flex-row lg:items-center">
     <div class="max-w-3xl space-y-6">
-      <div class="inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/10 px-4 py-2 text-sm font-medium text-accent-100/90 shadow-soft">
+      <div class="hero-badge inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/10 px-4 py-2 text-sm font-medium text-accent-100/90 shadow-soft" data-reveal data-reveal-delay="0">
         Dynamics 365 Sales · Service · Power Platform
       </div>
-      <h1 class="font-heading text-4xl font-bold tracking-tight text-white sm:text-5xl lg:text-6xl">
+      <h1 class="font-heading text-4xl font-bold tracking-tight text-white sm:text-5xl lg:text-6xl" data-reveal data-reveal-delay="80">
         Dynamics 365 Lösungen mit Microsoft DNA
       </h1>
-      <p class="text-lg text-brand-50/90 sm:text-xl">
+      <p class="text-lg text-brand-50/90 sm:text-xl" data-reveal data-reveal-delay="140">
         Architektur, Integrationen und Delivery nach Microsoft Best Practices – von der ersten Vision bis zum produktiven Betrieb.
       </p>
-      <div class="flex flex-wrap gap-4">
+      <div class="flex flex-wrap gap-4" data-reveal data-reveal-delay="200">
         <a
           href="mailto:hello@dynamics-tim.dev"
-          class="rounded-2xl bg-signal-400 px-6 py-3 text-base font-semibold text-brand-900 shadow-soft transition hover:bg-signal-500 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-200"
+          class="cta-glow rounded-2xl bg-signal-400 px-6 py-3 text-base font-semibold text-brand-900 shadow-soft transition hover:bg-signal-500 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-200"
         >
           Kostenloses Erstgespräch
         </a>
         <a
           href={to('services')}
-          class="rounded-2xl border border-white/30 bg-white/0 px-6 py-3 text-base font-semibold text-white transition hover:bg-white/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/60"
+          class="cta-outline rounded-2xl border border-white/30 bg-white/0 px-6 py-3 text-base font-semibold text-white transition hover:bg-white/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/60"
         >
           Leistungen entdecken
         </a>
       </div>
-      <ul class="mt-8 grid gap-3 text-base text-white/90 sm:grid-cols-3">
+      <ul class="mt-8 grid gap-3 text-base text-white/90 sm:grid-cols-3" data-reveal data-reveal-delay="260">
         {[
           'Codequalität & Solution Blueprints',
           'Integrationen mit Azure & Dataverse',
@@ -52,7 +52,7 @@ const to = (path: string) => `${base}${path.replace(/^\//, '')}`;
         ))}
       </ul>
     </div>
-    <div class="relative mx-auto w-full max-w-md">
+    <div class="relative mx-auto w-full max-w-md" data-reveal data-reveal-delay="320">
       <div class="absolute -inset-8 rounded-3xl bg-gradient-to-br from-white/10 via-white/5 to-accent-200/20 blur-2xl"></div>
       <div class="relative rounded-3xl border border-white/20 bg-white/90 p-6 text-left text-slate-800 shadow-[0_20px_60px_rgba(0,39,76,0.25)]">
         <div class="space-y-4">
