@@ -28,9 +28,10 @@
 ## Rechtstexte & Variablen
 - Impressum: `src/pages/impressum/index.astro`
 - Datenschutzerklaerung: `src/pages/datenschutz/index.astro`
-- Stammdaten: `env/.env.json` (TODO: Aufsichtsbehoerde, DSB, Registerangaben ergaenzen).
+- Stammdaten: `src/data/legal-data.ts` (optional override via `env/.env.json`, falls vorhanden; TODO: Aufsichtsbehoerde, DSB, Registerangaben ergaenzen).
 
 ## Qualitaetssicherung
 - Consent-Version bei inhaltlichen Aenderungen hochziehen (Konstante in `consent.js`).
 - Smoke-Test: erster Seitenaufruf ohne Fremd-Domains; danach `Alle akzeptieren` pruefen; Widerruf muss Dienste wieder deaktivieren.
 - Lighthouse Best-Practices und SEO pruefen; Fonts/CSS nur von `self` laden.
+
