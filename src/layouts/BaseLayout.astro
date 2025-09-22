@@ -2,6 +2,7 @@
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import SeoHead from '../components/SeoHead.astro';
+import { ClientRouter } from 'astro:transitions';
 import '../styles/global.css';
 
 interface Props {
@@ -36,7 +37,7 @@ const csp = [
 ---
 
 <!DOCTYPE html>
-<html lang="de" class="has-page-transition is-preload">
+<html lang="de">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -48,14 +49,14 @@ const csp = [
     <link rel="preload" href={`${base}assets/fonts/inter-latin.woff2`} as="font" type="font/woff2" crossorigin />
     <link rel="preload" href={`${base}assets/fonts/sora-latin.woff2`} as="font" type="font/woff2" crossorigin />
     <link rel="stylesheet" href={`${base}assets/css/consent.css`} />
+    <ClientRouter />
   </head>
   <body class="min-h-screen bg-slate-50">
-    {showHeader && <Header />}
-    <main>
+    {showHeader && <Header transition:persist />}
+    <main transition:name="page" transition:animate="fade">
       <slot />
     </main>
-    {showFooter && <Footer />}
-    <script src={`${base}assets/js/page-transitions.js`} defer></script>
+    {showFooter && <Footer transition:persist />}
     <script src={`${base}assets/js/reveal.js`} defer></script>
     <script src={`${base}assets/js/consent.js`} defer></script>
   </body>

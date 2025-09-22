@@ -23,7 +23,7 @@ const legalLinks = [
       </div>
       <div class="flex flex-wrap items-center gap-4 md:justify-end">
         {legalLinks.map((link) => (
-          <a class="hover:text-white" href={link.href}>{link.label}</a>
+          <a class="hover:text-white" href={link.href} data-astro-prefetch>{link.label}</a>
         ))}
         <button
           type="button"

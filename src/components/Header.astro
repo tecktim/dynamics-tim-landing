@@ -12,18 +12,19 @@ const navItems = [
 
 <header class="sticky top-0 z-50 border-b border-surface-200/80 bg-white/85 shadow-sm backdrop-blur">
   <div class="mx-auto flex max-w-6xl items-center justify-between px-6 py-4">
-    <a href={base} class="flex items-center gap-3 text-lg font-semibold text-brand-700 hover:text-brand-500">
+    <a href={base} data-astro-prefetch class="flex items-center gap-3 text-lg font-semibold text-brand-700 hover:text-brand-500">
       <span class="flex h-10 w-10 items-center justify-center rounded-xl bg-brand-500 text-white shadow-soft">TF</span>
       <span class="hidden sm:inline-block">Tim Friedrich · Dynamics 365</span>
     </a>
     <nav class="hidden items-center gap-8 text-sm font-medium text-slate-600 md:flex">
       {navItems.map((item) => (
-        <a href={item.href} class="nav-link">
+        <a href={item.href} class="nav-link" data-astro-prefetch>
           {item.label}
         </a>
       ))}
       <a
         href={to('contact')}
+        data-astro-prefetch
         class="rounded-xl bg-brand-500 px-4 py-2 text-sm font-semibold text-white shadow-soft transition-colors hover:bg-brand-600 focus-visible:bg-brand-600 hover:text-white focus-visible:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-brand-500 focus-visible:ring-offset-white"
       >
         Kostenloses Erstgespräch
@@ -31,6 +32,7 @@ const navItems = [
     </nav>
     <a
       href={to('contact')}
+      data-astro-prefetch
       class="rounded-xl bg-brand-500 px-3 py-2 text-sm font-semibold text-white shadow-soft transition-colors hover:bg-brand-600 focus-visible:bg-brand-600 hover:text-white focus-visible:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-400 md:hidden"
       aria-label="Kontakt aufnehmen"
     >

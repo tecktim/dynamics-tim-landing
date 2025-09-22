@@ -17,6 +17,7 @@ export default defineConfig({
   site: siteUrl,
   base: baseUrl,
   output: 'static',
+  prefetch: true,
   integrations: [
     tailwind({
       applyBaseStyles: false
