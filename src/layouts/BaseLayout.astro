@@ -67,10 +67,7 @@ const csp = [
     {showFooter && <Footer transition:persist />}
     <script src={`${base}assets/js/reveal.js`} defer></script>
     <script src={`${base}assets/js/consent.js`} defer></script>
-    {pushoverConfigured && (
-      <script type="module" src={Astro.resolve('../scripts/pushover-notifier.ts')}></script>
-    )}
-    <script type="module" is:inline define:vars={{ assetBase: base }}>
+    <script type="module" is:inline define:vars={{ assetBase: base, pushoverConfigured }}>
       const scriptCache = new Map();
 
       const loadScript = (key, src) => {
@@ -213,6 +210,15 @@ const csp = [
         },
         true
       );
+
+      // Load pushover notifier if configured
+      if (pushoverConfigured) {
+        schedule(() => {
+          loadScript('pushover', `${assetBase}scripts/pushover-notifier.ts`).catch((error) => {
+            console.error('[pushover] failed to load', error);
+          });
+        });
+      }
     </script>
   </body>
 </html>
