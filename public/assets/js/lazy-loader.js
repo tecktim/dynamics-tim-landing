@@ -148,18 +148,11 @@
   );
 
   // Load pushover notifier if configured
-  console.log('Lazy-loader: pushoverConfigured =', pushoverConfigured);
   if (pushoverConfigured) {
-    console.log('Lazy-loader: Scheduling pushover script load');
     schedule(() => {
-      console.log('Lazy-loader: Loading pushover script from:', `${assetBase}scripts/pushover-notifier.js`);
-      loadScript('pushover', `${assetBase}scripts/pushover-notifier.js`).then(() => {
-        console.log('Lazy-loader: Pushover script loaded successfully');
-      }).catch((error) => {
+      loadScript('pushover', `${assetBase}scripts/pushover-notifier.js`).catch((error) => {
         console.error('[pushover] failed to load', error);
       });
     });
-  } else {
-    console.log('Lazy-loader: Pushover not configured, skipping');
   }
 })();
