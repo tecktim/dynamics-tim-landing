@@ -22,13 +22,23 @@ const {
   showFooter = true
 } = Astro.props as Props;
 const base = import.meta.env.BASE_URL ?? '/';
+const pushoverToken = import.meta.env.PUBLIC_PUSHOVER_TOKEN;
+const pushoverUser = import.meta.env.PUBLIC_PUSHOVER_USER;
+const pushoverConfigured = Boolean(pushoverToken && pushoverUser);
+
+const connectSources = ["'self'"];
+
+if (pushoverConfigured) {
+  connectSources.push('https://api.pushover.net');
+}
+
 const csp = [
   "default-src 'self'",
   "script-src 'self'",
   "style-src 'self' 'unsafe-inline'",
   "img-src 'self' data:",
   "font-src 'self'",
-  "connect-src 'self'",
+  `connect-src ${connectSources.join(' ')}`,
   "frame-src 'self'",
   "base-uri 'self'",
   "form-action 'self'"
@@ -54,7 +64,12 @@ const csp = [
     <main>
       <slot />
     </main>
-    {showFooter && <Footer />}
+    {showFooter && <Footer transition:persist />}
+    <script src={`${base}assets/js/reveal.js`} defer></script>
+    <script src={`${base}assets/js/consent.js`} defer></script>
+    {pushoverConfigured && (
+      <script type="module" src={Astro.resolve('../scripts/pushover-notifier.ts')}></script>
+    )}
     <script type="module">
       const assetBase = ${JSON.stringify(base)};
       const scriptCache = new Map();
