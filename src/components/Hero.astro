@@ -1,6 +1,18 @@
----
+﻿---
 const base = import.meta.env.BASE_URL ?? '/';
 const to = (path: string) => `${base}${path.replace(/^\//, '')}`;
+
+const testimonials = [
+  {
+    title: 'ORBIS SE Referenz',
+    quote:
+      'Tim überzeugte durch seine exzellente Analysefähigkeit und fand für alle auftretenden Probleme ausnahmslos gute Lösungen.',
+    attribution: 'Microsoft Platform Solutions, ORBIS SE'
+  }
+];
+
+const currentTestimonial = testimonials[0];
+const testimonialRotatorScript = `${base}scripts/testimonial-rotator.js`;
 ---
 
 <section class="hero-ambient relative overflow-hidden bg-gradient-to-br from-brand-900 via-brand-800 to-accent-700 py-24 text-white">
@@ -52,18 +64,30 @@ const to = (path: string) => `${base}${path.replace(/^\//, '')}`;
         ))}
       </ul>
     </div>
-    <div class="relative mx-auto w-full max-w-md" data-reveal data-reveal-delay="320">
+    <div
+      class="relative mx-auto w-full max-w-md"
+      data-reveal
+      data-reveal-delay="320"
+      data-testimonial-rotator
+      data-testimonial-items={JSON.stringify(testimonials)}
+    >
       <div class="absolute -inset-8 rounded-3xl bg-gradient-to-br from-white/10 via-white/5 to-accent-200/20 blur-2xl"></div>
-      <div class="relative rounded-3xl border border-white/20 bg-white/90 p-6 text-left text-slate-800 shadow-[0_20px_60px_rgba(0,39,76,0.25)]">
+      <div class="relative rounded-3xl border border-white/20 bg-white/90 p-6 text-left text-slate-800 shadow-[0_20px_60px_rgba(0,39,76,0.25)] transition-opacity duration-500" data-testimonial-card>
         <div class="space-y-4">
-          <p class="text-sm font-semibold uppercase tracking-wide text-brand-600">ORBIS SE Referenz</p>
-          <p class="text-lg text-slate-700">
-            "Tim überzeugte durch seine exzellente Analysefähigkeit und fand für alle auftretenden Probleme ausnahmslos gute Lösungen."
+          <p class="text-sm font-semibold uppercase tracking-wide text-brand-600" data-testimonial-title>{currentTestimonial.title}</p>
+          <p class="text-lg text-slate-700" data-testimonial-quote>
+            "{currentTestimonial.quote}"
           </p>
-          <p class="text-sm font-medium text-slate-500">Microsoft Platform Solutions, ORBIS SE</p>
+          <p class="text-sm font-medium text-slate-500" data-testimonial-source>{currentTestimonial.attribution}</p>
         </div>
+      </div>
+      <div class="sr-only" role="status" aria-live="polite" data-testimonial-announcer>
+        {currentTestimonial.title} - {currentTestimonial.attribution}
       </div>
     </div>
   </div>
 </section>
+
+<script type="module" src={testimonialRotatorScript}></script>
+
 

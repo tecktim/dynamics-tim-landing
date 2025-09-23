@@ -24,7 +24,7 @@ const defaultData: LegalData = {
   VAT_ID: 'DE453253034',
   TRADE_REGISTER: 'optional',
   SUPERVISORY_AUTH: '',
-  DPO: '',
+  DPO: 'Tim Friedrich',
   HOSTING: 'GitHub Pages',
   PROCESSORS: [
     'GitHub (Pages/CDN)',
