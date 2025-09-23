@@ -1,4 +1,9 @@
 (function () {
+  const globalScope = typeof window !== 'undefined' ? window : null;
+  if (globalScope) {
+    globalScope.__consentReady = false;
+  }
+
   const STORAGE_KEY = 'dynamicsTimConsent';
   const VERSION = '2024-09-22';
   const DEFAULT_PREFERENCES = {
@@ -496,6 +501,11 @@
     }
 
     initMutationObserver();
+
+    if (globalScope) {
+      globalScope.__consentReady = true;
+      globalScope.dispatchEvent(new CustomEvent('consent:ready'));
+    }
   }
 
   if (document.readyState === 'loading') {
