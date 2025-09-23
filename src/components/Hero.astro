@@ -91,9 +91,8 @@ const testimonialRotatorScript = `${base}scripts/testimonial-rotator.js`;
   </div>
 </section>
 
-<script type="module">
+<script type="module" is:inline define:vars={{ scriptSrc: testimonialRotatorScript }}>
   const selector = '[data-testimonial-rotator]';
-  const scriptSrc = ${JSON.stringify(testimonialRotatorScript)};
   let loadPromise = null;
 
   const loadRotator = () => {
@@ -190,6 +189,5 @@ const testimonialRotatorScript = `${base}scripts/testimonial-rotator.js`;
     init();
   }
 </script>
-
 
 

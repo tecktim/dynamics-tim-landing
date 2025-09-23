@@ -70,8 +70,7 @@ const csp = [
     {pushoverConfigured && (
       <script type="module" src={Astro.resolve('../scripts/pushover-notifier.ts')}></script>
     )}
-    <script type="module">
-      const assetBase = ${JSON.stringify(base)};
+    <script type="module" is:inline define:vars={{ assetBase: base }}>
       const scriptCache = new Map();
 
       const loadScript = (key, src) => {
@@ -217,4 +216,5 @@ const csp = [
     </script>
   </body>
 </html>
+
 
