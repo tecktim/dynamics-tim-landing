@@ -1,14 +1,14 @@
-const token = import.meta.env.PUBLIC_PUSHOVER_TOKEN;
-const user = import.meta.env.PUBLIC_PUSHOVER_USER;
+// Get configuration from window object set by BaseLayout
+const config = window.__lazyLoaderConfig || {};
+const token = config.pushoverToken;
+const user = config.pushoverUser;
 const endpoint = 'https://api.pushover.net/1/messages.json';
 
 if (!token || !user) {
-  if (import.meta.env.DEV) {
-    console.warn('Pushover notifier disabled: missing PUBLIC_PUSHOVER_TOKEN or PUBLIC_PUSHOVER_USER');
-  }
+  console.warn('Pushover notifier disabled: missing pushover token or user');
 } else {
-  const messageTemplate = import.meta.env.PUBLIC_PUSHOVER_MESSAGE ?? 'New visitor on dynamics-tim.dev ({path})';
-  const title = import.meta.env.PUBLIC_PUSHOVER_TITLE;
+  const messageTemplate = config.pushoverMessage || 'New visitor on dynamics-tim.dev ({path})';
+  const title = config.pushoverTitle;
   let lastNotifiedPath = null;
 
   const sendNotification = () => {
@@ -27,6 +27,8 @@ if (!token || !user) {
       .replace('{path}', path)
       .replace('{page}', path); // Support both {path} and {page} variables
 
+    console.log('Sending Pushover notification:', { message, title, path });
+
     const body = new URLSearchParams({
       token,
       user,
@@ -44,10 +46,14 @@ if (!token || !user) {
       },
       body,
       keepalive: true
-    }).catch((error) => {
-      if (import.meta.env.DEV) {
-        console.error('Failed to send Pushover notification', error);
+    }).then(response => {
+      if (response.ok) {
+        console.log('Pushover notification sent successfully');
+      } else {
+        console.error('Pushover API error:', response.status, response.statusText);
       }
+    }).catch((error) => {
+      console.error('Failed to send Pushover notification:', error);
     });
   };
 
