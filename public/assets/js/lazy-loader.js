@@ -150,7 +150,7 @@
   // Load pushover notifier if configured
   if (pushoverConfigured) {
     schedule(() => {
-      loadScript('pushover', `${assetBase}scripts/pushover-notifier.ts`).catch((error) => {
+      loadScript('pushover', `${assetBase}scripts/pushover-notifier.js`).catch((error) => {
         console.error('[pushover] failed to load', error);
       });
     });
