@@ -284,11 +284,12 @@
     pointer-events: none;
     content: '';
     position: absolute;
-    inset: -20%;
-    background: radial-gradient(circle at 20% 20%, rgba(255, 255, 255, 0.15), transparent 55%);
-    opacity: 0.9;
+    inset: -28%;
+    background: radial-gradient(circle at 18% 22%, rgba(255, 255, 255, 0.28), transparent 58%),
+      radial-gradient(circle at 78% 18%, rgba(77, 162, 242, 0.22), transparent 62%);
+    opacity: 0.85;
     transform: rotate(0deg) scale(1);
-    animation: heroAmbientDrift 18s ease-in-out infinite alternate;
+    animation: heroAmbientDrift 20s ease-in-out infinite alternate;
     will-change: transform, opacity;
     z-index: 0;
   }
@@ -297,13 +298,52 @@
     pointer-events: none;
     content: '';
     position: absolute;
-    inset: -25%;
-    background: linear-gradient(120deg, rgba(12, 86, 194, 0.2), rgba(60, 225, 195, 0.15), transparent 70%);
+    inset: -30%;
+    background: conic-gradient(from 120deg at 55% 45%, rgba(28, 186, 205, 0.28), rgba(77, 162, 242, 0.18), transparent 72%);
     mix-blend-mode: screen;
-    opacity: 0.4;
-    animation: heroAmbientShift 22s ease-in-out infinite alternate;
+    opacity: 0.55;
+    animation: heroAmbientShift 26s ease-in-out infinite alternate;
     will-change: transform, opacity;
     z-index: 0;
+  }
+
+  .hero-ambient .ambient-gradient {
+    pointer-events: none;
+    position: absolute;
+    inset: -24%;
+    background: radial-gradient(circle at 50% 0%, rgba(255, 255, 255, 0.35), transparent 65%),
+      conic-gradient(from 140deg at 50% 50%, rgba(0, 154, 174, 0.25), transparent 70%);
+    mix-blend-mode: screen;
+    opacity: 0.45;
+    animation: heroAuroraDrift 24s ease-in-out infinite alternate;
+    will-change: transform, opacity;
+    z-index: 0;
+  }
+
+  .hero-ambient .ambient-grid {
+    pointer-events: none;
+    position: absolute;
+    inset: -1px;
+    background-image: linear-gradient(90deg, rgba(255, 255, 255, 0.08) 1px, transparent 1px),
+      linear-gradient(0deg, rgba(255, 255, 255, 0.08) 1px, transparent 1px);
+    background-size: 90px 90px;
+    mix-blend-mode: soft-light;
+    opacity: 0.18;
+    animation: heroGridDrift 22s linear infinite;
+    will-change: background-position;
+    z-index: 0;
+  }
+
+  .hero-ambient .floating-orb {
+    pointer-events: none;
+    mix-blend-mode: screen;
+    animation: heroOrbFloat 20s ease-in-out infinite;
+    will-change: transform, opacity;
+    z-index: 0;
+  }
+
+  .hero-ambient .floating-orb--delay {
+    animation-delay: 8s;
   }
 
   .hero-ambient .ambient-glow,
@@ -320,6 +360,40 @@
   .hero-badge {
     animation: heroBadgeFloat 6s ease-in-out infinite;
     will-change: transform;
+  }
+
+  .hero-highlight-gradient {
+    position: relative;
+    display: inline;
+    background-image: linear-gradient(105deg, rgba(255, 255, 255, 0.95) 0%, rgba(201, 242, 247, 0.9) 45%, rgba(255, 185, 0, 0.9) 100%);
+    background-size: 160% 160%;
+    -webkit-background-clip: text;
+    color: transparent;
+    animation: heroTextGlow 14s ease-in-out infinite;
+    will-change: background-position, filter;
+    filter: drop-shadow(0 0 18px rgba(255, 255, 255, 0.22));
+  }
+
+  .hero-highlight-underline {
+    position: relative;
+    display: inline-block;
+    padding-bottom: 0.05em;
+  }
+
+  .hero-highlight-underline::after {
+    content: '';
+    position: absolute;
+    left: -3%;
+    right: -3%;
+    bottom: 0.1em;
+    height: 0.35em;
+    border-radius: 999px;
+    background: linear-gradient(120deg, rgba(255, 255, 255, 0.65), rgba(255, 255, 255, 0));
+    opacity: 0.7;
+    transform: translate3d(0, 0.28em, 0) scaleX(0.92);
+    animation: heroUnderlinePulse 12s ease-in-out infinite;
+    will-change: transform, opacity;
+    pointer-events: none;
   }
 
   .cta-glow {
@@ -351,6 +425,75 @@
   .cta-glow:focus-visible::before {
     opacity: 1;
     transform: translate3d(45%, 0, 0);
+  }
+
+  .hero-cta {
+    position: relative;
+    isolation: isolate;
+  }
+
+  .hero-cta::before {
+    inset: -140%;
+    background: conic-gradient(from 180deg at 50% 50%, rgba(255, 255, 255, 0.8) 0%, rgba(255, 255, 255, 0) 45%, rgba(255, 255, 255, 0) 70%, rgba(255, 255, 255, 0.8) 100%);
+    transform: rotate(0deg);
+  }
+
+  .hero-cta::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(110deg, rgba(255, 255, 255, 0.4), rgba(255, 255, 255, 0));
+    opacity: 0;
+    transition: opacity 320ms ease;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .hero-cta:hover::after,
+  .hero-cta:focus-visible::after {
+    opacity: 0.45;
+  }
+
+  .hero-cta:hover::before,
+  .hero-cta:focus-visible::before {
+    transform: rotate(35deg);
+  }
+
+  .hero-cta:hover,
+  .hero-cta:focus-visible {
+    box-shadow: 0 26px 56px rgba(255, 185, 0, 0.38);
+  }
+
+  .hero-cta > * {
+    position: relative;
+    z-index: 1;
+  }
+
+  .hero-cta-outline {
+    position: relative;
+    isolation: isolate;
+  }
+
+  .hero-cta-outline::after {
+    content: '';
+    position: absolute;
+    inset: -1px;
+    border-radius: inherit;
+    background: linear-gradient(110deg, rgba(255, 255, 255, 0.5), rgba(201, 242, 247, 0.25), rgba(255, 255, 255, 0));
+    opacity: 0;
+    transition: opacity 320ms ease;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .hero-cta-outline:hover::after,
+  .hero-cta-outline:focus-visible::after {
+    opacity: 0.35;
+  }
+
+  .hero-cta-outline > * {
+    position: relative;
+    z-index: 1;
   }
 
   .cta-outline {
@@ -415,6 +558,11 @@
   .hero-ambient::after,
   .hero-ambient .ambient-glow,
   .hero-ambient .ambient-orb,
+  .hero-ambient .ambient-gradient,
+  .hero-ambient .ambient-grid,
+  .hero-ambient .floating-orb,
+  .hero-highlight-gradient,
+  .hero-highlight-underline::after,
   .hero-badge {
     animation: none !important;
   }
@@ -453,33 +601,105 @@
 @keyframes heroAmbientDrift {
   0% {
     transform: rotate(0deg) scale(1);
-    opacity: 0.7;
+    opacity: 0.62;
+  }
+  50% {
+    transform: rotate(5deg) scale(1.08);
+    opacity: 0.95;
   }
   100% {
-    transform: rotate(8deg) scale(1.1);
-    opacity: 1;
+    transform: rotate(-3deg) scale(1.04);
+    opacity: 0.75;
   }
 }
 
 @keyframes heroAmbientShift {
   0% {
-    transform: translate3d(-10%, -5%, 0) scale(1);
-    opacity: 0.3;
+    transform: translate3d(-12%, -6%, 0) scale(1);
+    opacity: 0.35;
+  }
+  50% {
+    transform: translate3d(6%, 4%, 0) scale(1.07);
+    opacity: 0.6;
   }
   100% {
-    transform: translate3d(8%, 6%, 0) scale(1.05);
-    opacity: 0.55;
+    transform: translate3d(-4%, 8%, 0) scale(1.02);
+    opacity: 0.45;
   }
 }
 
 @keyframes heroSoftPulse {
   0% {
-    transform: translate3d(0, 0, 0) scale(1);
-    opacity: 0.75;
+    transform: translate3d(0, 0, 0) scale(0.95);
+    opacity: 0.6;
+  }
+  50% {
+    transform: translate3d(14px, -14px, 0) scale(1.06);
+    opacity: 1;
   }
   100% {
-    transform: translate3d(10px, -12px, 0) scale(1.05);
+    transform: translate3d(-10px, 12px, 0) scale(0.98);
+    opacity: 0.75;
+  }
+}
+
+@keyframes heroAuroraDrift {
+  0% {
+    transform: translate3d(-6%, -4%, 0) scale(1);
+    opacity: 0.38;
+  }
+  50% {
+    transform: translate3d(5%, 3%, 0) scale(1.05);
+    opacity: 0.55;
+  }
+  100% {
+    transform: translate3d(-3%, 6%, 0) scale(1.02);
+    opacity: 0.42;
+  }
+}
+
+@keyframes heroGridDrift {
+  0% {
+    background-position: 0 0, 0 0;
+  }
+  100% {
+    background-position: 160px 160px, 160px 160px;
+  }
+}
+
+@keyframes heroOrbFloat {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0) scale(0.94);
+    opacity: 0.65;
+  }
+  50% {
+    transform: translate3d(18px, -16px, 0) scale(1.06);
     opacity: 1;
+  }
+}
+
+@keyframes heroTextGlow {
+  0%,
+  100% {
+    background-position: 0% 50%;
+    filter: drop-shadow(0 0 18px rgba(255, 255, 255, 0.24));
+  }
+  50% {
+    background-position: 100% 50%;
+    filter: drop-shadow(0 0 26px rgba(255, 255, 255, 0.38));
+  }
+}
+
+@keyframes heroUnderlinePulse {
+  0%,
+  100% {
+    transform: translate3d(0, 0.28em, 0) scaleX(0.9);
+    opacity: 0.5;
+  }
+  50% {
+    transform: translate3d(0, 0.28em, 0) scaleX(1.05);
+    opacity: 0.85;
   }
 }
 
