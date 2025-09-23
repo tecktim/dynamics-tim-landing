@@ -24,6 +24,24 @@ Anschließend ist die Seite unter [http://localhost:4321](http://localhost:4321)
 | `npm run format`  | Prettier Formatting für das gesamte Projekt               |
 | `npm run sync`    | Content Collections synchronisieren (`src/content/*`)     |
 
+## 🔔 Echtzeit-Besuchsbenachrichtigungen
+
+Zum Empfangen einer Pushover-Mitteilung bei jedem Seitenaufruf müssen zwei Build-Variablen gesetzt werden. Leg dazu eine `.env` Datei mit folgenden Werten an (werden automatisch im Client verfügbar gemacht):
+
+```bash
+PUBLIC_PUSHOVER_TOKEN="<dein-app-token>"
+PUBLIC_PUSHOVER_USER="<dein-user-key>"
+```
+
+Optional lassen sich Betreff und Nachricht anpassen:
+
+```bash
+PUBLIC_PUSHOVER_TITLE="Neuer Besuch"
+PUBLIC_PUSHOVER_MESSAGE="Besuch auf {path}"
+```
+
+`{path}` wird durch den aktuellen Pfad ersetzt, `{url}` liefert die vollständige URL. Sind Token und User-Key gesetzt, lädt das globale Layout automatisch ein kleines Modul nach und erlaubt in der Content Security Policy Anfragen an `https://api.pushover.net`.
+
 ## 📚 Content Collections
 
 Die Seiten `Profil` und `Home` verwenden Content Collections:
