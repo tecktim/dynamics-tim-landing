@@ -75,50 +75,6 @@ body * {
     @apply text-brand-500 transition hover:text-brand-400;
   }
 
-  html.has-page-transition body {
-    opacity: 1;
-    transform: translate3d(0, 0, 0);
-    will-change: opacity, transform;
-    transition: opacity var(--page-transition-duration) cubic-bezier(0.16, 1, 0.3, 1),
-      transform var(--page-transition-duration) cubic-bezier(0.16, 1, 0.3, 1);
-  }
-
-  html.has-page-transition body::after {
-    content: '';
-    position: fixed;
-    inset: 0;
-    background: radial-gradient(circle at 18% 18%, rgba(0, 120, 212, 0.2), transparent 60%),
-      radial-gradient(circle at 82% 82%, rgba(0, 154, 174, 0.22), transparent 58%),
-      rgba(0, 24, 56, 0.25);
-    opacity: 0;
-    transform: scale(1.03);
-    transition: opacity var(--page-transition-duration) cubic-bezier(0.22, 1, 0.36, 1),
-      transform var(--page-transition-duration) cubic-bezier(0.22, 1, 0.36, 1);
-    pointer-events: none;
-    mix-blend-mode: screen;
-    z-index: 60;
-  }
-
-  html.has-page-transition.is-preload body {
-    opacity: 0;
-    transform: translate3d(0, 24px, 0);
-  }
-
-  html.has-page-transition.is-transitioning body {
-    opacity: 0;
-    transform: translate3d(0, -16px, 0);
-  }
-
-  html.has-page-transition.is-transitioning body::after {
-    opacity: 0.42;
-    transform: scale(1.01);
-  }
-
-  html.has-page-transition.is-page-ready body::after {
-    opacity: 0;
-    transform: scale(1.03);
-  }
-
 }
 
 @layer components {
@@ -551,18 +507,6 @@ body * {
 }
 
 @media (prefers-reduced-motion: reduce) {
-  html.has-page-transition body,
-  html.has-page-transition.is-preload body,
-  html.has-page-transition.is-transitioning body {
-    opacity: 1 !important;
-    transform: none !important;
-    transition: none !important;
-  }
-
-  html.has-page-transition body::after {
-    display: none !important;
-  }
-
   .hero-ambient::before,
   .hero-ambient::after,
   .hero-ambient .ambient-glow,
@@ -721,4 +665,5 @@ body * {
     transform: translate3d(0, -6px, 0);
   }
 }
+
 
