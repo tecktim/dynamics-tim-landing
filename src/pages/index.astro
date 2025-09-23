@@ -11,40 +11,41 @@ const to = (path: string) => `${base}${path.replace(/^\//, '')}`;
 const projects = (await getCollection('projects')).sort((a, b) => (a.data.featured === b.data.featured ? 0 : a.data.featured ? -1 : 1));
 const heroServices = [
   {
-    title: 'Solution Architektur',
-    description: 'Zielbild, Governance & Best Practices für modulare Dynamics 365 Landschaften.'
+    title: 'Dynamics 365 Prozessdesign',
+    description:
+      'Service- und Vertriebsprozesse in Canvas Apps, Custom Pages und modellgetriebenen Apps übersetzt – inklusive UX, Security und Governance.'
   },
   {
-    title: 'Integrationen & Automatisierung',
-    description: 'Azure Functions, Service Bus, Power Automate & Plugins – orchestriert mit DevOps-Pipelines.'
+    title: 'Power Platform Engineering',
+    description: 'C# Plugins, Power Automate Flows, PCF Controls und Dataverse-Logik, die Fachbereiche sofort produktiver machen.'
+  },
+  {
+    title: 'Azure Integration & Automation',
+    description: 'Serverless Integrationen mit Azure Functions, Service Bus, Event Grid und DevOps-Pipelines für stabile Datenflüsse.'
   },
   {
     title: 'Delivery & Enablement',
-    description: 'Team-Coaching, Pairing, Quality Gates und produktionsreife Übergabe.'
-  },
-  {
-    title: 'Modernisierung & Performance',
-    description: 'Refactoring von Plugins, Telemetrie, Monitoring und messbare Optimierungen.'
+    description: 'SCRUM, Pairing, Dokumentation und Training – ich hinterlasse ein Team, das selbstständig releasen kann.'
   }
 ];
 
 const valueBullets = [
   {
-    title: 'Schnelle Impact-Analyse',
-    description: 'Innerhalb von Tagen statt Wochen Klarheit über Risiken, Scope und nächsten Schritte.'
+    title: 'Vom Prozess zum Produkt',
+    description: 'Workshops, Backlogs und Klick-Demos werden in wenigen Iterationen zu produktiven Dynamics 365 Lösungen.'
   },
   {
-    title: 'Enterprise-ready Delivery',
-    description: 'CI/CD, Source Control und Observability als Standard – unabhängig von Teamgröße.'
+    title: 'Full-Stack Power Platform',
+    description: 'Canvas Apps, React/TypeScript-PCFs, C# Plugins und Automatisierung aus einer Hand.'
   },
   {
-    title: 'Hands-on Umsetzung',
-    description: 'Keine PowerPoint-Schlachten. Ich liefere produktionsreife Ergebnisse mit Code & Tests.'
+    title: 'Release-Sicherheit inklusive',
+    description: 'Azure DevOps, Code-Quality-Gates und Monitoring sorgen für planbare Deployments ohne Überraschungen.'
   }
 ];
 ---
 
-<BaseLayout title="Startseite" description="Dynamics 365 (Sales/Service) Entwicklung & Beratung: saubere Architekturen, performante Integrationen, Power Platform, Azure & DevOps.">
+<BaseLayout title="Startseite" description="Dynamics 365 Freelancer für Service- & Sales-Prozesse: Power Platform Engineering, Azure Integrationen, DevOps & Enablement.">
   <Hero />
 
   <section class="bg-surface-100 py-20">
@@ -63,7 +64,7 @@ const valueBullets = [
 
   <ServicesGrid
     heading="Leistungen"
-    subheading="Ob Greenfield oder Sanierung – ich begleite Dynamics 365 Projekte von der Idee bis zum stabilen Betrieb."
+    subheading="Ich verbinde Prozess-Know-how mit Dynamics 365 Engineering – vom ersten Workshop bis zur produktiven Übergabe."
     items={heroServices}
   />
 
@@ -71,9 +72,9 @@ const valueBullets = [
 
   <section class="bg-gradient-to-br from-brand-900 via-brand-800 to-accent-600 py-24 text-white" data-reveal data-reveal-delay="0">
     <div class="mx-auto max-w-5xl px-6 text-center">
-      <h2 class="text-3xl font-bold sm:text-4xl" data-reveal data-reveal-delay="0">Bereit für skalierbare Dynamics 365 Lösungen?</h2>
+      <h2 class="text-3xl font-bold sm:text-4xl" data-reveal data-reveal-delay="0">Bereit für spürbar schnellere Service- und Vertriebsprozesse?</h2>
       <p class="mt-4 text-lg text-slate-200" data-reveal data-reveal-delay="80">
-        Lass uns im kostenlosen Erstgespräch klären, wie wir Architektur, Delivery und Integrationen gemeinsam beschleunigen.
+        Lass uns im kostenlosen Erstgespräch klären, wie wir Dynamics 365, Power Platform und Azure-Infrastrukturen messbar effizienter machen.
       </p>
       <div class="mt-8 flex flex-wrap justify-center gap-4" data-reveal data-reveal-delay="160">
         <a href="mailto:hello@dynamics-tim.dev" class="cta-glow rounded-2xl bg-white px-6 py-3 text-base font-semibold text-brand-700 shadow-soft transition hover:bg-surface-200">
