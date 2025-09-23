@@ -1,5 +1,8 @@
+console.log('Pushover notifier script loaded');
+
 // Get configuration from window object set by BaseLayout
 const config = window.__lazyLoaderConfig || {};
+console.log('Pushover config:', config);
 const token = config.pushoverToken;
 const user = config.pushoverUser;
 const endpoint = 'https://api.pushover.net/1/messages.json';
