@@ -8,7 +8,8 @@ if (!endpoint) {
   const debounceMs = Number.isFinite(config.pushoverDebounceMs)
     ? Math.max(0, config.pushoverDebounceMs)
     : 30_000;
-
+  const messageTemplate = config.pushoverMessage || 'New visitor on dynamics-tim.dev ({path})';
+  const title = config.pushoverTitle+"🔥";
   let lastNotifiedPath = null;
   let lastAttemptAt = 0;
   let disabled = false;
