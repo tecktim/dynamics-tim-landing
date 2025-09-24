@@ -38,11 +38,11 @@ jobs:
       - name: Build for develop
         run: npm run build
         env:
-          PUBLIC_BASE_URL: ${{ steps.pages.outputs.base_url }}/develop
-          PUBLIC_PUSHOVER_TOKEN: ${{ secrets.PUBLIC_PUSHOVER_TOKEN }}
-          PUBLIC_PUSHOVER_USER: ${{ secrets.PUBLIC_PUSHOVER_USER }}
-          PUBLIC_PUSHOVER_TITLE: "[DEVELOP] ${{ secrets.PUBLIC_PUSHOVER_TITLE }}"
-          PUBLIC_PUSHOVER_MESSAGE: "[DEVELOP] ${{ secrets.PUBLIC_PUSHOVER_MESSAGE }}"
+          BASE_URL: ${{ steps.pages.outputs.base_url }}/develop
+          PUSHOVER_TOKEN: ${{ secrets.PUSHOVER_TOKEN }}
+          PUSHOVER_USER: ${{ secrets.PUSHOVER_USER }}
+          PUSHOVER_TITLE: "[DEVELOP] ${{ secrets.PUSHOVER_TITLE }}"
+          PUSHOVER_MESSAGE: "[DEVELOP] ${{ secrets.PUSHOVER_MESSAGE }}"
 
       - name: Upload develop artifacts
         uses: actions/upload-pages-artifact@v3
