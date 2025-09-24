@@ -24,6 +24,7 @@
   "license": "MIT",
   "dependencies": {
     "@astrojs/mdx": "^4.3.5",
+    "@astrojs/node": "^9.4.4",
     "@astrojs/sitemap": "^3.6.0",
     "@astrojs/tailwind": "^6.0.2",
     "@types/node": "^24.5.2",

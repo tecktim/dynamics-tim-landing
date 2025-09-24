@@ -22,15 +22,10 @@ const {
   showFooter = true
 } = Astro.props as Props;
 const base = import.meta.env.BASE_URL ?? '/';
-const pushoverToken = import.meta.env.PUBLIC_PUSHOVER_TOKEN;
-const pushoverUser = import.meta.env.PUBLIC_PUSHOVER_USER;
-const pushoverConfigured = Boolean(pushoverToken && pushoverUser);
+const pushoverEnabled = process.env.PUSHOVER_ENABLED !== 'false';
+const pushoverEndpoint = pushoverEnabled ? `${base}api/pushover` : null;
 
 const connectSources = ["'self'"];
-
-if (pushoverConfigured) {
-  connectSources.push('https://api.pushover.net');
-}
 
 const csp = [
   "default-src 'self'",
@@ -67,22 +62,16 @@ const csp = [
     {showFooter && <Footer transition:persist />}
     <script src={`${base}assets/js/reveal.js`} defer></script>
     <script src={`${base}assets/js/consent.js`} defer></script>
-    <script is:inline define:vars={{ 
-      assetBase: base, 
-      pushoverConfigured,
-      pushoverToken: pushoverToken,
-      pushoverUser: pushoverUser,
-      pushoverTitle: import.meta.env.PUBLIC_PUSHOVER_TITLE,
-      pushoverMessage: import.meta.env.PUBLIC_PUSHOVER_MESSAGE
+    <script is:inline define:vars={{
+      assetBase: base,
+      pushoverEndpoint,
+      pushoverDebounceMs: Number.parseInt(process.env.PUSHOVER_DEBOUNCE_MS ?? '', 10) || undefined
     }}>
       // Pass config to external script
-      window.__lazyLoaderConfig = { 
-        assetBase, 
-        pushoverConfigured,
-        pushoverToken,
-        pushoverUser,
-        pushoverTitle,
-        pushoverMessage
+      window.__lazyLoaderConfig = {
+        assetBase,
+        pushoverEndpoint,
+        pushoverDebounceMs
       };
     </script>
     <script src={`${base}assets/js/lazy-loader.js`} defer></script>
