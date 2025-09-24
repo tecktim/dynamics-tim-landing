@@ -160,7 +160,9 @@ This is a personal portfolio project. If you find bugs or have suggestions, feel
 
 
 
-MIT License - see [LICENSE](LICENSE) for details.Die Seiten `Profil` und `Home` verwenden Content Collections:
+**All Rights Reserved** - This is proprietary software. See [LICENSE](LICENSE) for details.
+
+For licensing inquiries, contact: hello@dynamics-tim.devDie Seiten `Profil` und `Home` verwenden Content Collections:
 
 - `src/content/timeline` – Berufliche Stationen als MDX, inkl. Metadaten (Firmenname, Zeitraum, Tags)
 - `src/content/projects` – Projekt-Highlights mit Links, Tech-Stack und Beschreibung

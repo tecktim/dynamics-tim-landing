@@ -29,7 +29,7 @@
     "gdpr-compliant"
   ],
   "author": "Tim Friedrich",
-  "license": "MIT",
+  "license": "UNLICENSED",
   "dependencies": {
     "@astrojs/mdx": "^4.3.5",
     "@astrojs/node": "^9.4.4",
