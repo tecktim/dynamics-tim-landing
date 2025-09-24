@@ -38,16 +38,21 @@ jobs:
       - name: Build for develop
         run: npm run build
         env:
-          BASE_URL: ${{ steps.pages.outputs.base_url }}/develop
+          PUBLIC_BASE_URL: ${{ steps.pages.outputs.base_url }}/develop
           PUSHOVER_TOKEN: ${{ secrets.PUSHOVER_TOKEN }}
           PUSHOVER_USER: ${{ secrets.PUSHOVER_USER }}
           PUSHOVER_TITLE: "[DEVELOP] ${{ secrets.PUSHOVER_TITLE }}"
           PUSHOVER_MESSAGE: "[DEVELOP] ${{ secrets.PUSHOVER_MESSAGE }}"
 
+      - name: Create develop directory structure
+        run: |
+          mkdir -p develop
+          cp -r dist/* develop/
+
       - name: Upload develop artifacts
         uses: actions/upload-pages-artifact@v3
         with:
-          path: dist
+          path: develop
           name: github-pages-develop
 
   deploy:
