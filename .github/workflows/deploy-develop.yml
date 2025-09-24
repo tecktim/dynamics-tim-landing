@@ -1,0 +1,64 @@
+name: Deploy Develop to GitHub Pages
+
+on:
+  push:
+    branches:
+      - develop
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages-develop
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    environment: dynamics-tim-landing-develop
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "lts/*"
+          cache: "npm"
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Setup Pages
+        id: pages
+        uses: actions/configure-pages@v5
+
+      - name: Build for develop
+        run: npm run build
+        env:
+          PUBLIC_BASE_URL: ${{ steps.pages.outputs.base_url }}/develop
+          PUBLIC_PUSHOVER_TOKEN: ${{ secrets.PUBLIC_PUSHOVER_TOKEN }}
+          PUBLIC_PUSHOVER_USER: ${{ secrets.PUBLIC_PUSHOVER_USER }}
+          PUBLIC_PUSHOVER_TITLE: "[DEVELOP] ${{ secrets.PUBLIC_PUSHOVER_TITLE }}"
+          PUBLIC_PUSHOVER_MESSAGE: "[DEVELOP] ${{ secrets.PUBLIC_PUSHOVER_MESSAGE }}"
+
+      - name: Upload develop artifacts
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: dist
+          name: github-pages-develop
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages-develop
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy to GitHub Pages (Develop)
+        id: deployment
+        uses: actions/deploy-pages@v4
+        with:
+          artifact_name: github-pages-develop
