@@ -1,4 +1,34 @@
 import type { APIRoute } from 'astro';
+import { readFileSync } from 'fs';
+import { resolve } from 'path';
+
+// Load environment variables from .env file if not already loaded
+if (!process.env.PUSHOVER_TOKEN || !process.env.PUSHOVER_USER) {
+  try {
+    const envPath = resolve(process.cwd(), '.env');
+    const envContent = readFileSync(envPath, 'utf-8');
+    const envVars = envContent
+      .split('\n')
+      .filter(line => line && !line.startsWith('#'))
+      .reduce((acc, line) => {
+        const [key, ...valueParts] = line.split('=');
+        if (key && valueParts.length) {
+          const value = valueParts.join('=').trim();
+          acc[key.trim()] = value.replace(/^["']|["']$/g, ''); // Remove quotes
+        }
+        return acc;
+      }, {} as Record<string, string>);
+    
+    // Set environment variables if they don't exist
+    Object.entries(envVars).forEach(([key, value]) => {
+      if (!process.env[key]) {
+        process.env[key] = value;
+      }
+    });
+  } catch (error) {
+    console.warn('Could not load .env file:', error);
+  }
+}
 
 const PUSHOVER_ENDPOINT = 'https://api.pushover.net/1/messages.json';
 const { PUSHOVER_TOKEN, PUSHOVER_USER } = process.env;
