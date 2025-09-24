@@ -8,7 +8,7 @@ if (!token || !user) {
   console.warn('Pushover notifier disabled: missing pushover token or user');
 } else {
   const messageTemplate = config.pushoverMessage || 'New visitor on dynamics-tim.dev ({path})';
-  const title = config.pushoverTitle;
+  const title = config.pushoverTitle+"🔥";
   let lastNotifiedPath = null;
 
   const funnyMessages = [
