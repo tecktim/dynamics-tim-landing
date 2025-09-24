@@ -12,21 +12,19 @@ if (!token || !user) {
   let lastNotifiedPath = null;
 
   const funnyMessages = [
-    "🎉 Someone just discovered your digital masterpiece! Time to do a happy dance! 💃",
-    "🚀 A wild visitor appeared! They're probably thinking 'Wow, this Tim guy knows his Dynamics!' ⚡",
-    "🎯 Ding ding! Another curious soul has landed - your website magic is working! ✨",
-    "🏆 Plot twist: Someone just visited and is now seriously considering hiring the Dynamics wizard (that's you!) 🧙‍♂️",
-    "🎪 Ladies and gentlemen, we have a visitor! *dramatic trumpet sounds* 🎺",
-    "🌟 Breaking news: Your awesome website just made someone's day brighter! (And yours too!) ☀️",
-    "🎮 Achievement unlocked: New visitor! XP gained: +100 Visibility Points! 🏅",
-    "🕵️ Detective report: Someone is investigating your brilliant work. Suspicious levels of awesomeness detected! 🔍",
-    "🎨 An art connoisseur just appreciated your digital canvas! Your website is basically the Mona Lisa of Dynamics! 🖼️",
-    "🎭 Plot development: A potential client just entered the Tim Friedrich story. Will they click 'Contact'? Stay tuned! 📺",
-    "🎪 Step right up! Someone just visited the greatest Dynamics show on Earth! 🎠",
-    "🚁 Helicopter view: Your website radar has detected incoming awesomeness! 📡",
-    "🎯 Bullseye! Your magnetic personality just attracted another visitor! 🧲",
-    "🎵 *Happy notification sounds* Someone's browsing your masterpiece and probably humming with joy! 🎶",
-    "🔥 Your website is so hot right now! Someone just got warmed up by visiting! 🌡️"
+    "� Jemand hat sich verirrt. Dynamics-Experte gesucht? 🤷‍♂️",
+    "🚀 Besucher! Wahrscheinlich vom CV beeindruckt... oder verwirrt 😏",
+    "🕵️ Verdächtiger klickt rum. Hoffentlich nicht die Konkurrenz 👀",
+    "🎪 Schaulustiger detektiert! Zeit für den Verkaufsmodus? 💸",
+    "� +1 Webseitenbesucher. Noch 999.999 bis zum Durchbruch 📈",
+    "� Website glüht vor Aktivität! (OK, war nur ein Klick) 🌡️",
+    "� Plot Twist: Jemand surft tatsächlich hier rum 🤯",
+    "🚁 Radar meldet: Potenzieller Kunde in Sichtweite! �",
+    "� Treffer! Entweder Interesse oder falscher Tab �",
+    "🎵 Ding! Jemand scrollt durch dein Lebenswerk �",
+    "� Breaking: Mensch besucht Website. Sensation! 📰",
+    "� Achievement: Wieder jemand überzeugt... oder gelangweilt 😴",
+    "🎪 Manege frei! Der nächste Kunde... äh, Besucher! �"
   ];
 
   const sendNotification = () => {
