@@ -1,6 +1,6 @@
 # Tim Freelance Landing
 
-Landingpage-Projekt für Tim Friedrich – Dynamics 365 Freelancer. Gebaut mit [Astro](https://astro.build) & Tailwind CSS, optimiert für GitHub Pages Deployments.
+Landingpage-Projekt für Tim Friedrich – Dynamics 365 Freelancer. Gebaut mit [Astro](https://astro.build) & Tailwind CSS, optimiert für GitHub Pages Deployments und mit optionalem SSR-Pushover-Endpoint.
 
 ## 🚀 Quickstart
 
@@ -26,21 +26,24 @@ Anschließend ist die Seite unter [http://localhost:4321](http://localhost:4321)
 
 ## 🔔 Echtzeit-Besuchsbenachrichtigungen
 
-Zum Empfangen einer Pushover-Mitteilung bei jedem Seitenaufruf müssen zwei Build-Variablen gesetzt werden. Leg dazu eine `.env` Datei mit folgenden Werten an (werden automatisch im Client verfügbar gemacht):
+Die Pushover-Integration läuft jetzt über einen serverseitigen Astro-Endpoint (`/api/pushover`). Dadurch bleiben Token und User-Key im Backend und werden nicht mehr mit dem Client gebundlet. Für lokale Tests eine `.env` mit folgenden Werten anlegen:
 
 ```bash
-PUBLIC_PUSHOVER_TOKEN="<dein-app-token>"
-PUBLIC_PUSHOVER_USER="<dein-user-key>"
+PUSHOVER_TOKEN="<dein-app-token>"
+PUSHOVER_USER="<dein-user-key>"
 ```
 
-Optional lassen sich Betreff und Nachricht anpassen:
+Optional lassen sich Betreff, Nachricht und Server-Limits konfigurieren:
 
 ```bash
-PUBLIC_PUSHOVER_TITLE="Neuer Besuch"
-PUBLIC_PUSHOVER_MESSAGE="Besuch auf {path}"
+PUSHOVER_TITLE="Neuer Besuch"
+PUSHOVER_MESSAGE="Besuch auf {path}"
+PUSHOVER_DEBOUNCE_MS="45000"      # Mindestabstand zwischen Client-Calls
+PUSHOVER_RATE_LIMIT_MS="60000"    # Rate-Limit pro IP auf dem Endpoint
+PUSHOVER_TIMEOUT_MS="8000"        # Timeout für den Upstream-Request
 ```
 
-`{path}` wird durch den aktuellen Pfad ersetzt, `{url}` liefert die vollständige URL. Sind Token und User-Key gesetzt, lädt das globale Layout automatisch ein kleines Modul nach und erlaubt in der Content Security Policy Anfragen an `https://api.pushover.net`.
+`{path}`, `{url}` und `{referrer}` werden serverseitig ersetzt. Bei Bedarf lässt sich der Client-Lader mit `PUSHOVER_ENABLED="false"` komplett ausschalten. Der Client sendet nur den aktuellen Pfad/URL und bekommt bei Fehlern eine klare Antwort (429/503). Da GitHub Pages keine SSR-Funktionen unterstützt, muss das Deployment für aktive Benachrichtigungen auf eine Plattform mit Node/Serverless-Runtime (z. B. Vercel, Netlify, Cloudflare, eigener Node-Server) wechseln. Das bestehende Pages-Workflow bleibt für das statische Marketing-Site-Build erhalten – ohne die o. g. Umstellung bleibt der Endpoint jedoch deaktiviert (503 `not_configured`).
 
 ## 📚 Content Collections
 

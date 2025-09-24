@@ -4,6 +4,7 @@ import mdx from '@astrojs/mdx';
 import sitemap from '@astrojs/sitemap';
 import robotsTxt from 'astro-robots-txt';
 import compress from 'astro-compress';
+import node from '@astrojs/node';
 
 const defaultSite = 'https://dynamics-tim.dev';
 const defaultBase = '/';
@@ -16,7 +17,13 @@ const baseUrl = ensureSlash(publicBaseUrl ? new URL(publicBaseUrl).pathname : de
 export default defineConfig({
   site: siteUrl,
   base: baseUrl,
-  output: 'static',
+  output: 'server',
+  adapter: node({
+    mode: 'standalone'
+  }),
+  prerender: {
+    default: true
+  },
   prefetch: true,
   integrations: [
     tailwind({
