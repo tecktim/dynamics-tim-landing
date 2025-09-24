@@ -1,10 +1,23 @@
-node_modules
-.dist
-.astro
-dist
-.DS_Store
+# Dependencies
+node_modules/
+
+# Build outputs
+.dist/
+.astro/
+dist/
+coverage/
+
+# Environment variables
 .env
 .env.*
+
+# System files
+.DS_Store
 *.log
-coverage
+
+# Generated files
 public/og-image.png
+
+# IDE
+.vscode/
+.idea/
