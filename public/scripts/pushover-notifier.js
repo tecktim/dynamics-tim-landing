@@ -1,34 +1,25 @@
 // Get configuration from window object set by BaseLayout
 const config = window.__lazyLoaderConfig || {};
-const token = config.pushoverToken;
-const user = config.pushoverUser;
-const endpoint = 'https://api.pushover.net/1/messages.json';
+const endpoint = typeof config.pushoverEndpoint === 'string' ? config.pushoverEndpoint : null;
 
-if (!token || !user) {
-  console.warn('Pushover notifier disabled: missing pushover token or user');
+if (!endpoint) {
+  console.warn('[pushover] notifier disabled: missing endpoint');
 } else {
-  const messageTemplate = config.pushoverMessage || 'New visitor on dynamics-tim.dev ({path})';
-  const title = config.pushoverTitle;
-  let lastNotifiedPath = null;
+  const debounceMs = Number.isFinite(config.pushoverDebounceMs)
+    ? Math.max(0, config.pushoverDebounceMs)
+    : 30_000;
 
-  const funnyMessages = [
-    "� Jemand hat sich verirrt. Dynamics-Experte gesucht? 🤷‍♂️",
-    "🚀 Besucher! Wahrscheinlich vom CV beeindruckt... oder verwirrt 😏",
-    "🕵️ Verdächtiger klickt rum. Hoffentlich nicht die Konkurrenz 👀",
-    "🎪 Schaulustiger detektiert! Zeit für den Verkaufsmodus? 💸",
-    "� +1 Webseitenbesucher. Noch 999.999 bis zum Durchbruch 📈",
-    "� Website glüht vor Aktivität! (OK, war nur ein Klick) 🌡️",
-    "� Plot Twist: Jemand surft tatsächlich hier rum 🤯",
-    "🚁 Radar meldet: Potenzieller Kunde in Sichtweite! �",
-    "� Treffer! Entweder Interesse oder falscher Tab �",
-    "🎵 Ding! Jemand scrollt durch dein Lebenswerk �",
-    "� Breaking: Mensch besucht Website. Sensation! 📰",
-    "� Achievement: Wieder jemand überzeugt... oder gelangweilt 😴",
-    "🎪 Manege frei! Der nächste Kunde... äh, Besucher! �"
-  ];
+  let lastNotifiedPath = null;
+  let lastAttemptAt = 0;
+  let disabled = false;
+
+  const disable = (reason) => {
+    disabled = true;
+    console.warn('[pushover] notifier disabled:', reason);
+  };
 
   const sendNotification = () => {
-    if (typeof window === 'undefined' || typeof document === 'undefined') {
+    if (disabled || typeof window === 'undefined' || typeof document === 'undefined') {
       return;
     }
 
@@ -37,43 +28,48 @@ if (!token || !user) {
       return;
     }
 
+    const now = Date.now();
+    if (now - lastAttemptAt < debounceMs) {
+      return;
+    }
+
     lastNotifiedPath = path;
-    
-    // Pick a random funny message
-    const randomMessage = funnyMessages[Math.floor(Math.random() * funnyMessages.length)];
-    const message = randomMessage
-      .replace('{url}', window.location.href)
-      .replace('{path}', path)
-      .replace('{page}', path);
+    lastAttemptAt = now;
 
-    console.log('Sending Pushover notification:', { message, title, path });
+    const payload = {
+      path,
+      url: window.location.href
+    };
 
-    const body = new URLSearchParams({
-      token,
-      user,
-      message
-    });
-
-    if (title) {
-      body.set('title', title);
+    if (document.referrer) {
+      payload.referrer = document.referrer;
     }
 
     fetch(endpoint, {
       method: 'POST',
       headers: {
-        'Content-Type': 'application/x-www-form-urlencoded'
+        'Content-Type': 'application/json'
       },
-      body,
+      body: JSON.stringify(payload),
+      credentials: 'same-origin',
       keepalive: true
-    }).then(response => {
-      if (response.ok) {
-        console.log('🎉 Pushover notification sent successfully!');
-      } else {
-        console.error('Pushover API error:', response.status, response.statusText);
-      }
-    }).catch((error) => {
-      console.error('Failed to send Pushover notification:', error);
-    });
+    })
+      .then((response) => {
+        if (response.ok) {
+          return;
+        }
+
+        if (response.status === 404 || response.status === 405 || response.status === 503) {
+          disable(`server returned ${response.status}`);
+        } else if (response.status === 429) {
+          console.warn('[pushover] rate limited by server');
+        } else {
+          console.warn('[pushover] server responded with', response.status);
+        }
+      })
+      .catch((error) => {
+        console.warn('[pushover] failed to send notification', error);
+      });
   };
 
   if (document.readyState === 'complete') {

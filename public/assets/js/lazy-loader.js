@@ -2,7 +2,7 @@
   // Get config from global scope
   const config = window.__lazyLoaderConfig || {};
   const assetBase = config.assetBase || '/';
-  const pushoverConfigured = config.pushoverConfigured || false;
+  const pushoverEndpoint = typeof config.pushoverEndpoint === 'string' ? config.pushoverEndpoint : null;
 
   const scriptCache = new Map();
 
@@ -148,7 +148,7 @@
   );
 
   // Load pushover notifier if configured
-  if (pushoverConfigured) {
+  if (pushoverEndpoint) {
     schedule(() => {
       loadScript('pushover', `${assetBase}scripts/pushover-notifier.js`).catch((error) => {
         console.error('[pushover] failed to load', error);
