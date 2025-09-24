@@ -17,6 +17,7 @@ concurrency:
 jobs:
   build:
     runs-on: ubuntu-latest
+    environment: dynamics-tim-landing
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -38,6 +39,10 @@ jobs:
         run: npm run build
         env:
           PUBLIC_BASE_URL: ${{ steps.pages.outputs.base_url }}
+          PUBLIC_PUSHOVER_TOKEN: ${{ secrets.PUBLIC_PUSHOVER_TOKEN }}
+          PUBLIC_PUSHOVER_USER: ${{ secrets.PUBLIC_PUSHOVER_USER }}
+          PUBLIC_PUSHOVER_TITLE: ${{ secrets.PUBLIC_PUSHOVER_TITLE }}
+          PUBLIC_PUSHOVER_MESSAGE: ${{ secrets.PUBLIC_PUSHOVER_MESSAGE }}
 
       - name: Upload production artifacts
         uses: actions/upload-pages-artifact@v3
