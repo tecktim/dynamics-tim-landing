@@ -9,7 +9,15 @@ if (!token || !user) {
 } else {
   const messageTemplate = config.pushoverMessage || 'New visitor on dynamics-tim.dev ({path})';
   const title = config.pushoverTitle+"🔥";
-  let hasSentNotification = false;
+  
+  // Use a global flag to prevent multiple notifications across page navigations
+  if (!window.__pushoverNotificationSent) {
+    window.__pushoverNotificationSent = false;
+  }
+  
+  // Also check sessionStorage for extra safety across script reloads
+  const sessionKey = 'pushover_notification_sent';
+  const sessionSent = sessionStorage.getItem(sessionKey) === 'true';
 
   const funnyMessages = [
     "� Jemand hat sich verirrt. Dynamics-Experte gesucht? 🤷‍♂️",
@@ -32,12 +40,13 @@ if (!token || !user) {
       return;
     }
 
-    if (hasSentNotification) {
+    if (window.__pushoverNotificationSent || sessionSent) {
       return;
     }
     
     const path = `${window.location.pathname}${window.location.search}${window.location.hash}`;
-    hasSentNotification = true;
+    window.__pushoverNotificationSent = true;
+    sessionStorage.setItem(sessionKey, 'true');
     
     // Pick a random funny message
     const randomMessage = funnyMessages[Math.floor(Math.random() * funnyMessages.length)];
@@ -85,6 +94,4 @@ if (!token || !user) {
       { once: true }
     );
   }
-
-  window.addEventListener('astro:page-load', sendNotification);
 }
