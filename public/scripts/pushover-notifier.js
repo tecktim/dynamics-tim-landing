@@ -9,7 +9,7 @@ if (!token || !user) {
 } else {
   const messageTemplate = config.pushoverMessage || 'New visitor on dynamics-tim.dev ({path})';
   const title = config.pushoverTitle+"🔥";
-  let lastNotifiedPath = null;
+  let hasSentNotification = false;
 
   const funnyMessages = [
     "� Jemand hat sich verirrt. Dynamics-Experte gesucht? 🤷‍♂️",
@@ -32,12 +32,12 @@ if (!token || !user) {
       return;
     }
 
-    const path = `${window.location.pathname}${window.location.search}${window.location.hash}`;
-    if (path === lastNotifiedPath) {
+    if (hasSentNotification) {
       return;
     }
-
-    lastNotifiedPath = path;
+    
+    const path = `${window.location.pathname}${window.location.search}${window.location.hash}`;
+    hasSentNotification = true;
     
     // Pick a random funny message
     const randomMessage = funnyMessages[Math.floor(Math.random() * funnyMessages.length)];
@@ -45,8 +45,6 @@ if (!token || !user) {
       .replace('{url}', window.location.href)
       .replace('{path}', path)
       .replace('{page}', path);
-
-    console.log('Sending Pushover notification:', { message, title, path });
 
     const body = new URLSearchParams({
       token,
@@ -67,7 +65,7 @@ if (!token || !user) {
       keepalive: true
     }).then(response => {
       if (response.ok) {
-        console.log('🎉 Pushover notification sent successfully!');
+        // console.log('🎉 Pushover notification sent successfully!');
       } else {
         console.error('Pushover API error:', response.status, response.statusText);
       }
