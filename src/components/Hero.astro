@@ -46,7 +46,7 @@ const testimonialRotatorScript = `${base}scripts/testimonial-rotator.js`;
           <span>Leistungen entdecken</span>
         </a>
       </div>
-      <ul class="mt-8 grid gap-3 text-base text-white/90 sm:grid-cols-3" data-reveal data-reveal-delay="260">
+      <ul class="mt-8 grid gap-3 text-base text-white/90 sm:grid-cols-3 hero-skills-list" data-reveal data-reveal-delay="260">
         {[
           'C# Plugins & Power Automate',
           'Azure Integrations',
@@ -54,9 +54,9 @@ const testimonialRotatorScript = `${base}scripts/testimonial-rotator.js`;
           'Customization & Configuration',
           'Custom Controls (PCF)',
           'Azure DevOps, Clean ALM & Observability'
-        ].map((item) => (
-          <li class="flex items-center gap-3 rounded-xl border border-white/15 bg-white/10 px-3 py-2 shadow-soft backdrop-blur-sm">
-            <span class="flex h-8 w-8 items-center justify-center rounded-full bg-white/15 text-signal-400">
+        ].map((item, index) => (
+          <li class={`hero-skill-card hero-skill-card--${index + 1} flex items-center gap-3 rounded-xl border border-white/15 bg-white/10 px-3 py-2 shadow-soft backdrop-blur-sm transition-all duration-300`}>
+            <span class="hero-skill-icon flex h-8 w-8 items-center justify-center rounded-full bg-white/15 text-signal-400 transition-all duration-300">
               <svg viewBox="0 0 20 20" fill="currentColor" class="h-4 w-4">
                 <path
                   fill-rule="evenodd"
@@ -65,7 +65,7 @@ const testimonialRotatorScript = `${base}scripts/testimonial-rotator.js`;
                 ></path>
               </svg>
             </span>
-            <span>{item}</span>
+            <span class="hero-skill-text transition-all duration-300">{item}</span>
           </li>
         ))}
       </ul>

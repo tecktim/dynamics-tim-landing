@@ -666,4 +666,123 @@ body * {
   }
 }
 
+@keyframes heroSkillHighlight {
+  0%,
+  85%,
+  100% {
+    border-color: rgba(255, 255, 255, 0.15);
+    background-color: rgba(255, 255, 255, 0.1);
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    transform: translateY(0) scale(1);
+  }
+  15% {
+    border-color: rgba(255, 185, 0, 0.6);
+    background-color: rgba(255, 255, 255, 0.18);
+    box-shadow: 0 10px 25px -3px rgba(255, 185, 0, 0.3), 0 4px 6px -2px rgba(255, 185, 0, 0.2);
+    transform: translateY(-2px) scale(1.01);
+  }
+}
+
+@keyframes heroSkillIconGlow {
+  0%,
+  85%,
+  100% {
+    background-color: rgba(255, 255, 255, 0.15);
+    color: rgb(255, 185, 0);
+  }
+  15% {
+    background-color: rgba(255, 185, 0, 0.25);
+    color: rgb(255, 215, 76);
+  }
+}
+
+@keyframes heroSkillTextGlow {
+  0%,
+  85%,
+  100% {
+    color: rgba(255, 255, 255, 0.9);
+  }
+  15% {
+    color: rgba(255, 255, 255, 1);
+  }
+}
+
+.hero-skills-list {
+  --animation-duration: 12s;
+}
+
+.hero-skill-card {
+  animation: heroSkillHighlight var(--animation-duration) ease-in-out infinite;
+}
+
+.hero-skill-card .hero-skill-icon {
+  animation: heroSkillIconGlow var(--animation-duration) ease-in-out infinite;
+}
+
+.hero-skill-card .hero-skill-text {
+  animation: heroSkillTextGlow var(--animation-duration) ease-in-out infinite;
+}
+
+.hero-skill-card--1 {
+  animation-delay: 0s;
+}
+
+.hero-skill-card--1 .hero-skill-icon,
+.hero-skill-card--1 .hero-skill-text {
+  animation-delay: 0s;
+}
+
+.hero-skill-card--2 {
+  animation-delay: 2s;
+}
+
+.hero-skill-card--2 .hero-skill-icon,
+.hero-skill-card--2 .hero-skill-text {
+  animation-delay: 2s;
+}
+
+.hero-skill-card--3 {
+  animation-delay: 4s;
+}
+
+.hero-skill-card--3 .hero-skill-icon,
+.hero-skill-card--3 .hero-skill-text {
+  animation-delay: 4s;
+}
+
+.hero-skill-card--4 {
+  animation-delay: 6s;
+}
+
+.hero-skill-card--4 .hero-skill-icon,
+.hero-skill-card--4 .hero-skill-text {
+  animation-delay: 6s;
+}
+
+.hero-skill-card--5 {
+  animation-delay: 8s;
+}
+
+.hero-skill-card--5 .hero-skill-icon,
+.hero-skill-card--5 .hero-skill-text {
+  animation-delay: 8s;
+}
+
+.hero-skill-card--6 {
+  animation-delay: 10s;
+}
+
+.hero-skill-card--6 .hero-skill-icon,
+.hero-skill-card--6 .hero-skill-text {
+  animation-delay: 10s;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-skill-card,
+  .hero-skill-card .hero-skill-icon,
+  .hero-skill-card .hero-skill-text {
+    animation: none !important;
+  }
+}
+
 
