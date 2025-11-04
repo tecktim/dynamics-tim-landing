@@ -25,44 +25,88 @@ const canonicalUrl = url
     : Astro.url.href;
 
 const imageUrl = Astro.site ? new URL(ogImage, Astro.site).toString() : ogImage;
+const siteUrl = Astro.site ? Astro.site.toString() : new URL('/', canonicalUrl).toString();
 
-const _jsonLd = {
+const personId = `${siteUrl}#person`;
+const webSiteId = `${siteUrl}#website`;
+const webPageId = `${canonicalUrl}#webpage`;
+const serviceId = `${siteUrl}#service`;
+
+const jsonLd = {
   '@context': 'https://schema.org',
-  '@type': 'Person',
-  name: 'Tim Friedrich',
-  jobTitle: 'Dynamics 365 Freelancer',
-  description,
-  url: canonicalUrl,
-  image: imageUrl,
-  sameAs: [
-    'https://github.com/tim-freelance',
-    'https://www.linkedin.com/in/tim-friedrich',
-    'https://www.youtube.com/@tim-freelance'
-  ],
-  knowsAbout: [
-    'Dynamics 365 Sales',
-    'Dynamics 365 Customer Service',
-    'Power Platform',
-    'Azure Integration Services',
-    'DevOps',
-    'Event-driven Architecture'
-  ],
   '@graph': [
     {
-      '@type': 'SoftwareDeveloper',
+      '@type': 'Person',
+      '@id': personId,
       name: 'Tim Friedrich',
-      skills: [
-        'C# Plugins',
-        'TypeScript',
-        'Power Automate',
-        'Azure Functions',
-        'Power Apps'
+      jobTitle: 'Dynamics 365 Freelancer',
+      description,
+      url: siteUrl,
+      image: imageUrl,
+      sameAs: [
+        'https://github.com/tim-freelance',
+        'https://www.linkedin.com/in/tim-friedrich',
+        'https://www.youtube.com/@tim-freelance'
       ],
-      worksFor: {
-        '@type': 'Organization',
-        name: 'Tim Friedrich Freelance'
+      knowsAbout: [
+        'Dynamics 365 Sales',
+        'Dynamics 365 Customer Service',
+        'Power Platform',
+        'Azure Integration Services',
+        'DevOps',
+        'Event-driven Architecture'
+      ]
+    },
+    {
+      '@type': 'WebSite',
+      '@id': webSiteId,
+      url: siteUrl,
+      name: baseTitle,
+      inLanguage: 'de-DE',
+      publisher: {
+        '@id': personId
       },
-      url: canonicalUrl
+      potentialAction: {
+        '@type': 'SearchAction',
+        target: `${siteUrl}?s={search_term_string}`,
+        'query-input': 'required name=search_term_string'
+      }
+    },
+    {
+      '@type': 'WebPage',
+      '@id': webPageId,
+      url: canonicalUrl,
+      name: pageTitle,
+      description,
+      isPartOf: {
+        '@id': webSiteId
+      },
+      inLanguage: 'de-DE',
+      primaryImageOfPage: imageUrl,
+      about: {
+        '@id': serviceId
+      }
+    },
+    {
+      '@type': 'ProfessionalService',
+      '@id': serviceId,
+      name: 'Dynamics 365 Beratung & Power Platform Engineering',
+      url: siteUrl,
+      description,
+      provider: {
+        '@id': personId
+      },
+      areaServed: {
+        '@type': 'Country',
+        name: 'Deutschland'
+      },
+      serviceType: [
+        'Dynamics 365 Sales Implementierung',
+        'Dynamics 365 Customer Service Optimierung',
+        'Power Platform Engineering',
+        'Azure Integration & Automatisierung',
+        'DevOps Enablement'
+      ]
     }
   ]
 };
@@ -70,15 +114,18 @@ const _jsonLd = {
 
 <title>{pageTitle}</title>
 <meta name="description" content={description} />
+<meta name="robots" content="index,follow" />
+<meta name="author" content="Tim Friedrich" />
 <link rel="canonical" href={canonicalUrl} />
 <meta property="og:type" content="website" />
 <meta property="og:title" content={pageTitle} />
 <meta property="og:description" content={description} />
 <meta property="og:url" content={canonicalUrl} />
 <meta property="og:image" content={imageUrl} />
+<meta property="og:locale" content="de_DE" />
 <meta property="og:site_name" content={baseTitle} />
 <meta name="twitter:card" content="summary_large_image" />
 <meta name="twitter:title" content={pageTitle} />
 <meta name="twitter:description" content={description} />
 <meta name="twitter:image" content={imageUrl} />
-<script type="application/ld+json">{JSON.stringify(_jsonLd)}</script>
+<script type="application/ld+json">{JSON.stringify(jsonLd)}</script>
