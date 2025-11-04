@@ -59,26 +59,56 @@ const valueBullets = [
 
 const faqs = [
   {
-    question: 'Wie starte ich ein Dynamics 365 Projekt mit dir?',
+    question: 'Wie starte ich ein Dynamics 365 Projekt mit dir als Freelancer?',
     answerHtml:
-      'Wir beginnen mit einem fokussierten Erstgespräch, priorisieren die wichtigsten Use Cases und planen einen zweiwöchigen Solution Sprint. Über das <a href="mailto:hello@dynamics-tim.dev" class="text-brand-500 underline decoration-2 decoration-brand-200 hover:text-brand-400">Kontaktformular</a> oder per Mail erhältst du in 48 Stunden eine Roadmap inklusive Aufwandsschätzung.',
+      'Wir beginnen mit einem fokussierten Erstgespräch, priorisieren die wichtigsten Dynamics 365 Use Cases und planen einen zweiwöchigen Solution Sprint. Über das <a href="mailto:hello@dynamics-tim.dev" class="text-brand-500 underline decoration-2 decoration-brand-200 hover:text-brand-400">Kontaktformular</a> oder per Mail erhältst du in 48 Stunden eine Roadmap inklusive Aufwandsschätzung.',
     plainAnswer:
-      'Wir starten mit einem Erstgespräch, priorisieren die wichtigsten Use Cases und planen einen zweiwöchigen Solution Sprint. Über das Kontaktformular oder per Mail erhältst du in 48 Stunden eine Roadmap inklusive Aufwandsschätzung.'
+      'Wir starten mit einem Erstgespräch, priorisieren die wichtigsten Dynamics 365 Use Cases und planen einen zweiwöchigen Solution Sprint. Über das Kontaktformular oder per Mail erhältst du in 48 Stunden eine Roadmap inklusive Aufwandsschätzung.'
   },
   {
-    question: 'Welche Ergebnisse sind in den ersten 90 Tagen realistisch?',
+    question: 'Welche Ergebnisse liefert dein Dynamics 365 Consulting in den ersten 90 Tagen?',
     answerHtml:
       'Innerhalb der ersten drei Monate erhältst du einen produktionsnahen Blueprint mit priorisierter Backlog-Liste, validierten Integrationspfaden und messbaren Quick Wins. Die wichtigsten Prozesse landen in funktionsfähigen Canvas Apps bzw. modellgetriebenen Apps, damit dein Team schnell Feedback geben kann.',
     plainAnswer:
       'In den ersten 90 Tagen entsteht ein produktionsnaher Blueprint mit priorisiertem Backlog, validierten Integrationen und Quick Wins in Canvas beziehungsweise modellgetriebenen Apps.'
   },
   {
-    question: 'Unterstützt du auch bestehende Dynamics Teams?',
+    question: 'Unterstützt du auch bestehende Dynamics 365 Teams langfristig?',
     answerHtml: `Ja. Ich coache interne Entwickler:innen, führe gemeinsame Code-Reviews durch und implementiere Quality Gates sowie Automatisierung. Über den <a href="${to('profile')}" class="text-brand-500 underline decoration-2 decoration-brand-200 hover:text-brand-400">Profil-Bereich</a> findest du Referenzen und konkrete Technologien, die ich einbringe.`,
     plainAnswer:
-      'Ich unterstütze bestehende Dynamics Teams mit Coaching, Code-Reviews, Quality Gates und Automatisierung. Referenzen und Technologien findest du im Profil-Bereich.'
+      'Ich unterstütze bestehende Dynamics 365 Teams mit Coaching, Code-Reviews, Quality Gates und Automatisierung. Referenzen und Technologien findest du im Profil-Bereich.'
   }
 ];
+
+const cornerstoneLinks = [
+  {
+    title: 'Dynamics 365 Leistungs-Blueprint',
+    description:
+      'Alle Serviceangebote inklusive Canvas Apps, Custom Pages, C# Plugins und Azure Integrationen – gebündelt im Leistungsbereich für schnelle Orientierung.',
+    href: to('services'),
+    cta: 'Zu den Leistungen'
+  },
+  {
+    title: 'Profil, Referenzen & Zertifizierungen',
+    description:
+      'E-E-A-T-Signale auf einen Blick: Projekterfolge, Timeline, Zertifizierungen und Technologie-Stack für Dynamics 365 Delivery.',
+    href: to('profile'),
+    cta: 'Profil ansehen'
+  },
+  {
+    title: 'Kontakt & Discovery Call',
+    description:
+      'Direkter Draht für Priorisierung, Aufwandsschätzung und SEO-optimierte Angebotsunterlagen – inklusive optionaler Pushover-Benachrichtigungen.',
+    href: to('contact'),
+    cta: 'Kontakt aufnehmen'
+  }
+];
+
+const canonicalUrl = Astro.site
+  ? new URL(Astro.url.pathname, Astro.site).toString()
+  : Astro.url.href;
+const siteUrl = Astro.site ? Astro.site.toString() : new URL('/', canonicalUrl).toString();
+const providerId = `${siteUrl}#person`;
 
 const faqSchema = {
   '@context': 'https://schema.org',
@@ -92,9 +122,42 @@ const faqSchema = {
     }
   }))
 };
+
+const serviceItemList = {
+  '@context': 'https://schema.org',
+  '@type': 'ItemList',
+  name: 'Dynamics 365 & Power Platform Services',
+  itemListElement: heroServices.map((service, index) => {
+    const serviceUrl = new URL(service.href ?? '/', siteUrl).toString();
+    return {
+      '@type': 'ListItem',
+      position: index + 1,
+      item: {
+        '@type': 'Service',
+        name: service.title,
+        description: service.description,
+        url: serviceUrl,
+        provider: {
+          '@type': 'Person',
+          '@id': providerId
+        },
+        areaServed: {
+          '@type': 'Country',
+          name: 'Deutschland'
+        }
+      }
+    };
+  })
+};
+
+const structuredData = [faqSchema, serviceItemList];
 ---
 
-<BaseLayout title="Startseite" description="Dynamics 365 Freelancer für Service- & Sales-Prozesse: Power Platform Engineering, Azure Integrationen, DevOps & Enablement.">
+<BaseLayout
+  title="Startseite"
+  description="Dynamics 365 Freelancer für Service- & Sales-Prozesse: Power Platform Engineering, Azure Integrationen, DevOps & Enablement."
+  breadcrumbs={[{ name: 'Startseite', url: '/' }]}
+>
   <Hero />
 
   <section class="bg-surface-100 py-20">
@@ -122,31 +185,26 @@ const faqSchema = {
   <section class="bg-surface-50 py-20">
     <div class="mx-auto max-w-6xl px-6">
       <div class="max-w-3xl space-y-4">
-        <h2 class="section-title" data-reveal data-reveal-delay="0">Content-Refresh & Autoritätsplan</h2>
+        <h2 class="section-title" data-reveal data-reveal-delay="0">Cornerstone Content &amp; Conversion-Pfade</h2>
         <p class="text-lg text-slate-600" data-reveal data-reveal-delay="80">
-          Nach dem Pareto-Prinzip fokussiere ich die Top-20%-Seiten – insbesondere die <a href={to('services')} class="text-brand-500 underline decoration-2 decoration-brand-200 hover:text-brand-400">Leistungsübersicht</a> und den <a href={to('profile')} class="text-brand-500 underline decoration-2 decoration-brand-200 hover:text-brand-400">Profilbereich</a>. Quartalsweise Updates liefern frische Referenzen, aktualisierte KPI und neue How-to-Beiträge für AI-Suchen.
+          Die wichtigsten SEO-Zielseiten verlinken bewusst aufeinander, damit Nutzer:innen und Suchmaschinen die Schwerpunkte Dynamics 365, Power Platform und Azure sofort erkennen. So bleibt die Linkkraft gebündelt – von der Leistungsbeschreibung bis zum Discovery Call.
         </p>
       </div>
-      <ol class="mt-10 grid gap-6 md:grid-cols-3" data-reveal data-reveal-delay="160">
-        <li class="card h-full space-y-3">
-          <h3 class="text-xl font-semibold text-slate-900">Monat 1: Audit & Quick Wins</h3>
-          <p class="text-base text-slate-600">
-            Core Web Vitals, strukturierte Daten und interne Links auf den wertvollsten Seiten optimieren. Ergebnisse werden im <a href={to('services')} class="text-brand-500 underline decoration-2 decoration-brand-200 hover:text-brand-400">Service-Portfolio</a> dokumentiert.
-          </p>
-        </li>
-        <li class="card h-full space-y-3">
-          <h3 class="text-xl font-semibold text-slate-900">Monat 2: Content Deep Dive</h3>
-          <p class="text-base text-slate-600">
-            Thematische Cluster rund um Dynamics 365 Sales &amp; Service ausbauen, Use Cases ergänzen und Long-Tail-Snippets für AI-Antworten vorbereiten.
-          </p>
-        </li>
-        <li class="card h-full space-y-3">
-          <h3 class="text-xl font-semibold text-slate-900">Monat 3: Authority & Feedback</h3>
-          <p class="text-base text-slate-600">
-            Referenz-Interviews, Backlinks und Thought-Leadership-Updates veröffentlichen. Über den <a href={to('contact')} class="text-brand-500 underline decoration-2 decoration-brand-200 hover:text-brand-400">Kontakt</a> laufen Feedback-Schleifen für kontinuierliche Optimierung.
-          </p>
-        </li>
-      </ol>
+      <div class="mt-10 grid gap-6 md:grid-cols-3" data-reveal data-reveal-delay="160">
+        {cornerstoneLinks.map((item, index) => (
+          <article class="card flex h-full flex-col gap-4" data-reveal data-reveal-delay={`${index * 80 + 220}`} key={item.title}>
+            <h3 class="text-xl font-semibold text-slate-900">{item.title}</h3>
+            <p class="text-base text-slate-600">{item.description}</p>
+            <a
+              href={item.href}
+              class="mt-auto inline-flex items-center gap-1 text-sm font-semibold text-brand-500 transition hover:text-brand-400"
+            >
+              <span>{item.cta}</span>
+              <span aria-hidden="true">&rarr;</span>
+            </a>
+          </article>
+        ))}
+      </div>
     </div>
   </section>
 
@@ -171,6 +229,7 @@ const faqSchema = {
     </div>
   </section>
 
+
   <section class="bg-gradient-to-br from-brand-900 via-brand-800 to-accent-600 py-24 text-white" data-reveal data-reveal-delay="0">
     <div class="mx-auto max-w-5xl px-6 text-center">
       <h2 class="text-3xl font-bold sm:text-4xl" data-reveal data-reveal-delay="0">Bereit für spürbar schnellere Service- und Vertriebsprozesse?</h2>
@@ -187,6 +246,6 @@ const faqSchema = {
       </div>
     </div>
   </section>
-  <script type="application/ld+json" is:inline>{JSON.stringify(faqSchema)}</script>
+  <script type="application/ld+json" is:inline>{JSON.stringify(structuredData)}</script>
 </BaseLayout>
 

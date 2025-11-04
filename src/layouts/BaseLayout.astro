@@ -4,11 +4,17 @@ import Footer from '../components/Footer.astro';
 import SeoHead from '../components/SeoHead.astro';
 import '../styles/global.css';
 
+interface Breadcrumb {
+  name: string;
+  url: string;
+}
+
 interface Props {
   title?: string;
   description?: string;
   ogImage?: string;
   url?: string;
+  breadcrumbs?: Breadcrumb[];
   showHeader?: boolean;
   showFooter?: boolean;
 }
@@ -18,6 +24,7 @@ const {
   description,
   ogImage,
   url,
+  breadcrumbs = [],
   showHeader = true,
   showFooter = true
 } = Astro.props as Props;
@@ -52,7 +59,13 @@ const csp = [
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta http-equiv="Content-Security-Policy" content={csp} />
     <meta name="referrer" content="strict-origin-when-cross-origin" />
-    <SeoHead title={title} description={description} ogImage={ogImage} url={url} />
+    <SeoHead
+      title={title}
+      description={description}
+      ogImage={ogImage}
+      url={url}
+      breadcrumbs={breadcrumbs}
+    />
     <link rel="icon" type="image/svg+xml" href={`${base}favicon.svg`} />
     <link rel="manifest" href={`${base}manifest.webmanifest`} />
     <link rel="preload" href={`${base}assets/fonts/inter-latin.woff2`} as="font" type="font/woff2" crossorigin />

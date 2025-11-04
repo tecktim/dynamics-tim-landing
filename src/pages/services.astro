@@ -49,9 +49,46 @@ const formats = [
     description: 'Health Check für bestehende Lösungen inklusive Code-Reviews, Pairing Sessions und Enablement der internen Entwickler:innen.'
   }
 ];
+
+const canonicalUrl = Astro.site
+  ? new URL(Astro.url.pathname, Astro.site).toString()
+  : Astro.url.href;
+const siteUrl = Astro.site ? Astro.site.toString() : new URL('/', canonicalUrl).toString();
+const providerId = `${siteUrl}#person`;
+
+const serviceListSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'ItemList',
+  name: 'Dynamics 365 Leistungen & Consulting',
+  itemListElement: services.map((service, index) => ({
+    '@type': 'ListItem',
+    position: index + 1,
+    item: {
+      '@type': 'Service',
+      name: service.title,
+      description: service.description,
+      url: new URL(`#${service.id ?? ''}`, canonicalUrl).toString(),
+      provider: {
+        '@type': 'Person',
+        '@id': providerId
+      },
+      areaServed: {
+        '@type': 'Country',
+        name: 'Deutschland'
+      }
+    }
+  }))
+};
 ---
 
-<BaseLayout title="Leistungen" description="Dynamics 365 Leistungen für Prozessdesign, Power Platform Engineering, Azure Integrationen und DevOps Enablement.">
+<BaseLayout
+  title="Leistungen"
+  description="Dynamics 365 Leistungen für Prozessdesign, Power Platform Engineering, Azure Integrationen und DevOps Enablement."
+  breadcrumbs={[
+    { name: 'Startseite', url: '/' },
+    { name: 'Leistungen', url: '/services' }
+  ]}
+>
   <section class="bg-surface-100 py-20">
     <div class="mx-auto max-w-5xl px-6 text-center">
       <h1 class="section-title">Leistungen im Überblick</h1>
@@ -95,6 +132,7 @@ const formats = [
       </a>
     </div>
   </section>
+  <script type="application/ld+json" is:inline>{JSON.stringify(serviceListSchema)}</script>
 </BaseLayout>
 
 

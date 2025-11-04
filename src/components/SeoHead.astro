@@ -1,9 +1,15 @@
 ---
+interface Breadcrumb {
+  name: string;
+  url: string;
+}
+
 interface Props {
   title?: string;
   description?: string;
   ogImage?: string;
   url?: string;
+  breadcrumbs?: Breadcrumb[];
 }
 
 const defaultDescription =
@@ -13,7 +19,8 @@ const {
   title,
   description = defaultDescription,
   ogImage = '/og-image.png',
-  url
+  url,
+  breadcrumbs = []
 } = Astro.props as Props;
 
 const baseTitle = 'Dynamics 365 Freelance · Tim Friedrich';
@@ -110,6 +117,21 @@ const jsonLd = {
     }
   ]
 };
+
+if (breadcrumbs.length > 0) {
+  const breadcrumbItems = breadcrumbs.map((crumb, index) => ({
+    '@type': 'ListItem',
+    position: index + 1,
+    name: crumb.name,
+    item: new URL(crumb.url, siteUrl).toString()
+  }));
+
+  (jsonLd['@graph'] as unknown[]).push({
+    '@type': 'BreadcrumbList',
+    '@id': `${webPageId}#breadcrumb`,
+    itemListElement: breadcrumbItems
+  });
+}
 ---
 
 <title>{pageTitle}</title>
