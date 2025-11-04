@@ -61,46 +61,21 @@ const faqs = [
   {
     question: 'Wie starte ich ein Dynamics 365 Projekt mit dir als Freelancer?',
     answerHtml:
-      'Wir beginnen mit einem fokussierten Erstgespräch, priorisieren die wichtigsten Dynamics 365 Use Cases und planen einen zweiwöchigen Solution Sprint. Über das <a href="mailto:hello@dynamics-tim.dev" class="text-brand-500 underline decoration-2 decoration-brand-200 hover:text-brand-400">Kontaktformular</a> oder per Mail erhältst du in 48 Stunden eine Roadmap inklusive Aufwandsschätzung.',
+      'Wir beginnen mit einem fokussierten Erstgespräch, in dem wir die wichtigsten Dynamics 365 Use Cases priorisieren und das weitere Vorgehen klären. Über das <a href="mailto:hello@dynamics-tim.dev" class="text-brand-500 underline decoration-2 decoration-brand-200 hover:text-brand-400">Kontaktformular</a> oder per Mail erhältst du in 48 Stunden eine Roadmap inklusive Aufwandsschätzung.',
     plainAnswer:
-      'Wir starten mit einem Erstgespräch, priorisieren die wichtigsten Dynamics 365 Use Cases und planen einen zweiwöchigen Solution Sprint. Über das Kontaktformular oder per Mail erhältst du in 48 Stunden eine Roadmap inklusive Aufwandsschätzung.'
-  },
-  {
-    question: 'Welche Ergebnisse liefert dein Dynamics 365 Consulting in den ersten 90 Tagen?',
-    answerHtml:
-      'Innerhalb der ersten drei Monate erhältst du einen produktionsnahen Blueprint mit priorisierter Backlog-Liste, validierten Integrationspfaden und messbaren Quick Wins. Die wichtigsten Prozesse landen in funktionsfähigen Canvas Apps bzw. modellgetriebenen Apps, damit dein Team schnell Feedback geben kann.',
-    plainAnswer:
-      'In den ersten 90 Tagen entsteht ein produktionsnaher Blueprint mit priorisiertem Backlog, validierten Integrationen und Quick Wins in Canvas beziehungsweise modellgetriebenen Apps.'
+      'Wir starten mit einem Erstgespräch, in dem wir die wichtigsten Dynamics 365 Use Cases priorisieren und das weitere Vorgehen klären. Über das Kontaktformular oder per Mail erhältst du in 48 Stunden eine Roadmap inklusive Aufwandsschätzung.'
   },
   {
     question: 'Unterstützt du auch bestehende Dynamics 365 Teams langfristig?',
     answerHtml: `Ja. Ich coache interne Entwickler:innen, führe gemeinsame Code-Reviews durch und implementiere Quality Gates sowie Automatisierung. Über den <a href="${to('profile')}" class="text-brand-500 underline decoration-2 decoration-brand-200 hover:text-brand-400">Profil-Bereich</a> findest du Referenzen und konkrete Technologien, die ich einbringe.`,
     plainAnswer:
       'Ich unterstütze bestehende Dynamics 365 Teams mit Coaching, Code-Reviews, Quality Gates und Automatisierung. Referenzen und Technologien findest du im Profil-Bereich.'
-  }
-];
-
-const cornerstoneLinks = [
-  {
-    title: 'Dynamics 365 Leistungs-Blueprint',
-    description:
-      'Alle Serviceangebote inklusive Canvas Apps, Custom Pages, C# Plugins und Azure Integrationen – gebündelt im Leistungsbereich für schnelle Orientierung.',
-    href: to('services'),
-    cta: 'Zu den Leistungen'
   },
   {
-    title: 'Profil, Referenzen & Zertifizierungen',
-    description:
-      'E-E-A-T-Signale auf einen Blick: Projekterfolge, Timeline, Zertifizierungen und Technologie-Stack für Dynamics 365 Delivery.',
-    href: to('profile'),
-    cta: 'Profil ansehen'
-  },
-  {
-    title: 'Kontakt & Discovery Call',
-    description:
-      'Direkter Draht für Priorisierung, Aufwandsschätzung und SEO-optimierte Angebotsunterlagen – inklusive optionaler Pushover-Benachrichtigungen.',
-    href: to('contact'),
-    cta: 'Kontakt aufnehmen'
+    question: 'Welche Dynamics 365 und Power Platform Technologien nutzt du?',
+    answerHtml: `Ich arbeite mit C# Plugins, Power Automate, PCF Controls, Azure Functions, Service Bus, Event Grid und Playwright für UI Test Automation. Diese Technologien ermöglichen es mir, skalierbare und effiziente Lösungen zu entwickeln, die den spezifischen Anforderungen von Dynamics 365 gerecht werden.`,
+    plainAnswer:
+      'Ich arbeite mit C# Plugins, Power Automate, PCF Controls, Azure Functions, Service Bus, Event Grid und Playwright für UI Test Automation. Diese Technologien ermöglichen es mir, skalierbare und effiziente Lösungen zu entwickeln, die den spezifischen Anforderungen von Dynamics 365 gerecht werden.'
   }
 ];
 
@@ -179,34 +154,6 @@ const structuredData = [faqSchema, serviceItemList];
     subheading="Ich verbinde Prozess-Know-how mit Dynamics 365 Engineering – vom ersten Workshop bis zur produktiven Übergabe."
     items={heroServices}
   />
-
-  <ProjectCards items={projects.slice(0, 2)} />
-
-  <section class="bg-surface-50 py-20">
-    <div class="mx-auto max-w-6xl px-6">
-      <div class="max-w-3xl space-y-4">
-        <h2 class="section-title" data-reveal data-reveal-delay="0">Cornerstone Content &amp; Conversion-Pfade</h2>
-        <p class="text-lg text-slate-600" data-reveal data-reveal-delay="80">
-          Die wichtigsten SEO-Zielseiten verlinken bewusst aufeinander, damit Nutzer:innen und Suchmaschinen die Schwerpunkte Dynamics 365, Power Platform und Azure sofort erkennen. So bleibt die Linkkraft gebündelt – von der Leistungsbeschreibung bis zum Discovery Call.
-        </p>
-      </div>
-      <div class="mt-10 grid gap-6 md:grid-cols-3" data-reveal data-reveal-delay="160">
-        {cornerstoneLinks.map((item, index) => (
-          <article class="card flex h-full flex-col gap-4" data-reveal data-reveal-delay={`${index * 80 + 220}`} key={item.title}>
-            <h3 class="text-xl font-semibold text-slate-900">{item.title}</h3>
-            <p class="text-base text-slate-600">{item.description}</p>
-            <a
-              href={item.href}
-              class="mt-auto inline-flex items-center gap-1 text-sm font-semibold text-brand-500 transition hover:text-brand-400"
-            >
-              <span>{item.cta}</span>
-              <span aria-hidden="true">&rarr;</span>
-            </a>
-          </article>
-        ))}
-      </div>
-    </div>
-  </section>
 
   <section class="bg-surface-100 py-20" id="faq">
     <div class="mx-auto max-w-6xl px-6">
