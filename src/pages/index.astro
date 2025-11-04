@@ -11,25 +11,34 @@ const to = (path: string) => `${base}${path.replace(/^\//, '')}`;
 const projects = (await getCollection('projects')).sort((a, b) => (a.data.featured === b.data.featured ? 0 : a.data.featured ? -1 : 1));
 const heroServices = [
   {
-    title: 'Dynamics 365 Prozessdesign',
+    title: 'Dynamics 365 Prozessdesign & UX-Governance',
     description:
-      'Service- und Vertriebsprozesse in Canvas Apps, Custom Pages und modellgetriebenen Apps übersetzt – inklusive UX, Security und Governance.'
+      'Service- und Vertriebsprozesse in Canvas Apps, Custom Pages und modellgetriebenen Apps übersetzt – inklusive UX, Security und Governance.',
+    href: to('services#prozessdesign'),
+    cta: 'Prozessdesign-Ansatz ansehen'
   },
   {
-    title: 'Power Platform Engineering',
-    description: 'C# Plugins, Power Automate Flows, PCF Controls und Dataverse-Logik, die Fachbereiche sofort produktiver machen.'
+    title: 'Power Platform Engineering & Plugins',
+    description: 'C# Plugins, Power Automate Flows, PCF Controls und Dataverse-Logik, die Fachbereiche sofort produktiver machen.',
+    href: to('services#automation'),
+    cta: 'Automatisierung vertiefen'
   },
   {
-    title: 'Azure Integration & Automation',
-    description: 'Serverless Integrationen mit Azure Functions, Service Bus, Event Grid und DevOps-Pipelines für stabile Datenflüsse.'
+    title: 'Azure Integration & Automatisierung',
+    description: 'Serverless Integrationen mit Azure Functions, Service Bus, Event Grid und DevOps-Pipelines für stabile Datenflüsse.',
+    href: to('services#integration'),
+    cta: 'Integrations-Blueprint prüfen'
   },
   {
     title: 'UI Test Automation & Quality Gates',
-    description: 'Playwright-basierte Test-Frameworks für Business-kritische CRM-Workflows mit robusten Retry-Strategien und Quality Gates für sichere Deployments.'
+    description: 'Playwright-basierte Test-Frameworks für Business-kritische CRM-Workflows mit robusten Retry-Strategien und Quality Gates für sichere Deployments.',
+    href: to('services#quality')
   },
   {
-    title: 'Delivery & Enablement',
-    description: 'SCRUM/Kanban, Pairing, Dokumentation und Training – ich hinterlasse ein Team, das selbstständig releasen kann.'
+    title: 'Delivery, DevOps & Enablement',
+    description: 'SCRUM/Kanban, Pairing, Dokumentation und Training – ich hinterlasse ein Team, das selbstständig releasen kann.',
+    href: to('services#enablement'),
+    cta: 'Enablement-Formate entdecken'
   }
 ];
 
@@ -47,6 +56,114 @@ const valueBullets = [
     description: 'Azure DevOps, Code-Quality-Gates und Monitoring sorgen für planbare Deployments ohne Überraschungen.'
   }
 ];
+
+const faqs = [
+  {
+    question: 'Wie starte ich ein Dynamics 365 Projekt mit dir?',
+    answerHtml:
+      'Wir beginnen mit einem fokussierten Erstgespräch, priorisieren die wichtigsten Use Cases und planen einen zweiwöchigen Solution Sprint. Über das <a href="mailto:hello@dynamics-tim.dev" class="text-brand-500 underline decoration-2 decoration-brand-200 hover:text-brand-400">Kontaktformular</a> oder per Mail erhältst du in 48 Stunden eine Roadmap inklusive Aufwandsschätzung.',
+    plainAnswer:
+      'Wir starten mit einem Erstgespräch, priorisieren die wichtigsten Use Cases und planen einen zweiwöchigen Solution Sprint. Über das Kontaktformular oder per Mail erhältst du in 48 Stunden eine Roadmap inklusive Aufwandsschätzung.'
+  },
+  {
+    question: 'Welche Ergebnisse sind in den ersten 90 Tagen realistisch?',
+    answerHtml:
+      'Innerhalb der ersten drei Monate erhältst du einen produktionsnahen Blueprint mit priorisierter Backlog-Liste, validierten Integrationspfaden und messbaren Quick Wins. Die wichtigsten Prozesse landen in funktionsfähigen Canvas Apps bzw. modellgetriebenen Apps, damit dein Team schnell Feedback geben kann.',
+    plainAnswer:
+      'In den ersten 90 Tagen entsteht ein produktionsnaher Blueprint mit priorisiertem Backlog, validierten Integrationen und Quick Wins in Canvas beziehungsweise modellgetriebenen Apps.'
+  },
+  {
+    question: 'Unterstützt du auch bestehende Dynamics Teams?',
+    answerHtml: `Ja. Ich coache interne Entwickler:innen, führe gemeinsame Code-Reviews durch und implementiere Quality Gates sowie Automatisierung. Über den <a href="${to('profile')}" class="text-brand-500 underline decoration-2 decoration-brand-200 hover:text-brand-400">Profil-Bereich</a> findest du Referenzen und konkrete Technologien, die ich einbringe.`,
+    plainAnswer:
+      'Ich unterstütze bestehende Dynamics Teams mit Coaching, Code-Reviews, Quality Gates und Automatisierung. Referenzen und Technologien findest du im Profil-Bereich.'
+  }
+];
+
+const seoActionPlan = [
+  {
+    title: 'Suchintention & Keyword-Hubs verankern',
+    description:
+      'Mit Search Console und SEO-Tools die 20 % Suchanfragen identifizieren, die 80 % des Traffics versprechen. Headlines, Intros und Meta-Daten der wichtigsten Seiten exakt daran ausrichten.'
+  },
+  {
+    title: 'Core Web Vitals priorisieren',
+    description:
+      'Largest Contentful Paint und Cumulative Layout Shift der Start- und Serviceseiten optimieren: kritische Assets inline liefern, Scripts entlasten und Bildgrößen automatisiert skalieren.'
+  },
+  {
+    title: 'Strukturierte Daten erweitern',
+    description:
+      'Neben FAQ- und Person-Schema auch HowTo-, Service- und Breadcrumb-Markup implementieren, um Rich Results in klassischen und AI-Suchergebnissen zu triggern.'
+  },
+  {
+    title: 'Autoritätscluster ausbauen',
+    description:
+      'Content-Silos für Vertrieb, Service, Automation und Integration aufbauen. Pillar-Seiten quartalsweise aktualisieren und gezielt mit Satellite-Artikeln verbinden.'
+  },
+  {
+    title: 'Interne Linkkraft steuern',
+    description:
+      'Priorisierte Seiten aus Blog, Projekten und Services mit sprechenden Anchor-Texten verknüpfen. Navigations- und Footerlinks auf Conversion-Pfade ausrichten.'
+  },
+  {
+    title: 'Conversion-orientierte Snippets testen',
+    description:
+      'Meta-Titel und Beschreibungen der Top-Performing Pages über A/B-Tests variieren, um Klickraten zu steigern und Suchintention besser abzuholen.'
+  },
+  {
+    title: 'E-E-A-T-Signale stärken',
+    description:
+      'Autorensteckbriefe, Zertifizierungen, Kundenstimmen und Case-Studies ergänzen. Transparente Kontakt- und Impressumsdaten halten die Vertrauenswürdigkeit hoch.'
+  },
+  {
+    title: 'Backlink-Partnerschaften kuratieren',
+    description:
+      'Gezielte Kooperationen mit Branchenblogs, Microsoft-Communities und Podcasts eingehen. Unverlinkte Markennennungen regelmäßig in hochwertige Backlinks verwandeln.'
+  },
+  {
+    title: 'AI & Voice-Optimierung testen',
+    description:
+      'Dialogorientierte FAQ, Conversational Keywords und kurze Antwortsnippets für AI-Aggregatoren und Sprachassistenten erstellen.'
+  },
+  {
+    title: 'Monitoring & Iteration verankern',
+    description:
+      'SEO-Dashboards mit KPI, Funnel-Tracking und Alerting betreiben. Monatlich lernen, quartalsweise Roadmap neu priorisieren und Tests dokumentieren.'
+  }
+];
+
+const faqSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: faqs.map((faq) => ({
+    '@type': 'Question',
+    name: faq.question,
+    acceptedAnswer: {
+      '@type': 'Answer',
+      text: faq.plainAnswer
+    }
+  }))
+};
+
+const howToSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'HowTo',
+  name: '10-Schritte-Plan für Dynamics 365 SEO-Exzellenz',
+  description:
+    'Ein priorisierter SEO-Fahrplan, der die wichtigsten Maßnahmen für Dynamics 365 Dienstleistungen nach dem Pareto-Prinzip orchestriert.',
+  step: seoActionPlan.map((step, index) => ({
+    '@type': 'HowToStep',
+    position: index + 1,
+    name: step.title,
+    itemListElement: {
+      '@type': 'HowToDirection',
+      text: step.description
+    }
+  }))
+};
+
+const structuredData = [faqSchema, howToSchema];
 ---
 
 <BaseLayout title="Startseite" description="Dynamics 365 Freelancer für Service- & Sales-Prozesse: Power Platform Engineering, Azure Integrationen, DevOps & Enablement.">
@@ -74,6 +191,85 @@ const valueBullets = [
 
   <ProjectCards items={projects.slice(0, 2)} />
 
+  <section class="bg-surface-50 py-20">
+    <div class="mx-auto max-w-6xl px-6">
+      <div class="max-w-3xl space-y-4">
+        <h2 class="section-title" data-reveal data-reveal-delay="0">Content-Refresh & Autoritätsplan</h2>
+        <p class="text-lg text-slate-600" data-reveal data-reveal-delay="80">
+          Nach dem Pareto-Prinzip fokussiere ich die Top-20%-Seiten – insbesondere die <a href={to('services')} class="text-brand-500 underline decoration-2 decoration-brand-200 hover:text-brand-400">Leistungsübersicht</a> und den <a href={to('profile')} class="text-brand-500 underline decoration-2 decoration-brand-200 hover:text-brand-400">Profilbereich</a>. Quartalsweise Updates liefern frische Referenzen, aktualisierte KPI und neue How-to-Beiträge für AI-Suchen.
+        </p>
+      </div>
+      <ol class="mt-10 grid gap-6 md:grid-cols-3" data-reveal data-reveal-delay="160">
+        <li class="card h-full space-y-3">
+          <h3 class="text-xl font-semibold text-slate-900">Monat 1: Audit & Quick Wins</h3>
+          <p class="text-base text-slate-600">
+            Core Web Vitals, strukturierte Daten und interne Links auf den wertvollsten Seiten optimieren. Ergebnisse werden im <a href={to('services')} class="text-brand-500 underline decoration-2 decoration-brand-200 hover:text-brand-400">Service-Portfolio</a> dokumentiert.
+          </p>
+        </li>
+        <li class="card h-full space-y-3">
+          <h3 class="text-xl font-semibold text-slate-900">Monat 2: Content Deep Dive</h3>
+          <p class="text-base text-slate-600">
+            Thematische Cluster rund um Dynamics 365 Sales &amp; Service ausbauen, Use Cases ergänzen und Long-Tail-Snippets für AI-Antworten vorbereiten.
+          </p>
+        </li>
+        <li class="card h-full space-y-3">
+          <h3 class="text-xl font-semibold text-slate-900">Monat 3: Authority & Feedback</h3>
+          <p class="text-base text-slate-600">
+            Referenz-Interviews, Backlinks und Thought-Leadership-Updates veröffentlichen. Über den <a href={to('contact')} class="text-brand-500 underline decoration-2 decoration-brand-200 hover:text-brand-400">Kontakt</a> laufen Feedback-Schleifen für kontinuierliche Optimierung.
+          </p>
+        </li>
+      </ol>
+    </div>
+  </section>
+
+  <section class="bg-surface-100 py-20" id="faq">
+    <div class="mx-auto max-w-6xl px-6">
+      <h2 class="section-title" data-reveal data-reveal-delay="0">FAQ: Dynamics 365 Zusammenarbeit</h2>
+      <div class="mt-10 space-y-6" data-reveal data-reveal-delay="80">
+        {faqs.map((faq, index) => (
+          <details
+            class="group rounded-2xl border border-surface-200 bg-white/90 p-6 shadow-soft transition"
+            data-reveal
+            data-reveal-delay={`${index * 80 + 160}`}
+          >
+            <summary class="flex cursor-pointer items-center justify-between gap-4 text-left text-lg font-semibold text-slate-900">
+              <span>{faq.question}</span>
+              <span class="text-brand-400 transition group-open:rotate-45" aria-hidden="true">+</span>
+            </summary>
+            <div class="mt-4 text-base text-slate-600" set:html={faq.answerHtml}></div>
+          </details>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="bg-surface-50 py-20">
+    <div class="mx-auto max-w-6xl px-6">
+      <div class="max-w-3xl space-y-4">
+        <h2 class="section-title" data-reveal data-reveal-delay="0">10-Schritte-Plan für nachhaltiges SEO</h2>
+        <p class="text-lg text-slate-600" data-reveal data-reveal-delay="80">
+          Als Principal SEO Engineer priorisiere ich Maßnahmen nach dem Pareto-Prinzip: Die folgenden Schritte liefern den größten Hebel für Rankings, Autorität und Conversion-Optimierung – insbesondere rund um Dynamics 365, Power Platform und Azure-Projekte.
+        </p>
+      </div>
+      <ol class="mt-10 grid gap-6 md:grid-cols-2" data-reveal data-reveal-delay="160">
+        {seoActionPlan.map((step, index) => (
+          <li
+            class="card h-full space-y-3"
+            data-reveal
+            data-reveal-delay={`${index * 60 + 200}`}
+            key={step.title}
+          >
+            <span class="inline-flex h-10 w-10 items-center justify-center rounded-full bg-brand-500 text-base font-semibold text-white">
+              {index + 1}
+            </span>
+            <h3 class="text-xl font-semibold text-slate-900">{step.title}</h3>
+            <p class="text-base text-slate-600">{step.description}</p>
+          </li>
+        ))}
+      </ol>
+    </div>
+  </section>
+
   <section class="bg-gradient-to-br from-brand-900 via-brand-800 to-accent-600 py-24 text-white" data-reveal data-reveal-delay="0">
     <div class="mx-auto max-w-5xl px-6 text-center">
       <h2 class="text-3xl font-bold sm:text-4xl" data-reveal data-reveal-delay="0">Bereit für spürbar schnellere Service- und Vertriebsprozesse?</h2>
@@ -90,5 +286,6 @@ const valueBullets = [
       </div>
     </div>
   </section>
+  <script type="application/ld+json" is:inline>{JSON.stringify(structuredData)}</script>
 </BaseLayout>
 
