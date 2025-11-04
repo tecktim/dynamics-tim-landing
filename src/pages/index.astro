@@ -11,25 +11,34 @@ const to = (path: string) => `${base}${path.replace(/^\//, '')}`;
 const projects = (await getCollection('projects')).sort((a, b) => (a.data.featured === b.data.featured ? 0 : a.data.featured ? -1 : 1));
 const heroServices = [
   {
-    title: 'Dynamics 365 Prozessdesign',
+    title: 'Dynamics 365 Prozessdesign & UX-Governance',
     description:
-      'Service- und Vertriebsprozesse in Canvas Apps, Custom Pages und modellgetriebenen Apps übersetzt – inklusive UX, Security und Governance.'
+      'Service- und Vertriebsprozesse in Canvas Apps, Custom Pages und modellgetriebenen Apps übersetzt – inklusive UX, Security und Governance.',
+    href: to('services#prozessdesign'),
+    cta: 'Prozessdesign-Ansatz ansehen'
   },
   {
-    title: 'Power Platform Engineering',
-    description: 'C# Plugins, Power Automate Flows, PCF Controls und Dataverse-Logik, die Fachbereiche sofort produktiver machen.'
+    title: 'Power Platform Engineering & Plugins',
+    description: 'C# Plugins, Power Automate Flows, PCF Controls und Dataverse-Logik, die Fachbereiche sofort produktiver machen.',
+    href: to('services#automation'),
+    cta: 'Automatisierung vertiefen'
   },
   {
-    title: 'Azure Integration & Automation',
-    description: 'Serverless Integrationen mit Azure Functions, Service Bus, Event Grid und DevOps-Pipelines für stabile Datenflüsse.'
+    title: 'Azure Integration & Automatisierung',
+    description: 'Serverless Integrationen mit Azure Functions, Service Bus, Event Grid und DevOps-Pipelines für stabile Datenflüsse.',
+    href: to('services#integration'),
+    cta: 'Integrations-Blueprint prüfen'
   },
   {
     title: 'UI Test Automation & Quality Gates',
-    description: 'Playwright-basierte Test-Frameworks für Business-kritische CRM-Workflows mit robusten Retry-Strategien und Quality Gates für sichere Deployments.'
+    description: 'Playwright-basierte Test-Frameworks für Business-kritische CRM-Workflows mit robusten Retry-Strategien und Quality Gates für sichere Deployments.',
+    href: to('services#quality')
   },
   {
-    title: 'Delivery & Enablement',
-    description: 'SCRUM/Kanban, Pairing, Dokumentation und Training – ich hinterlasse ein Team, das selbstständig releasen kann.'
+    title: 'Delivery, DevOps & Enablement',
+    description: 'SCRUM/Kanban, Pairing, Dokumentation und Training – ich hinterlasse ein Team, das selbstständig releasen kann.',
+    href: to('services#enablement'),
+    cta: 'Enablement-Formate entdecken'
   }
 ];
 
@@ -47,9 +56,108 @@ const valueBullets = [
     description: 'Azure DevOps, Code-Quality-Gates und Monitoring sorgen für planbare Deployments ohne Überraschungen.'
   }
 ];
+
+const faqs = [
+  {
+    question: 'Wie starte ich ein Dynamics 365 Projekt mit dir als Freelancer?',
+    answerHtml:
+      'Wir beginnen mit einem fokussierten Erstgespräch, priorisieren die wichtigsten Dynamics 365 Use Cases und planen einen zweiwöchigen Solution Sprint. Über das <a href="mailto:hello@dynamics-tim.dev" class="text-brand-500 underline decoration-2 decoration-brand-200 hover:text-brand-400">Kontaktformular</a> oder per Mail erhältst du in 48 Stunden eine Roadmap inklusive Aufwandsschätzung.',
+    plainAnswer:
+      'Wir starten mit einem Erstgespräch, priorisieren die wichtigsten Dynamics 365 Use Cases und planen einen zweiwöchigen Solution Sprint. Über das Kontaktformular oder per Mail erhältst du in 48 Stunden eine Roadmap inklusive Aufwandsschätzung.'
+  },
+  {
+    question: 'Welche Ergebnisse liefert dein Dynamics 365 Consulting in den ersten 90 Tagen?',
+    answerHtml:
+      'Innerhalb der ersten drei Monate erhältst du einen produktionsnahen Blueprint mit priorisierter Backlog-Liste, validierten Integrationspfaden und messbaren Quick Wins. Die wichtigsten Prozesse landen in funktionsfähigen Canvas Apps bzw. modellgetriebenen Apps, damit dein Team schnell Feedback geben kann.',
+    plainAnswer:
+      'In den ersten 90 Tagen entsteht ein produktionsnaher Blueprint mit priorisiertem Backlog, validierten Integrationen und Quick Wins in Canvas beziehungsweise modellgetriebenen Apps.'
+  },
+  {
+    question: 'Unterstützt du auch bestehende Dynamics 365 Teams langfristig?',
+    answerHtml: `Ja. Ich coache interne Entwickler:innen, führe gemeinsame Code-Reviews durch und implementiere Quality Gates sowie Automatisierung. Über den <a href="${to('profile')}" class="text-brand-500 underline decoration-2 decoration-brand-200 hover:text-brand-400">Profil-Bereich</a> findest du Referenzen und konkrete Technologien, die ich einbringe.`,
+    plainAnswer:
+      'Ich unterstütze bestehende Dynamics 365 Teams mit Coaching, Code-Reviews, Quality Gates und Automatisierung. Referenzen und Technologien findest du im Profil-Bereich.'
+  }
+];
+
+const cornerstoneLinks = [
+  {
+    title: 'Dynamics 365 Leistungs-Blueprint',
+    description:
+      'Alle Serviceangebote inklusive Canvas Apps, Custom Pages, C# Plugins und Azure Integrationen – gebündelt im Leistungsbereich für schnelle Orientierung.',
+    href: to('services'),
+    cta: 'Zu den Leistungen'
+  },
+  {
+    title: 'Profil, Referenzen & Zertifizierungen',
+    description:
+      'E-E-A-T-Signale auf einen Blick: Projekterfolge, Timeline, Zertifizierungen und Technologie-Stack für Dynamics 365 Delivery.',
+    href: to('profile'),
+    cta: 'Profil ansehen'
+  },
+  {
+    title: 'Kontakt & Discovery Call',
+    description:
+      'Direkter Draht für Priorisierung, Aufwandsschätzung und SEO-optimierte Angebotsunterlagen – inklusive optionaler Pushover-Benachrichtigungen.',
+    href: to('contact'),
+    cta: 'Kontakt aufnehmen'
+  }
+];
+
+const canonicalUrl = Astro.site
+  ? new URL(Astro.url.pathname, Astro.site).toString()
+  : Astro.url.href;
+const siteUrl = Astro.site ? Astro.site.toString() : new URL('/', canonicalUrl).toString();
+const providerId = `${siteUrl}#person`;
+
+const faqSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: faqs.map((faq) => ({
+    '@type': 'Question',
+    name: faq.question,
+    acceptedAnswer: {
+      '@type': 'Answer',
+      text: faq.plainAnswer
+    }
+  }))
+};
+
+const serviceItemList = {
+  '@context': 'https://schema.org',
+  '@type': 'ItemList',
+  name: 'Dynamics 365 & Power Platform Services',
+  itemListElement: heroServices.map((service, index) => {
+    const serviceUrl = new URL(service.href ?? '/', siteUrl).toString();
+    return {
+      '@type': 'ListItem',
+      position: index + 1,
+      item: {
+        '@type': 'Service',
+        name: service.title,
+        description: service.description,
+        url: serviceUrl,
+        provider: {
+          '@type': 'Person',
+          '@id': providerId
+        },
+        areaServed: {
+          '@type': 'Country',
+          name: 'Deutschland'
+        }
+      }
+    };
+  })
+};
+
+const structuredData = [faqSchema, serviceItemList];
 ---
 
-<BaseLayout title="Startseite" description="Dynamics 365 Freelancer für Service- & Sales-Prozesse: Power Platform Engineering, Azure Integrationen, DevOps & Enablement.">
+<BaseLayout
+  title="Startseite"
+  description="Dynamics 365 Freelancer für Service- & Sales-Prozesse: Power Platform Engineering, Azure Integrationen, DevOps & Enablement."
+  breadcrumbs={[{ name: 'Startseite', url: '/' }]}
+>
   <Hero />
 
   <section class="bg-surface-100 py-20">
@@ -74,6 +182,54 @@ const valueBullets = [
 
   <ProjectCards items={projects.slice(0, 2)} />
 
+  <section class="bg-surface-50 py-20">
+    <div class="mx-auto max-w-6xl px-6">
+      <div class="max-w-3xl space-y-4">
+        <h2 class="section-title" data-reveal data-reveal-delay="0">Cornerstone Content &amp; Conversion-Pfade</h2>
+        <p class="text-lg text-slate-600" data-reveal data-reveal-delay="80">
+          Die wichtigsten SEO-Zielseiten verlinken bewusst aufeinander, damit Nutzer:innen und Suchmaschinen die Schwerpunkte Dynamics 365, Power Platform und Azure sofort erkennen. So bleibt die Linkkraft gebündelt – von der Leistungsbeschreibung bis zum Discovery Call.
+        </p>
+      </div>
+      <div class="mt-10 grid gap-6 md:grid-cols-3" data-reveal data-reveal-delay="160">
+        {cornerstoneLinks.map((item, index) => (
+          <article class="card flex h-full flex-col gap-4" data-reveal data-reveal-delay={`${index * 80 + 220}`} key={item.title}>
+            <h3 class="text-xl font-semibold text-slate-900">{item.title}</h3>
+            <p class="text-base text-slate-600">{item.description}</p>
+            <a
+              href={item.href}
+              class="mt-auto inline-flex items-center gap-1 text-sm font-semibold text-brand-500 transition hover:text-brand-400"
+            >
+              <span>{item.cta}</span>
+              <span aria-hidden="true">&rarr;</span>
+            </a>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="bg-surface-100 py-20" id="faq">
+    <div class="mx-auto max-w-6xl px-6">
+      <h2 class="section-title" data-reveal data-reveal-delay="0">FAQ: Dynamics 365 Zusammenarbeit</h2>
+      <div class="mt-10 space-y-6" data-reveal data-reveal-delay="80">
+        {faqs.map((faq, index) => (
+          <details
+            class="group rounded-2xl border border-surface-200 bg-white/90 p-6 shadow-soft transition"
+            data-reveal
+            data-reveal-delay={`${index * 80 + 160}`}
+          >
+            <summary class="flex cursor-pointer items-center justify-between gap-4 text-left text-lg font-semibold text-slate-900">
+              <span>{faq.question}</span>
+              <span class="text-brand-400 transition group-open:rotate-45" aria-hidden="true">+</span>
+            </summary>
+            <div class="mt-4 text-base text-slate-600" set:html={faq.answerHtml}></div>
+          </details>
+        ))}
+      </div>
+    </div>
+  </section>
+
+
   <section class="bg-gradient-to-br from-brand-900 via-brand-800 to-accent-600 py-24 text-white" data-reveal data-reveal-delay="0">
     <div class="mx-auto max-w-5xl px-6 text-center">
       <h2 class="text-3xl font-bold sm:text-4xl" data-reveal data-reveal-delay="0">Bereit für spürbar schnellere Service- und Vertriebsprozesse?</h2>
@@ -90,5 +246,6 @@ const valueBullets = [
       </div>
     </div>
   </section>
+  <script type="application/ld+json" is:inline>{JSON.stringify(structuredData)}</script>
 </BaseLayout>
 

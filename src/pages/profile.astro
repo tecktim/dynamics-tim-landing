@@ -9,7 +9,14 @@ const projects = (await getCollection('projects')).sort((a, b) => (a.data.featur
 const certs = (await getCollection('certs')).sort((a, b) => b.data.issued.localeCompare(a.data.issued));
 ---
 
-<BaseLayout title="Profil" description="Profil von Tim Friedrich: Dynamics 365 Freelancer für Power Platform Engineering, Azure Integrationen & DevOps Enablement.">
+<BaseLayout
+  title="Profil"
+  description="Profil von Tim Friedrich: Dynamics 365 Freelancer für Power Platform Engineering, Azure Integrationen & DevOps Enablement."
+  breadcrumbs={[
+    { name: 'Startseite', url: '/' },
+    { name: 'Profil', url: '/profile' }
+  ]}
+>
   <section class="bg-surface-100 py-20">
     <div class="mx-auto max-w-5xl px-6">
       <h1 class="section-title">Über Tim Friedrich</h1>
