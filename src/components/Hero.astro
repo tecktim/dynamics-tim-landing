@@ -23,8 +23,27 @@ const testimonialRotatorScript = `${base}scripts/testimonial-rotator.js`;
   <div class="floating-orb floating-orb--delay pointer-events-none absolute -left-32 bottom-6 h-[26rem] w-[26rem] rounded-full bg-[radial-gradient(circle,_rgba(77,162,242,0.38),_transparent_65%)] blur-3xl mix-blend-screen" aria-hidden="true"></div>
   <div class="relative mx-auto flex max-w-6xl flex-col gap-12 px-6 lg:flex-row lg:items-center lg:gap-16">
     <div class="max-w-3xl space-y-6">
-      <div class="hero-badge inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/15 px-4 py-2 text-sm font-medium text-white/90 shadow-soft backdrop-blur-md ring-1 ring-white/10" data-reveal data-reveal-delay="0">
-        Dynamics 365 · Power Platform · Azure
+      <div class="flex items-center gap-6 flex-wrap">
+        <a 
+          href={to('profile')}
+          class="relative group cursor-pointer" 
+          data-reveal 
+          data-reveal-delay="0"
+          aria-label="Zum Profil von Tim Friedrich"
+        >
+          <div class="absolute -inset-1 rounded-full bg-gradient-to-br from-signal-400 via-accent-300 to-signal-500 opacity-75 blur-md animate-pulse group-hover:opacity-100 transition-opacity"></div>
+          <img 
+            src={`${base}images/tim-portrait.jpg`}
+            alt="Tim Friedrich - Dynamics 365 Developer & Technical Consultant"
+            class="relative h-24 w-24 rounded-full object-cover ring-4 ring-white/20 shadow-xl group-hover:ring-white/40 transition-all duration-300 group-hover:scale-105"
+            width="96"
+            height="96"
+            loading="eager"
+          />
+        </a>
+        <div class="hero-badge inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/15 px-4 py-2 text-sm font-medium text-white/90 shadow-soft backdrop-blur-md ring-1 ring-white/10" data-reveal data-reveal-delay="0">
+          Dynamics 365 · Power Platform · Azure
+        </div>
       </div>
       <h1 class="font-heading text-4xl font-bold leading-tight tracking-tight text-white sm:text-5xl lg:text-6xl xl:text-7xl" data-reveal data-reveal-delay="80">
         Dynamics 365 Developer &amp; Technical Consultant für<span class="hero-highlight-gradient"> skalierbare Plattformen,</span>
