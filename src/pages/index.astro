@@ -776,7 +776,7 @@ const structuredData = [faqSchema, serviceItemList];
       const caseStudies: Record<string, { industry: string; text: string }> = JSON.parse(
         document.getElementById("quiz-case-studies")?.textContent ?? "{}"
       );
-      const modelLookup = new Map(Object.entries(caseStudies));
+      const caseStudyLookup = new Map(Object.entries(caseStudies));
       const bookingUrl =
         "https://outlook.office.com/bookwithme/user/c7bd6282644a4fcb82fd8cc491a921e5@dynamics-tim.dev?anonymous&ismsaljsauthenabled&ep=plink";
       const btns = document.querySelectorAll<HTMLButtonElement>(".quiz-btn");
@@ -931,7 +931,7 @@ const structuredData = [faqSchema, serviceItemList];
           "fullpackage",
           "embedded",
         ];
-        const recommendedKey = recommendationOrder.sort(
+        const recommendedKey = [...recommendationOrder].sort(
           (a, b) => weightedScores[b] - weightedScores[a]
         )[0];
         const match = {
@@ -974,7 +974,7 @@ const structuredData = [faqSchema, serviceItemList];
         };
 
         const baseMatch = match[recommendedKey] ?? match.audit;
-        const caseStudy = modelLookup.get(baseMatch.id)?.caseStudy ?? {
+        const caseStudy = caseStudyLookup.get(baseMatch.id) ?? {
           industry: "Dynamics 365",
           text: "Dein Setup braucht eine klare Priorisierung, damit Technologie und Team wieder in einen stabilen Rhythmus kommen.",
         };
