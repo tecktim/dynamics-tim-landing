@@ -761,7 +761,10 @@ const structuredData = [faqSchema, serviceItemList];
     id="quiz-case-studies"
     set:html={JSON.stringify(
       Object.fromEntries(engagementModels.map((model) => [model.id, model.caseStudy]))
-    )}
+    )
+      .replace(/</g, "\\u003c")
+      .replace(/>/g, "\\u003e")
+      .replace(/&/g, "\\u0026")}
   />
   <script>
     (function () {
