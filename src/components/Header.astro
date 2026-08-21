@@ -30,6 +30,7 @@ const navItems = [
       ))}
       <a
         id="nav-cta-desktop"
+        data-quiz-cta="header"
         href={to('contact')}
         data-astro-prefetch
         class="rounded-xl bg-brand-500 px-4 py-2 text-sm font-semibold text-white shadow-soft transition-colors hover:bg-brand-600 focus-visible:bg-brand-600 hover:text-white focus-visible:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-brand-500 focus-visible:ring-offset-white"
@@ -39,6 +40,7 @@ const navItems = [
     </nav>
     <a
       id="nav-cta-mobile"
+      data-quiz-cta="header"
       href={to('contact')}
       data-astro-prefetch
       class="rounded-xl bg-brand-500 px-3 py-2 text-sm font-semibold text-white shadow-soft transition-colors hover:bg-brand-600 focus-visible:bg-brand-600 hover:text-white focus-visible:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-400 md:hidden"
@@ -71,7 +73,7 @@ const navItems = [
 
     const stages = [
       { threshold: 0, text: 'Kostenloses Erstgespräch', mobileText: 'Erstgespräch', href: `${base}contact/`, external: false },
-      { threshold: 0.3, text: 'Passenden Einstieg finden', mobileText: 'Quiz', href: quizHref, external: false },
+      { threshold: 0.15, text: 'Passenden Einstieg finden', mobileText: 'Quiz', href: quizHref, external: false },
       { threshold: 0.7, text: '30-Min Slot buchen \u2192', mobileText: 'Buchen', href: 'https://outlook.office.com/bookwithme/user/c7bd6282644a4fcb82fd8cc491a921e5@dynamics-tim.dev?anonymous&ismsaljsauthenabled&ep=plink', external: true }
     ];
 
