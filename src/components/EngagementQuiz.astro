@@ -294,11 +294,15 @@ const { engagementModels, availabilityLabel, modelLinkBase = "" } = Astro.props 
   type="application/json"
   id="quiz-case-studies"
   set:html={JSON.stringify(
-    Object.fromEntries(engagementModels.map((model) => [model.id, model.caseStudy]))
+    Object.fromEntries(
+      engagementModels
+        .filter((model) => model.caseStudy != null)
+        .map((model) => [model.id, model.caseStudy])
+    )
   )
+    .replace(/&/g, "\\u0026")
     .replace(/</g, "\\u003c")
     .replace(/>/g, "\\u003e")
-    .replace(/&/g, "\\u0026")
     .replace(/\u2028/g, "\\u2028")
     .replace(/\u2029/g, "\\u2029")}
 ></script>
@@ -317,9 +321,13 @@ const { engagementModels, availabilityLabel, modelLinkBase = "" } = Astro.props 
       "2": "Wissensverteilung",
       "3": "Fehlersichtbarkeit",
     };
-    const caseStudies: Record<string, { industry: string; text: string }> = JSON.parse(
-      document.getElementById("quiz-case-studies")?.textContent ?? "{}"
-    );
+    const caseStudies: Record<string, { industry: string; text: string }> = (() => {
+      try {
+        return JSON.parse(document.getElementById("quiz-case-studies")?.textContent || "{}");
+      } catch {
+        return {};
+      }
+    })();
     const caseStudyLookup = new Map(Object.entries(caseStudies));
     const bookingUrl =
       "https://outlook.office.com/bookwithme/user/c7bd6282644a4fcb82fd8cc491a921e5@dynamics-tim.dev?anonymous&ismsaljsauthenabled&ep=plink";
@@ -502,9 +510,11 @@ const { engagementModels, availabilityLabel, modelLinkBase = "" } = Astro.props 
         "fullpackage",
         "embedded",
       ];
-      const recommendedKey = [...recommendationOrder].sort(
-        (a, b) => weightedScores[b] - weightedScores[a]
-      )[0];
+      const recommendedKey = recommendationOrder.reduce(
+        (best, candidate) =>
+          weightedScores[candidate] > weightedScores[best] ? candidate : best,
+        recommendationOrder[0]
+      );
       const match = {
         audit: {
           id: "audit",
