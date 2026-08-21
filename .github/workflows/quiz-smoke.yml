@@ -1,0 +1,39 @@
+name: Quiz smoke tests
+
+on:
+  pull_request:
+  push:
+    branches:
+      - main
+
+permissions:
+  contents: read
+
+jobs:
+  quiz-smoke:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "lts/*"
+          cache: "npm"
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Install Playwright browser
+        run: npx playwright install --with-deps chromium
+
+      - name: Run quiz smoke tests
+        run: npm run test:e2e
+        env:
+          PUBLIC_PUSHOVER_TOKEN: ""
+          PUBLIC_PUSHOVER_USER: ""
+          PUBLIC_PUSHOVER_TITLE: ""
+          PUBLIC_PUSHOVER_MESSAGE: ""
+          PUBLIC_GOATCOUNTER_URL: ${{ vars.PUBLIC_GOATCOUNTER_URL }}
