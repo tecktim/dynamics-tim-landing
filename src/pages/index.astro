@@ -1,9 +1,6 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Hero from '../components/Hero.astro';
-import ServicesGrid from '../components/ServicesGrid.astro';
-import ProjectCards from '../components/ProjectCards.astro';
-import { getCollection } from 'astro:content';
 import { site } from '../data/site';
 
 const base = import.meta.env.BASE_URL ?? '/';
@@ -15,9 +12,6 @@ const to = (path: string) => {
   return `${base}${normalized}${suffix}`;
 };
 
-const projects = (await getCollection('projects')).sort((a, b) =>
-  a.data.featured === b.data.featured ? 0 : a.data.featured ? -1 : 1
-);
 const engagementModels = [
   {
     id: 'audit',
@@ -39,7 +33,7 @@ const engagementModels = [
     ],
     caseStudy: {
       industry: 'IT-Dienstleister',
-      text: 'Für einen IT-Dienstleister habe ich in 10 Tagen eine undokumentierte Plugin-Architektur mit 40+ Custom-Steps analysiert und kritische Sicherheitslücken im Rollenmodell aufgedeckt — Ergebnis: konsoldierter Maßnahmenplan, der 3 Monate Fehlerbehebung eingespart hat.',
+      text: 'Für einen IT-Dienstleister habe ich in 10 Tagen eine undokumentierte Plugin-Architektur mit 40+ Custom-Steps analysiert und kritische Sicherheitslücken im Rollenmodell aufgedeckt — Ergebnis: konsolidierter Maßnahmenplan, der 3 Monate Fehlerbehebung eingespart hat.',
     },
     href: to('contact'),
     cta: 'Audit anfragen',
@@ -401,6 +395,7 @@ const structuredData = [faqSchema, serviceItemList];
         {
           engagementModels.map((model, index) => (
             <article
+              id={model.id}
               class="card flex flex-col gap-5 border-surface-200 bg-white/90"
               data-reveal
               data-reveal-delay={`${index * 100 + 160}`}
@@ -690,7 +685,11 @@ const structuredData = [faqSchema, serviceItemList];
                   id="quiz-result-badge"
                   class="mb-2 inline-flex items-center rounded-full bg-brand-50 px-3 py-1 text-xs font-semibold text-brand-700 ring-1 ring-brand-200/60"
                 ></span>
-                <h4 id="quiz-result-title" class="text-2xl font-semibold text-slate-900"></h4>
+                <h4
+                  id="quiz-result-title"
+                  class="text-2xl font-semibold text-slate-900"
+                  tabindex="-1"
+                ></h4>
                 <p id="quiz-result-tagline" class="mt-1 text-sm font-medium italic text-brand-600"></p>
               </div>
 
@@ -757,7 +756,12 @@ const structuredData = [faqSchema, serviceItemList];
       </div>
     </div>
   </section>
-  <script define:vars={{ engagementModels, site }}>
+  <script
+    type="application/json"
+    id="quiz-case-studies"
+    set:html={JSON.stringify(Object.fromEntries(engagementModels.map((model) => [model.id, model.caseStudy])))}
+  />
+  <script>
     (function () {
       const totalSteps = 3;
       const answers: Record<string, string> = {};
@@ -767,7 +771,10 @@ const structuredData = [faqSchema, serviceItemList];
         "2": "Wissensverteilung",
         "3": "Fehlersichtbarkeit",
       };
-      const modelLookup = new Map((engagementModels ?? []).map((model) => [model.id, model]));
+      const caseStudies: Record<string, { industry: string; text: string }> = JSON.parse(
+        document.getElementById("quiz-case-studies")?.textContent ?? "{}"
+      );
+      const modelLookup = new Map(Object.entries(caseStudies));
       const bookingUrl =
         "https://outlook.office.com/bookwithme/user/c7bd6282644a4fcb82fd8cc491a921e5@dynamics-tim.dev?anonymous&ismsaljsauthenabled&ep=plink";
       const btns = document.querySelectorAll<HTMLButtonElement>(".quiz-btn");
@@ -917,7 +924,14 @@ const structuredData = [faqSchema, serviceItemList];
           });
         });
 
-        const recommendedKey = Object.entries(weightedScores).sort((a, b) => b[1] - a[1])[0][0];
+        const recommendationOrder: Array<keyof typeof weightedScores> = [
+          "audit",
+          "fullpackage",
+          "embedded",
+        ];
+        const recommendedKey = recommendationOrder.sort(
+          (a, b) => weightedScores[b] - weightedScores[a]
+        )[0];
         const match = {
           audit: {
             id: "audit",
@@ -926,7 +940,7 @@ const structuredData = [faqSchema, serviceItemList];
             tagline: "Du bekommst Klarheit — nicht nur Folien.",
             text: "Ich prüfe eure Architektur, Release- und Sicherheitsroutinen und lege einen priorisierten Maßnahmenplan mit Quick Wins und Roadmap fest.",
             href: "#audit",
-            ctaLabel: "Audit anfragen",
+            ctaLabel: "30-Min Slot buchen →",
             calHref: bookingUrl,
             linkText: "Mehr zum Modell →",
             linkHref: "#audit",
@@ -938,7 +952,7 @@ const structuredData = [faqSchema, serviceItemList];
             tagline: "Senior-Kraft ins Team — ohne Overhead.",
             text: "Du bekommst Senior-Kapazität im Sprint-Prozess — von Plugins über Automationen bis hin zu QA und stabilen Release-Zyklen.",
             href: "#embedded",
-            ctaLabel: "Verfügbarkeit anfragen",
+            ctaLabel: "30-Min Slot buchen →",
             calHref: bookingUrl,
             linkText: "Mehr zum Modell →",
             linkHref: "#embedded",
@@ -950,7 +964,7 @@ const structuredData = [faqSchema, serviceItemList];
             tagline: "Einmal richtig machen. Dauerhaft wirken.",
             text: "Vom Audit über Umsetzung bis zur Team-Übergabe — damit euer Team langfristig stabil und eigenständig releasen kann.",
             href: "#fullpackage",
-            ctaLabel: "Gesamtpaket anfragen",
+            ctaLabel: "30-Min Slot buchen →",
             calHref: bookingUrl,
             linkText: "Mehr zum Modell →",
             linkHref: "#fullpackage",
@@ -1041,6 +1055,13 @@ const structuredData = [faqSchema, serviceItemList];
         if (resultCal) {
           resultCal.href = rec.calHref ?? bookingUrl;
           resultCal.textContent = rec.ctaLabel ?? "30-Min Slot buchen →";
+          if (rec.calHref?.startsWith("mailto:")) {
+            resultCal.removeAttribute("target");
+            resultCal.removeAttribute("rel");
+          } else {
+            resultCal.target = "_blank";
+            resultCal.rel = "noopener noreferrer";
+          }
         }
         renderAnswerSummary();
         resultEl.classList.remove("hidden");
@@ -1050,6 +1071,7 @@ const structuredData = [faqSchema, serviceItemList];
         if (stepLabel) {
           stepLabel.textContent = "Empfehlung";
         }
+        resultTitle?.focus();
         if (progressBar) {
           progressBar.style.width = "100%";
         }
@@ -1411,58 +1433,6 @@ const structuredData = [faqSchema, serviceItemList];
         if ((e as MouseEvent).clientY <= 0) showBanner();
       });
 
-      // Quick-Check form submission
-      const auditForm = document.getElementById("quick-audit-form") as HTMLFormElement | null;
-      const auditEmail = document.getElementById("quick-audit-email") as HTMLInputElement | null;
-      const auditSuccess = document.getElementById("quick-audit-success");
-      const auditError = document.getElementById("quick-audit-error");
-
-      if (auditForm && auditEmail) {
-        auditForm.addEventListener("submit", async (e) => {
-          e.preventDefault();
-          const email = auditEmail.value.trim();
-          if (!email || !auditEmail.checkValidity()) {
-            auditEmail.focus();
-            return;
-          }
-
-          const submitBtn = auditForm.querySelector('button[type="submit"]') as HTMLButtonElement;
-          if (submitBtn) {
-            submitBtn.disabled = true;
-            submitBtn.textContent = "Sende\u2026";
-          }
-
-          try {
-            const res = await fetch("https://n8n.dynamics-tim.dev/webhook/quick-check", {
-              method: "POST",
-              headers: { "Content-Type": "application/json" },
-              body: JSON.stringify({
-                email,
-                source: window.location.href,
-                timestamp: new Date().toISOString(),
-              }),
-            });
-
-            if (res.ok) {
-              if (auditSuccess) auditSuccess.classList.remove("hidden");
-              if (auditError) auditError.classList.add("hidden");
-              auditEmail.value = "";
-              auditEmail.disabled = true;
-              if (submitBtn) submitBtn.style.display = "none";
-              setTimeout(() => hideBanner(), 3000);
-            } else {
-              throw new Error("Request failed");
-            }
-          } catch {
-            if (auditError) auditError.classList.remove("hidden");
-            if (auditSuccess) auditSuccess.classList.add("hidden");
-            if (submitBtn) {
-              submitBtn.disabled = false;
-              submitBtn.textContent = "Quick-Check anfordern";
-            }
-          }
-        });
-      }
     })();
   </script>
 
