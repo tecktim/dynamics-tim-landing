@@ -694,13 +694,6 @@ const structuredData = [faqSchema, serviceItemList];
                 >
                   30-Min Slot buchen →
                 </a>
-                <a
-                  id="quiz-result-link"
-                  href="#engagement-modelle"
-                  class="inline-flex items-center gap-1 text-sm font-semibold text-brand-500 hover:text-brand-400"
-                >
-                  Mehr zum Modell &rarr;
-                </a>
                 <button
                   id="quiz-edit"
                   type="button"
@@ -733,7 +726,6 @@ const structuredData = [faqSchema, serviceItemList];
       const steps = Array.from(document.querySelectorAll<HTMLElement>(".quiz-step"));
       const resultEl = document.getElementById("quiz-result");
       const resultText = document.getElementById("quiz-result-text");
-      const resultLink = document.getElementById("quiz-result-link") as HTMLAnchorElement | null;
       const stepLabel = document.getElementById("quiz-step-label");
       const progressBar = document.getElementById("quiz-progress-bar") as HTMLElement | null;
       const stepsWrapper = document.getElementById("quiz-steps");
@@ -751,7 +743,6 @@ const structuredData = [faqSchema, serviceItemList];
             badge: "Schnelleinstieg · 1–2 Wochen",
             tagline: "Du bekommst Klarheit — nicht nur Folien.",
             text: "Ich analysiere deine aktuelle Dynamics 365 Landschaft und liefere dir einen priorisierten Aktionsplan mit Quick Wins und Roadmap — bevor du in Umsetzung investierst.",
-            href: "#audit",
           };
         }
         if (q2 === "features" || q3 === "existing") {
@@ -760,7 +751,6 @@ const structuredData = [faqSchema, serviceItemList];
             badge: "Laufend · Sprint-basiert",
             tagline: "Senior-Kraft ins Team — ohne Overhead.",
             text: "Du bekommst sofort Senior-Kapazität in deinen Sprint-Prozess integriert — Features, Plugins, Integrationen und Tests im Sprint-Rhythmus.",
-            href: "#embedded",
           };
         }
         return {
@@ -768,7 +758,6 @@ const structuredData = [faqSchema, serviceItemList];
           badge: "End-to-End · 3–4 Monate",
           tagline: "Einmal richtig machen. Dauerhaft wirken.",
           text: "Vom Audit über Umsetzung bis zur Team-Übergabe — dein Team kann am Ende eigenständig releasen und weiterentwickeln.",
-          href: "#fullpackage",
         };
       }
 
@@ -827,7 +816,6 @@ const structuredData = [faqSchema, serviceItemList];
         if (resultTitle) resultTitle.textContent = rec.title;
         if (resultBadge) resultBadge.textContent = rec.badge;
         if (resultTagline) resultTagline.textContent = '"' + rec.tagline + '"';
-        if (resultLink) resultLink.href = rec.href;
         renderAnswerSummary();
         resultEl.classList.remove("hidden");
         if (stepsWrapper) {
