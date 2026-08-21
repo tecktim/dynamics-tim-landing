@@ -1,0 +1,38 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import EngagementQuiz from "../components/EngagementQuiz.astro";
+import { engagementModels } from "../data/engagement-models";
+import { site } from "../data/site";
+
+const base = import.meta.env.BASE_URL ?? "/";
+const to = (path: string) => {
+  const trimmed = path.replace(/^\//, "");
+  const [pathname, hash] = trimmed.split("#");
+  const normalized = pathname ? `${pathname.replace(/\/$/, "")}/` : "";
+  const suffix = hash ? `#${hash}` : "";
+  return `${base}${normalized}${suffix}`;
+};
+---
+
+<BaseLayout
+  title="Dynamics 365 Engagement-Check"
+  description="Finde in drei Fragen heraus, welches Dynamics 365 Engagement-Modell zu deinem Team passt."
+  breadcrumbs={[{ name: "Engagement-Check", url: "/check/" }]}
+>
+  <section class="bg-surface-100 py-16">
+    <div class="mx-auto max-w-6xl px-6">
+      <div class="mb-10 max-w-3xl space-y-4">
+        <p class="text-sm font-semibold uppercase tracking-wide text-brand-600">Engagement-Check</p>
+        <h1 class="section-title">Welcher Einstieg passt zu eurem Dynamics 365 Setup?</h1>
+        <p class="text-lg text-slate-600">
+          Beantworte drei Fragen und erhalte in unter 60 Sekunden eine konkrete Empfehlung.
+        </p>
+      </div>
+    </div>
+  </section>
+  <EngagementQuiz
+    engagementModels={engagementModels}
+    availabilityLabel={site.availability.label}
+    modelLinkBase={to("/")}
+  />
+</BaseLayout>
