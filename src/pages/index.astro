@@ -911,9 +911,11 @@ const structuredData = [faqSchema, serviceItemList];
       if (editBtn) {
         editBtn.addEventListener("click", () => {
           resetQuiz();
-          document
-            .getElementById("quiz-container")
-            ?.scrollIntoView({ behavior: "smooth", block: "nearest" });
+            const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+            document.getElementById("quiz-container")?.scrollIntoView({
+              behavior: reducedMotion ? "auto" : "smooth",
+              block: "nearest",
+            });
         });
       }
 
