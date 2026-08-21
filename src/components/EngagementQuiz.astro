@@ -207,7 +207,11 @@ const { engagementModels, availabilityLabel, modelLinkBase = "" } = Astro.props 
                 id="quiz-result-badge"
                 class="mb-2 inline-flex items-center rounded-full bg-brand-50 px-3 py-1 text-xs font-semibold text-brand-700 ring-1 ring-brand-200/60"
               ></span>
-              <h4 id="quiz-result-title" class="text-2xl font-semibold text-slate-900"></h4>
+              <h4
+                id="quiz-result-title"
+                class="text-2xl font-semibold text-slate-900"
+                tabindex="-1"
+              ></h4>
               <p id="quiz-result-tagline" class="mt-1 text-sm font-medium italic text-brand-600">
               </p>
             </div>
@@ -286,7 +290,19 @@ const { engagementModels, availabilityLabel, modelLinkBase = "" } = Astro.props 
     </div>
   </div>
 </section>
-<script define:vars={{ engagementModels, modelLinkBase }}>
+<script
+  type="application/json"
+  id="quiz-case-studies"
+  set:html={JSON.stringify(
+    Object.fromEntries(engagementModels.map((model) => [model.id, model.caseStudy]))
+  )
+    .replace(/</g, "\\u003c")
+    .replace(/>/g, "\\u003e")
+    .replace(/&/g, "\\u0026")
+    .replace(/\u2028/g, "\\u2028")
+    .replace(/\u2029/g, "\\u2029")}
+></script>
+<script define:vars={{ modelLinkBase }}>
   (function () {
     const totalSteps = 3;
     const answers: Record<string, string> = {};
@@ -301,7 +317,10 @@ const { engagementModels, availabilityLabel, modelLinkBase = "" } = Astro.props 
       "2": "Wissensverteilung",
       "3": "Fehlersichtbarkeit",
     };
-    const modelLookup = new Map((engagementModels ?? []).map((model) => [model.id, model]));
+    const caseStudies: Record<string, { industry: string; text: string }> = JSON.parse(
+      document.getElementById("quiz-case-studies")?.textContent ?? "{}"
+    );
+    const caseStudyLookup = new Map(Object.entries(caseStudies));
     const bookingUrl =
       "https://outlook.office.com/bookwithme/user/c7bd6282644a4fcb82fd8cc491a921e5@dynamics-tim.dev?anonymous&ismsaljsauthenabled&ep=plink";
     const btns = document.querySelectorAll<HTMLButtonElement>(".quiz-btn");
@@ -478,7 +497,14 @@ const { engagementModels, availabilityLabel, modelLinkBase = "" } = Astro.props 
         });
       });
 
-      const recommendedKey = Object.entries(weightedScores).sort((a, b) => b[1] - a[1])[0][0];
+      const recommendationOrder: Array<keyof typeof weightedScores> = [
+        "audit",
+        "fullpackage",
+        "embedded",
+      ];
+      const recommendedKey = [...recommendationOrder].sort(
+        (a, b) => weightedScores[b] - weightedScores[a]
+      )[0];
       const match = {
         audit: {
           id: "audit",
@@ -487,7 +513,7 @@ const { engagementModels, availabilityLabel, modelLinkBase = "" } = Astro.props 
           tagline: "Du bekommst Klarheit — nicht nur Folien.",
           text: "Ich prüfe eure Architektur, Release- und Sicherheitsroutinen und lege einen priorisierten Maßnahmenplan mit Quick Wins und Roadmap fest.",
           href: "#audit",
-          ctaLabel: "Audit anfragen",
+          ctaLabel: "30-Min Slot buchen →",
           calHref: bookingUrl,
           linkText: "Mehr zum Modell →",
           linkHref: "#audit",
@@ -499,7 +525,7 @@ const { engagementModels, availabilityLabel, modelLinkBase = "" } = Astro.props 
           tagline: "Senior-Kraft ins Team — ohne Overhead.",
           text: "Du bekommst Senior-Kapazität im Sprint-Prozess — von Plugins über Automationen bis hin zu QA und stabilen Release-Zyklen.",
           href: "#embedded",
-          ctaLabel: "Verfügbarkeit anfragen",
+          ctaLabel: "30-Min Slot buchen →",
           calHref: bookingUrl,
           linkText: "Mehr zum Modell →",
           linkHref: "#embedded",
@@ -511,7 +537,7 @@ const { engagementModels, availabilityLabel, modelLinkBase = "" } = Astro.props 
           tagline: "Einmal richtig machen. Dauerhaft wirken.",
           text: "Vom Audit über Umsetzung bis zur Team-Übergabe — damit euer Team langfristig stabil und eigenständig releasen kann.",
           href: "#fullpackage",
-          ctaLabel: "Gesamtpaket anfragen",
+          ctaLabel: "30-Min Slot buchen →",
           calHref: bookingUrl,
           linkText: "Mehr zum Modell →",
           linkHref: "#fullpackage",
@@ -519,7 +545,7 @@ const { engagementModels, availabilityLabel, modelLinkBase = "" } = Astro.props 
       };
 
       const baseMatch = match[recommendationId ?? recommendedKey] ?? match.audit;
-      const caseStudy = modelLookup.get(baseMatch.id)?.caseStudy ?? {
+      const caseStudy = caseStudyLookup.get(baseMatch.id) ?? {
         industry: "Dynamics 365",
         text: "Dein Setup braucht eine klare Priorisierung, damit Technologie und Team wieder in einen stabilen Rhythmus kommen.",
       };
@@ -642,6 +668,13 @@ const { engagementModels, availabilityLabel, modelLinkBase = "" } = Astro.props 
       if (resultCal) {
         resultCal.href = rec.calHref ?? bookingUrl;
         resultCal.textContent = rec.ctaLabel ?? "30-Min Slot buchen →";
+        if (rec.calHref?.startsWith("mailto:")) {
+          resultCal.removeAttribute("target");
+          resultCal.removeAttribute("rel");
+        } else {
+          resultCal.target = "_blank";
+          resultCal.rel = "noopener noreferrer";
+        }
       }
       renderAnswerSummary();
       resultEl.classList.remove("hidden");
@@ -651,6 +684,7 @@ const { engagementModels, availabilityLabel, modelLinkBase = "" } = Astro.props 
       if (stepLabel) {
         stepLabel.textContent = "Empfehlung";
       }
+      resultTitle?.focus();
       if (progressBar) {
         progressBar.style.width = "100%";
       }
