@@ -29,8 +29,8 @@ jobs:
       - name: Run quiz smoke tests
         run: npm run test:e2e
         env:
-          PUBLIC_PUSHOVER_TOKEN: ${{ secrets.PUBLIC_PUSHOVER_TOKEN }}
-          PUBLIC_PUSHOVER_USER: ${{ secrets.PUBLIC_PUSHOVER_USER }}
-          PUBLIC_PUSHOVER_TITLE: ${{ secrets.PUBLIC_PUSHOVER_TITLE }}
-          PUBLIC_PUSHOVER_MESSAGE: ${{ secrets.PUBLIC_PUSHOVER_MESSAGE }}
+          PUBLIC_PUSHOVER_TOKEN: ""
+          PUBLIC_PUSHOVER_USER: ""
+          PUBLIC_PUSHOVER_TITLE: ""
+          PUBLIC_PUSHOVER_MESSAGE: ""
           PUBLIC_GOATCOUNTER_URL: ${{ vars.PUBLIC_GOATCOUNTER_URL }}
