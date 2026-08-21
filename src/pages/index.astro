@@ -547,35 +547,44 @@ const structuredData = [faqSchema, serviceItemList];
           <div class="space-y-5" id="quiz-steps">
             <div class="quiz-step rounded-2xl border border-surface-200 bg-white p-6" data-step="1">
               <p class="text-base font-medium text-slate-800">
-                1. Wie gut kennst du deinen aktuellen D365-Zustand?
+                1. Wie lange dauert bei euch ein Release von Dev nach Prod?
               </p>
               <div class="mt-4 grid gap-3 sm:grid-cols-2">
                 <button
                   type="button"
                   class="quiz-btn rounded-xl border border-slate-200 bg-white px-4 py-3 text-left text-sm font-medium text-slate-700 transition hover:border-brand-400 hover:text-brand-600 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-300/60"
                   data-q="1"
-                  data-v="unknown"
+                  data-v="automated"
                   aria-pressed="false"
                 >
-                  Kaum — wir haben kaum Dokumentation
+                  Stunden — läuft automatisiert
                 </button>
                 <button
                   type="button"
                   class="quiz-btn rounded-xl border border-slate-200 bg-white px-4 py-3 text-left text-sm font-medium text-slate-700 transition hover:border-brand-400 hover:text-brand-600 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-300/60"
                   data-q="1"
-                  data-v="partial"
+                  data-v="days"
                   aria-pressed="false"
                 >
-                  Teilweise - wir wissen, wo es hakt
+                  Ein bis zwei Tage, mit manuellen Schritten
+                </button>
+                <button
+                  type="button"
+                  class="quiz-btn rounded-xl border border-slate-200 bg-white px-4 py-3 text-left text-sm font-medium text-slate-700 transition hover:border-brand-400 hover:text-brand-600 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-300/60"
+                  data-q="1"
+                  data-v="weeks"
+                  aria-pressed="false"
+                >
+                  Über eine Woche
                 </button>
                 <button
                   type="button"
                   class="quiz-btn rounded-xl border border-slate-200 bg-white px-4 py-3 text-left text-sm font-medium text-slate-700 transition hover:border-brand-400 hover:text-brand-600 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-300/60 sm:col-span-2"
                   data-q="1"
-                  data-v="good"
+                  data-v="direct"
                   aria-pressed="false"
                 >
-                  Gut - wir brauchen Umsetzung, keine Analyse
+                  Ehrlich: wir ändern direkt in Prod
                 </button>
               </div>
             </div>
@@ -584,34 +593,36 @@ const structuredData = [faqSchema, serviceItemList];
               class="quiz-step hidden rounded-2xl border border-surface-200 bg-white p-6"
               data-step="2"
             >
-              <p class="text-base font-medium text-slate-800">2. Was ist deine Priorität gerade?</p>
+              <p class="text-base font-medium text-slate-800">
+                2. Kann jemand im Team sagen, was die einzelnen Plugins und Flows tun?
+              </p>
               <div class="mt-4 grid gap-3 sm:grid-cols-2">
                 <button
                   type="button"
                   class="quiz-btn rounded-xl border border-slate-200 bg-white px-4 py-3 text-left text-sm font-medium text-slate-700 transition hover:border-brand-400 hover:text-brand-600 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-300/60"
                   data-q="2"
-                  data-v="clarity"
+                  data-v="documented"
                   aria-pressed="false"
                 >
-                  Klarheit &amp; Roadmap
+                  Ja, ist dokumentiert
                 </button>
                 <button
                   type="button"
                   class="quiz-btn rounded-xl border border-slate-200 bg-white px-4 py-3 text-left text-sm font-medium text-slate-700 transition hover:border-brand-400 hover:text-brand-600 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-300/60"
                   data-q="2"
-                  data-v="features"
+                  data-v="oneperson"
                   aria-pressed="false"
                 >
-                  Features &amp; Entwicklung
+                  Eine Person weiß es
                 </button>
                 <button
                   type="button"
                   class="quiz-btn rounded-xl border border-slate-200 bg-white px-4 py-3 text-left text-sm font-medium text-slate-700 transition hover:border-brand-400 hover:text-brand-600 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-300/60 sm:col-span-2"
                   data-q="2"
-                  data-v="endtoend"
+                  data-v="nobody"
                   aria-pressed="false"
                 >
-                  Komplett-Lösung von A-Z
+                  Niemand — historisch gewachsen
                 </button>
               </div>
             </div>
@@ -620,34 +631,36 @@ const structuredData = [faqSchema, serviceItemList];
               class="quiz-step hidden rounded-2xl border border-surface-200 bg-white p-6"
               data-step="3"
             >
-              <p class="text-base font-medium text-slate-800">3. Wie ist dein Team aufgestellt?</p>
+              <p class="text-base font-medium text-slate-800">
+                3. Wenn nachts ein Plugin fehlschlägt — merkt das jemand?
+              </p>
               <div class="mt-4 grid gap-3 sm:grid-cols-2">
                 <button
                   type="button"
                   class="quiz-btn rounded-xl border border-slate-200 bg-white px-4 py-3 text-left text-sm font-medium text-slate-700 transition hover:border-brand-400 hover:text-brand-600 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-300/60"
                   data-q="3"
-                  data-v="none"
+                  data-v="alerting"
                   aria-pressed="false"
                 >
-                  Kein internes D365-Team
+                  Ja, Monitoring und Alerting laufen
                 </button>
                 <button
                   type="button"
                   class="quiz-btn rounded-xl border border-slate-200 bg-white px-4 py-3 text-left text-sm font-medium text-slate-700 transition hover:border-brand-400 hover:text-brand-600 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-300/60"
                   data-q="3"
-                  data-v="existing"
+                  data-v="users"
                   aria-pressed="false"
                 >
-                  Bestehendes Team, das Verstärkung braucht
+                  Fällt irgendwann beim Anwender auf
                 </button>
                 <button
                   type="button"
                   class="quiz-btn rounded-xl border border-slate-200 bg-white px-4 py-3 text-left text-sm font-medium text-slate-700 transition hover:border-brand-400 hover:text-brand-600 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-300/60 sm:col-span-2"
                   data-q="3"
-                  data-v="want-independent"
+                  data-v="no"
                   aria-pressed="false"
                 >
-                  Team, das unabhängig werden soll
+                  Nein
                 </button>
               </div>
             </div>
@@ -678,12 +691,37 @@ const structuredData = [faqSchema, serviceItemList];
                   class="mb-2 inline-flex items-center rounded-full bg-brand-50 px-3 py-1 text-xs font-semibold text-brand-700 ring-1 ring-brand-200/60"
                 ></span>
                 <h4 id="quiz-result-title" class="text-2xl font-semibold text-slate-900"></h4>
-                <p id="quiz-result-tagline" class="mt-1 text-sm font-medium italic text-brand-600">
-                </p>
+                <p id="quiz-result-tagline" class="mt-1 text-sm font-medium italic text-brand-600"></p>
               </div>
-              <p id="quiz-result-text" class="text-base text-slate-600"></p>
-              <ul id="quiz-answer-summary" class="grid gap-2 text-xs text-slate-500 sm:grid-cols-3">
-              </ul>
+
+              <div class="grid gap-4 md:grid-cols-2">
+                <div class="rounded-xl border border-surface-200 bg-surface-50 p-4">
+                  <p class="text-xs font-semibold uppercase tracking-wide text-slate-500">Befund</p>
+                  <p id="quiz-result-finding" class="mt-2 text-sm text-slate-700"></p>
+                </div>
+                <div class="rounded-xl border border-surface-200 bg-surface-50 p-4">
+                  <p class="text-xs font-semibold uppercase tracking-wide text-slate-500">Risiko</p>
+                  <p id="quiz-result-risk" class="mt-2 text-sm text-slate-700"></p>
+                </div>
+              </div>
+
+              <div class="rounded-xl border border-surface-200 bg-surface-50 p-4">
+                <p class="text-xs font-semibold uppercase tracking-wide text-slate-500">Ableitung</p>
+                <p id="quiz-result-derivation" class="mt-2 text-sm text-slate-700"></p>
+              </div>
+
+              <div class="rounded-xl border border-brand-100 bg-brand-50/60 p-4">
+                <p class="text-xs font-semibold uppercase tracking-wide text-brand-700">Beleg</p>
+                <p id="quiz-result-proof-label" class="mt-2 text-[11px] font-medium uppercase tracking-[0.12em] text-slate-500"></p>
+                <blockquote id="quiz-result-proof" class="mt-2 border-l-2 border-brand-200 pl-3 text-sm italic text-slate-700"></blockquote>
+              </div>
+
+              <div class="rounded-xl border border-surface-200 bg-surface-50 p-4">
+                <p class="text-xs font-semibold uppercase tracking-wide text-slate-500">Nächster Schritt</p>
+                <p id="quiz-result-text" class="mt-2 text-base text-slate-600"></p>
+              </div>
+
+              <ul id="quiz-answer-summary" class="grid gap-2 text-xs text-slate-500 sm:grid-cols-3"></ul>
               <div class="flex flex-wrap items-center gap-3 pt-1">
                 <a
                   id="quiz-result-cal"
@@ -719,21 +757,33 @@ const structuredData = [faqSchema, serviceItemList];
       </div>
     </div>
   </section>
-  <script>
+  <script define:vars={{ engagementModels, site }}>
     (function () {
       const totalSteps = 3;
       const answers: Record<string, string> = {};
       const answerLabels: Record<string, string> = {};
       const questionLabels: Record<string, string> = {
-        "1": "Zustand",
-        "2": "Priorität",
-        "3": "Team",
+        "1": "Release-Reife",
+        "2": "Wissensverteilung",
+        "3": "Fehlersichtbarkeit",
       };
+      const modelLookup = new Map((engagementModels ?? []).map((model) => [model.id, model]));
+      const bookingUrl =
+        "https://outlook.office.com/bookwithme/user/c7bd6282644a4fcb82fd8cc491a921e5@dynamics-tim.dev?anonymous&ismsaljsauthenabled&ep=plink";
       const btns = document.querySelectorAll<HTMLButtonElement>(".quiz-btn");
       const steps = Array.from(document.querySelectorAll<HTMLElement>(".quiz-step"));
       const resultEl = document.getElementById("quiz-result");
       const resultText = document.getElementById("quiz-result-text");
       const resultLink = document.getElementById("quiz-result-link") as HTMLAnchorElement | null;
+      const resultCal = document.getElementById("quiz-result-cal") as HTMLAnchorElement | null;
+      const resultFinding = document.getElementById("quiz-result-finding");
+      const resultRisk = document.getElementById("quiz-result-risk");
+      const resultDerivation = document.getElementById("quiz-result-derivation");
+      const resultBadge = document.getElementById("quiz-result-badge");
+      const resultTitle = document.getElementById("quiz-result-title");
+      const resultTagline = document.getElementById("quiz-result-tagline");
+      const resultProof = document.getElementById("quiz-result-proof");
+      const resultProofLabel = document.getElementById("quiz-result-proof-label");
       const stepLabel = document.getElementById("quiz-step-label");
       const progressBar = document.getElementById("quiz-progress-bar") as HTMLElement | null;
       const stepsWrapper = document.getElementById("quiz-steps");
@@ -741,34 +791,186 @@ const structuredData = [faqSchema, serviceItemList];
       const resetTop = document.getElementById("quiz-reset-top") as HTMLButtonElement | null;
       const editBtn = document.getElementById("quiz-edit") as HTMLButtonElement | null;
 
+      const scoreMatrix: Record<string, Record<string, number>> = {
+        automated: { embedded: 1, fullpackage: 1 },
+        days: { audit: 1, embedded: 2, fullpackage: 2 },
+        weeks: { audit: 2, embedded: 1, fullpackage: 2 },
+        direct: { audit: 3, embedded: 1, fullpackage: 2 },
+        documented: { embedded: 1, fullpackage: 1 },
+        oneperson: { audit: 1, embedded: 2, fullpackage: 2 },
+        nobody: { audit: 3, embedded: 1, fullpackage: 2 },
+        alerting: { embedded: 1, fullpackage: 1 },
+        users: { audit: 1, embedded: 2, fullpackage: 1 },
+        no: { audit: 3, embedded: 1, fullpackage: 2 },
+      };
+
+      function buildFindingText() {
+        const q1 = answers["1"];
+        const q2 = answers["2"];
+        const q3 = answers["3"];
+
+        const releaseSignals: Record<string, string> = {
+          automated: "Euer Release-Prozess läuft bereits weit automatisiert.",
+          days: "Euer Release braucht noch manuelle Schritte und kostet ein bis zwei Tage.",
+          weeks: "Euer Release ist über eine Woche lang und damit deutlich länger als nötig.",
+          direct: "Bei euch ist jedes Deployment ein Einzelfall. Das ist kein Prozessproblem, sondern ein Personenrisiko.",
+        };
+
+        const knowledgeSignals: Record<string, string> = {
+          documented: "Das Wissen über Plugins und Flows ist dokumentiert und im Team nachvollziehbar.",
+          oneperson: "Nur eine Person kennt die einzelnen Plugins und Flows wirklich.",
+          nobody: "Niemand kann die Historie und Abhängigkeiten vollständig erklären — das System ist historisch gewachsen.",
+        };
+
+        const alertSignals: Record<string, string> = {
+          alerting: "Bei einem Fehler läuft Monitoring und Alerting bereits.",
+          users: "Wenn etwas fehlschlägt, fällt es eher beim Anwender auf als im Team.",
+          no: "Bei einem Nachtfehler merkt niemand frühzeitig etwas.",
+        };
+
+        return [releaseSignals[q1], knowledgeSignals[q2], alertSignals[q3]].join(" ");
+      }
+
+      function buildRiskText() {
+        const q1 = answers["1"];
+        const q2 = answers["2"];
+        const q3 = answers["3"];
+
+        const risks: string[] = [];
+
+        if (q1 === "direct") {
+          risks.push("Jede Änderung in Prod ist potenziell riskant, weil es keinen standardisierten Releasepfad gibt.");
+        } else if (q1 === "weeks") {
+          risks.push("Der Release-Prozess ist langsam genug, dass kleine Probleme zu größeren Störungen und Regressionsrisiken werden.");
+        } else if (q1 === "days") {
+          risks.push("Manuelle Schritte ziehen Fehler und Verzögerungen nach sich, die bei jedem Release wieder auftauchen.");
+        }
+
+        if (q2 === "nobody") {
+          risks.push("Wenn die Person wegfällt, die die Logik kennt, seid ihr blind und müsst im Notfall improvisieren.");
+        } else if (q2 === "oneperson") {
+          risks.push("Die Wissenslast sitzt in einer einzigen Person — ein typischer Bottleneck bei kritischen Plugins und Flows.");
+        }
+
+        if (q3 === "no") {
+          risks.push("Fehler werden erst nach außen sichtbar, wenn der Kunde oder die User sie erleben.");
+        } else if (q3 === "users") {
+          risks.push("Das Monitoring ist nicht früh genug, damit das Team aktiv reagieren kann.");
+        }
+
+        return risks.join(" ");
+      }
+
+      function buildDerivationText() {
+        const q1 = answers["1"];
+        const q2 = answers["2"];
+        const q3 = answers["3"];
+
+        if (q1 === "direct" && q2 === "nobody") {
+          return "Weil ihr direkt in Prod ändert und das Wissen nur in Einzelpersonen steckt, ist der Engpass die fehlende Standardisierung und Dokumentation — nicht der technische Funktionsumfang.";
+        }
+
+        if (q1 === "weeks" && q2 === "oneperson" && q3 === "users") {
+          return "Weil ihr Releases verzögert, das Wissen auf eine Person fällt und Fehler spät sichtbar werden, ist der Engpass ein nicht tragfähiger operativer Rhythmus.";
+        }
+
+        if (q1 === "days" && q2 === "documented" && q3 === "alerting") {
+          return "Weil ihr schon gut dokumentiert seid und überwacht werdet, braucht ihr keinen reinen Audit-Block, sondern eine gezielte Umsetzungskraft im Team.";
+        }
+
+        return "Weil ihr diese Signale gemeinsam zeigt, liegt der Engpass nicht im Projektstart, sondern im operativen Reifegrad der Plattform.";
+      }
+
       function getRecommendation() {
-        const q1 = answers["1"],
-          q2 = answers["2"],
-          q3 = answers["3"];
-        if (q1 === "unknown" || q2 === "clarity") {
+        const q1 = answers["1"];
+        const q2 = answers["2"];
+        const q3 = answers["3"];
+
+        if (q1 === "automated" && q2 === "documented" && q3 === "alerting") {
           return {
+            id: "disqualify",
+            title: "Ehrliche Antwort: dafür brauchst du mich nicht.",
+            badge: "",
+            tagline: "Euer Setup ist sauberer als das der meisten Teams.",
+            finding: "Euer Release-Prozess ist automatisiert, das Wissen ist dokumentiert und eure Fehlererkennung läuft bereits mit Monitoring und Alerting.",
+            risk: "Die größten Risiken liegen nicht im System, sondern in der Richtung: Ein Mandat wäre hier überdimensioniert und würde das Team nicht wirklich voranbringen.",
+            derivation: "Weil ihr genau die Kriterien für eine reife Setup-Umgebung erfüllt, ist ein Mandat für eure aktuelle Situation nicht der passende Einstieg.",
+            text: "Wenn ihr eine zweite Meinung zu einer konkreten Architekturentscheidung wollt, meldet euch gern — aber ein Mandat wäre Overkill.",
+            href: "mailto:hello@dynamics-tim.dev?subject=Zweite%20Meinung%20zu%20Dynamics%20365&body=Hallo%20Tim%2C%20ich%20h%C3%A4tte%20gerne%20eine%20zweite%20Meinung%20zu%20einer%20konkreten%20Architekturentscheidung.%20",
+            ctaLabel: "Mail senden →",
+            proofLabel: "Beleg aus dem Praxisbereich",
+            proofText:
+              "Ich arbeite mit Teams, die schon sauber am Laufen sind und dann gezielt an Architektur, ALM und Skalierung arbeiten — nicht mit Re-Engineering aus einer Notlage heraus.",
+            linkText: "Mehr zu meinem Ansatz →",
+            linkHref: "#engagement-modelle",
+            calHref: "mailto:hello@dynamics-tim.dev?subject=Zweite%20Meinung%20zu%20Dynamics%20365",
+          };
+        }
+
+        const weightedScores: Record<string, number> = { audit: 0, embedded: 0, fullpackage: 0 };
+        const valuesToScore = [q1, q2, q3];
+
+        valuesToScore.forEach((value) => {
+          const score = scoreMatrix[value] ?? {};
+          Object.entries(score).forEach(([key, weight]) => {
+            weightedScores[key] = (weightedScores[key] ?? 0) + weight;
+          });
+        });
+
+        const recommendedKey = Object.entries(weightedScores).sort((a, b) => b[1] - a[1])[0][0];
+        const match = {
+          audit: {
+            id: "audit",
             title: "Audit & Strategie",
             badge: "Schnelleinstieg · 1–2 Wochen",
             tagline: "Du bekommst Klarheit — nicht nur Folien.",
-            text: "Ich analysiere deine aktuelle Dynamics 365 Landschaft und liefere dir einen priorisierten Aktionsplan mit Quick Wins und Roadmap — bevor du in Umsetzung investierst.",
+            text: "Ich prüfe eure Architektur, Release- und Sicherheitsroutinen und lege einen priorisierten Maßnahmenplan mit Quick Wins und Roadmap fest.",
             href: "#audit",
-          };
-        }
-        if (q2 === "features" || q3 === "existing") {
-          return {
+            ctaLabel: "Audit anfragen",
+            calHref: bookingUrl,
+            linkText: "Mehr zum Modell →",
+            linkHref: "#audit",
+          },
+          embedded: {
+            id: "embedded",
             title: "Embedded Developer",
             badge: "Laufend · Sprint-basiert",
             tagline: "Senior-Kraft ins Team — ohne Overhead.",
-            text: "Du bekommst sofort Senior-Kapazität in deinen Sprint-Prozess integriert — Features, Plugins, Integrationen und Tests im Sprint-Rhythmus.",
+            text: "Du bekommst Senior-Kapazität im Sprint-Prozess — von Plugins über Automationen bis hin zu QA und stabilen Release-Zyklen.",
             href: "#embedded",
-          };
-        }
+            ctaLabel: "Verfügbarkeit anfragen",
+            calHref: bookingUrl,
+            linkText: "Mehr zum Modell →",
+            linkHref: "#embedded",
+          },
+          fullpackage: {
+            id: "fullpackage",
+            title: "Full Package: Audit → Enablement",
+            badge: "End-to-End · 3–4 Monate",
+            tagline: "Einmal richtig machen. Dauerhaft wirken.",
+            text: "Vom Audit über Umsetzung bis zur Team-Übergabe — damit euer Team langfristig stabil und eigenständig releasen kann.",
+            href: "#fullpackage",
+            ctaLabel: "Gesamtpaket anfragen",
+            calHref: bookingUrl,
+            linkText: "Mehr zum Modell →",
+            linkHref: "#fullpackage",
+          },
+        };
+
+        const baseMatch = match[recommendedKey] ?? match.audit;
+        const caseStudy = modelLookup.get(baseMatch.id)?.caseStudy ?? {
+          industry: "Dynamics 365",
+          text: "Dein Setup braucht eine klare Priorisierung, damit Technologie und Team wieder in einen stabilen Rhythmus kommen.",
+        };
+        const caseStudyText = caseStudy.text || "Dein Setup braucht eine klare Priorisierung, damit Technologie und Team wieder in einen stabilen Rhythmus kommen.";
+
         return {
-          title: "Full Package: Audit → Enablement",
-          badge: "End-to-End · 3–4 Monate",
-          tagline: "Einmal richtig machen. Dauerhaft wirken.",
-          text: "Vom Audit über Umsetzung bis zur Team-Übergabe — dein Team kann am Ende eigenständig releasen und weiterentwickeln.",
-          href: "#fullpackage",
+          ...baseMatch,
+          finding: buildFindingText(),
+          risk: buildRiskText(),
+          derivation: buildDerivationText(),
+          proofLabel: `Projekt-Spotlight: ${caseStudy.industry}`,
+          proofText: caseStudyText,
         };
       }
 
@@ -820,14 +1022,26 @@ const structuredData = [faqSchema, serviceItemList];
       function revealResult() {
         if (!resultEl || !resultText) return;
         const rec = getRecommendation();
-        const resultTitle = document.getElementById("quiz-result-title");
-        const resultBadge = document.getElementById("quiz-result-badge");
-        const resultTagline = document.getElementById("quiz-result-tagline");
-        resultText.textContent = rec.text;
+        if (resultText) resultText.textContent = rec.text;
         if (resultTitle) resultTitle.textContent = rec.title;
-        if (resultBadge) resultBadge.textContent = rec.badge;
-        if (resultTagline) resultTagline.textContent = '"' + rec.tagline + '"';
-        if (resultLink) resultLink.href = rec.href;
+        if (resultBadge) {
+          resultBadge.textContent = rec.badge || "";
+          resultBadge.classList.toggle("hidden", !rec.badge);
+        }
+        if (resultTagline) resultTagline.textContent = rec.tagline ? `"${rec.tagline}"` : "";
+        if (resultFinding) resultFinding.textContent = rec.finding ?? "";
+        if (resultRisk) resultRisk.textContent = rec.risk ?? "";
+        if (resultDerivation) resultDerivation.textContent = rec.derivation ?? "";
+        if (resultProof) resultProof.textContent = rec.proofText ?? "";
+        if (resultProofLabel) resultProofLabel.textContent = rec.proofLabel ?? "";
+        if (resultLink) {
+          resultLink.href = rec.linkHref ?? rec.href ?? "#engagement-modelle";
+          resultLink.textContent = rec.linkText ?? "Mehr zum Modell →";
+        }
+        if (resultCal) {
+          resultCal.href = rec.calHref ?? bookingUrl;
+          resultCal.textContent = rec.ctaLabel ?? "30-Min Slot buchen →";
+        }
         renderAnswerSummary();
         resultEl.classList.remove("hidden");
         if (stepsWrapper) {
@@ -911,11 +1125,11 @@ const structuredData = [faqSchema, serviceItemList];
       if (editBtn) {
         editBtn.addEventListener("click", () => {
           resetQuiz();
-            const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-            document.getElementById("quiz-container")?.scrollIntoView({
-              behavior: reducedMotion ? "auto" : "smooth",
-              block: "nearest",
-            });
+          const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+          document.getElementById("quiz-container")?.scrollIntoView({
+            behavior: reducedMotion ? "auto" : "smooth",
+            block: "nearest",
+          });
         });
       }
 
