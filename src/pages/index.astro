@@ -759,7 +759,9 @@ const structuredData = [faqSchema, serviceItemList];
   <script
     type="application/json"
     id="quiz-case-studies"
-    set:html={JSON.stringify(Object.fromEntries(engagementModels.map((model) => [model.id, model.caseStudy])))}
+    set:html={JSON.stringify(
+      Object.fromEntries(engagementModels.map((model) => [model.id, model.caseStudy]))
+    )}
   />
   <script>
     (function () {
