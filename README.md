@@ -63,6 +63,21 @@ Das Repository enthält ein Workflow (`.github/workflows/deploy.yml`), der bei j
 
 Die Seite ist unter `https://dynamics-tim.dev/` erreichbar. Domain & Basis-Pfad sind in `astro.config.mjs` hinterlegt.
 
+## 🗓️ Verfügbarkeit pflegen
+
+Die nächste verfügbare Kapazität wird zentral in **`src/data/site.ts`** gepflegt:
+
+```ts
+export const site = {
+  availability: {
+    label: 'Q1 2027',          // Anzeigetext in der UI
+    availableFrom: '2027-02-01', // ISO-Datum
+  },
+};
+```
+
+Alle Stellen auf der Website (Hero, Quick-Check, CTA) lesen diesen Wert aus — es reicht, ihn hier zu ändern.
+
 ## 🗂️ Projektstruktur
 
 ```

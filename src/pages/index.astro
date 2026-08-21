@@ -4,6 +4,7 @@ import Hero from '../components/Hero.astro';
 import ServicesGrid from '../components/ServicesGrid.astro';
 import ProjectCards from '../components/ProjectCards.astro';
 import { getCollection } from 'astro:content';
+import { site } from '../data/site';
 
 const base = import.meta.env.BASE_URL ?? '/';
 const to = (path: string) => {
@@ -431,7 +432,7 @@ const structuredData = [faqSchema, serviceItemList];
               </div>
               <p class="text-xs text-slate-400 flex items-center gap-1.5">
                 <span class="inline-block h-2 w-2 rounded-full bg-green-400 animate-pulse"></span>
-                Nächste verfügbare Kapazität: Q3 2026
+                Nächste verfügbare Kapazität: {site.availability.label}
               </p>
             </div>
           </div>
@@ -630,7 +631,7 @@ const structuredData = [faqSchema, serviceItemList];
       </div>
       <p class="mt-4 text-sm text-white/50 flex items-center justify-center gap-2" data-reveal data-reveal-delay="200">
         <span class="inline-block h-2 w-2 rounded-full bg-green-400 animate-pulse"></span>
-        Nächste verfügbare Kapazität: Q3 2026
+        Nächste verfügbare Kapazität: {site.availability.label}
       </p>
     </div>
   </section>
